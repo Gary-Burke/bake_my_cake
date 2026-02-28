@@ -1,1 +1,1 @@
-web: gunicorn project_name.wsgi
+web: gunicorn bake_my_cake.wsgi
