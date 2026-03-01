@@ -1,0 +1,25 @@
+/* CSS Variables */
+
+:root {
+    --heading-font: "Playfair Display", serif;
+    --body-font: "Source Sans 3", sans-serif;
+
+    --primary-color: #69776e;
+    --secondary-color: #c9c1a6;
+    --highlight-color: #FED8A6;
+
+    --light-color: #FFF9F5;
+    --dark-color: #101720;
+}
+
+/* General CSS */
+
+body {
+    font-family: var(--body-font);
+    color: var(--dark-color);
+}
+
+h1,
+h2 {
+    font-family: var(--heading-font);
+}
