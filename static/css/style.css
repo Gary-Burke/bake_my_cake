@@ -1,4 +1,4 @@
-/* CSS Variables */
+/* ----- CSS Variables ----- */
 
 :root {
     --heading-font: "Playfair Display", serif;
@@ -12,7 +12,7 @@
     --dark-color: #101720;
 }
 
-/* General CSS */
+/* ----- General CSS ----- */
 
 body {
     font-family: var(--body-font);
@@ -22,5 +22,61 @@ body {
 h1,
 h2 {
     font-family: var(--heading-font);
-    color: var(--primary-color);
+    color: var(--dark-color);
+}
+
+/* prevents navbar from overlapping with main section due to fixed position */
+.section {
+    padding-top: 6.625rem;
+}
+
+/* ----- Navbar ----- */
+
+.logo {
+    width: auto;
+    height: 5rem;
+}
+
+#nav-top {
+    background-color: var(--primary-color);
+    min-height: 5rem;
+}
+
+#nav-top .nav-link {
+    color: var(--light-color);
+    font-family: var(--heading-font);
+    font-size: 1.25rem;
+    letter-spacing: 0.06rem;
+    position: relative;
+}
+
+#nav-top .nav-link:hover,
+#nav-top .nav-link.active {
+    color: var(--highlight-color);
+}
+
+/* ----- Media Queries ----- */
+
+/* Large screen sizes - 992px up*/
+
+@media screen and (min-width: 992px) {
+
+    /* Creates line underneath navbar items when hovered or active */
+    #nav-top .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0px;
+        width: 80%;
+        height: 0.2rem;
+        background-color: var(--highlight-color);
+        transform: translateX(-50%) scaleX(0);
+        transform-origin: center;
+        transition: transform 0.3s ease;
+    }
+
+    #nav-top .nav-item:hover .nav-link::after,
+    #nav-top .nav-link.active::after {
+        transform: translateX(-50%) scaleX(1);
+    }
 }
