@@ -58,7 +58,7 @@ h2 {
 /* ----- Sub-Navbar ----- */
 
 #nav-sub {
-    background-color: var(--highlight-color);
+    background-color: var(--light-color);
 }
 
 #bag {
@@ -82,7 +82,23 @@ h2 {
     cursor: pointer;
 }                     
 
+/* ----- Hero image ----- */
+
+.hero {
+     height: 50vh;
+     background: url("../images/hero-small.webp") no-repeat bottom center / cover; 
+}
+
 /* ----- Media Queries ----- */
+
+/* small screen sizes - 576px up*/
+
+@media screen and (min-width: 576px) {
+    .hero {
+     height: 70vh;
+     background: url("../images/hero-small.webp") no-repeat bottom center / cover; 
+} 
+}
 
 /* Large screen sizes - 992px up*/
 
@@ -106,4 +122,9 @@ h2 {
     #nav-top .nav-link.active::after {
         transform: translateX(-50%) scaleX(1);
     }
+
+    .hero {
+     height: 90vh;
+     background: url("../images/hero.webp") no-repeat bottom center / cover; 
+}
 }

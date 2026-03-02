@@ -24,12 +24,15 @@
     <link rel="preload" href="{% static 'fonts/source-sans-3-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 
+    {% block extra_css %}
+    {% endblock %}
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 
     <!-- Navbar section -->
-    <header>
+    <header class="mb-0">
         <nav class="navbar navbar-expand-lg fixed-top" id="nav-top" data-bs-theme="dark">
             <div class="container">
 
@@ -48,7 +51,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-1">
-                            <a class="nav-link active" href="#">About</a>
+                            <a class="nav-link active" href="#">Home</a>
                         </li>
                         <li class="nav-item mx-1">
                             <a class="nav-link" href="#">Cakes</a>
@@ -75,7 +78,7 @@
         <!-- Sub-Navbar section -->
         <nav id="nav-sub">
             <div class="container section">
-                <ul class="list-unstyled list-inline pt-2 pb-1 d-flex justify-content-end align-items-start">
+                <ul class="list-unstyled list-inline pt-2 pb-1 mb-0 d-flex justify-content-end align-items-start">
                     <li class="list-inline-item text-center mx-4">
                         <div><i class="fa-solid fa-user fa-xl"></i></div>
                         <div>Sign In / Register</div>
@@ -93,7 +96,7 @@
     </header>
 
     <!-- Main section -->
-    <main class="section">
+    <main>
         {% block content %}
         {% endblock content %}
     </main>
