@@ -28,7 +28,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- Navbar and header section -->
+    <!-- Navbar section -->
     <header>
         <nav class="navbar navbar-expand-lg fixed-top" id="nav-top" data-bs-theme="dark">
             <div class="container">
@@ -71,8 +71,26 @@
                 </div>
             </div>
         </nav>
-    </header>
 
+        <!-- Sub-Navbar section -->
+        <nav id="nav-sub">
+            <div class="container section">
+                <ul class="list-unstyled list-inline pt-2 pb-1 d-flex justify-content-end align-items-start">
+                    <li class="list-inline-item text-center mx-4">
+                        <div><i class="fa-solid fa-user fa-xl"></i></div>
+                        <div>Sign In / Register</div>
+                    </li>
+                    <li class="list-inline-item me-2">
+                        <div id="bag">
+                            <i class="fa-solid fa-bag-shopping fa-xl"></i>
+                            <div id="bag-count" class="d-flex justify-content-center align-items-center">2</div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
 
     <!-- Main section -->
     <main class="section">
@@ -88,6 +106,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
     </script>
+
+    <!-- Font Awesome Kit -->
+    <script src="https://kit.fontawesome.com/3a3a47fde5.js" crossorigin="anonymous"></script>
 
     {% block extras %}
     {% endblock %}
