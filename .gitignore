@@ -3,4 +3,4 @@
 __pycache__
 env.py
 .venv
-products/fixtures/
+fixtures/

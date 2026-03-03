@@ -33,7 +33,7 @@ class Product(models.Model):
     )
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
-    shape = models.CharField(choices=SHAPE, default="round")
+    shape = models.CharField(choices=SHAPE, default="round", max_length=20)
     base_price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.CharField(max_length=255, null=True, blank=True)
     image_url = CloudinaryField('image upload')
