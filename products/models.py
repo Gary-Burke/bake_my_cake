@@ -36,7 +36,7 @@ class Product(models.Model):
     shape = models.CharField(choices=SHAPE, default="round", max_length=20)
     base_price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.CharField(max_length=255, null=True, blank=True)
-    image_url = CloudinaryField('image upload')
+    image_url = CloudinaryField('image upload', null=True, blank=True)
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
