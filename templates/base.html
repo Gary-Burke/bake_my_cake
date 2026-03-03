@@ -1,7 +1,7 @@
 {% load static %}
 
 {% url 'index' as home_url %}
-{% url 'cakes' as cakes_url %}
+{% url 'products' as products_url %}
 
 <!DOCTYPE html>
 <html lang="en-US">
@@ -45,7 +45,7 @@
             <div class="container">
 
                 <!-- Logo -->
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{% url 'index' %}">
                     <img src="{% static 'images/logo-sm.webp' %}" alt="Bake my cake logo" class="logo" width="133"
                         height="80">
                 </a>
@@ -59,17 +59,26 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-1">
-                            <a class="nav-link {% if request.path == home_url %}active" aria-current="page{% endif %}" href="{% url 'index' %}">Home</a>
+                            <a class="nav-link {% if request.path == home_url %}active" aria-current="page{% endif %}"
+                                href="{% url 'index' %}">Home</a>
                         </li>
+
                         <li class="nav-item mx-1">
-                            <a class="nav-link {% if request.path == cakes_url %}active" aria-current="page{% endif %}" href="{% url 'cakes' %}">Cakes</a>
+                            <a class="nav-link" href="#">About</a>
                         </li>
-                        <li class="nav-item mx-1">
-                            <a class="nav-link" href="#">Cupcakes</a>
+
+                        <li class="nav-item mx-1 dropdown">
+                            <a class="nav-link {% if request.path == products_url %}active" aria-current="page{% endif %}" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">Sweet Stuff</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'products' %}">All Treats</a></li>
+                                <li><a class="dropdown-item" href="{% url 'products' %}?category=all-cakes">Cakes</a></li>
+                                <li><a class="dropdown-item" href="{% url 'products' %}?category=cupcake">Cupcakes</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item mx-1">
-                            <a class="nav-link" href="#">Custom Orders</a>
-                        </li>
+
+                        <li class="nav-item mx-1"><a class="nav-link" href="#">Custom Orders</a></li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">Admin</a>
