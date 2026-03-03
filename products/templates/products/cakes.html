@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="container">
+
+    <div class="row justify-content-between">
+        {% for cake in cakes_list %}
+        <div class="col-12 col-md-6 col-lg-3 cake-card">
+
+            {% if cake.image_url %}
+            <img src="{{ cake.image_url }}" alt="{{ cake.name }}">
+
+            {% elif cake.image %}
+            <img src="{% static 'images/' %}{{ cake.image }}" alt="{{ cake.name }}">
+
+            {% else %}
+            <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
+
+            {% endif %}
+
+            <p>{{ cake.name }} {{ cake.base_price }}€</p>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+{% endblock %}
