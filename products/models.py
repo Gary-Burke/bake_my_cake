@@ -8,18 +8,14 @@ class Category(models.Model):
     """
     Stores a single entry of a category for products
     """
-    CATEGORY = (
-        ("cake", "Cake"),
-        ("cupcake", "Cupcake"),
-    )
-
-    name = models.CharField(choices=CATEGORY, default="cake")
+    name = models.CharField(max_length=255)
+    display_name = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'Categories'
 
     def __str__(self):
-        return self.name
+        return self.display_name
 
 
 class Product(models.Model):
@@ -39,8 +35,8 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255)
     shape = models.CharField(choices=SHAPE, default="round")
     base_price = models.DecimalField(max_digits=5, decimal_places=2)
-    image = models.ImageField(null=True, blank=True)
-    image_url = CloudinaryField('image')
+    image = models.CharField(max_length=255, null=True, blank=True)
+    image_url = CloudinaryField('image upload')
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
