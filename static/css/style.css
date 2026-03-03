@@ -83,20 +83,25 @@ h2 {
 
 #nav-sub li {
     cursor: pointer;
-}                     
+}
 
 /* ----- Hero image ----- */
 
 .hero {
-     height: 50vh;
-     background: url("../images/hero-small.webp") no-repeat bottom center / cover; 
+    height: 50vh;
+    background: url("../images/hero-small.webp") no-repeat bottom center / cover;
 }
 
 /* ----- Product Page ----- */
 
 .cake-card img {
-    width: 200px;
-    height: 200px;
+    width: auto;
+    height: 250px;
+    max-width: 200px;
+}
+
+.cake-card {
+    border: 1px solid black;
 }
 
 /* ----- Media Queries ----- */
@@ -105,10 +110,22 @@ h2 {
 
 @media screen and (min-width: 576px) {
     .hero {
-     height: 70vh;
-     background: url("../images/hero-small.webp") no-repeat bottom center / cover; 
-} 
+        height: 70vh;
+        background: url("../images/hero-small.webp") no-repeat bottom center / cover;
+    }
 }
+
+
+/* small screen sizes - 768px up*/
+
+@media screen and (min-width: 768px) {
+    .cake-card img {
+        width: auto;
+        height: 300px;
+        max-width: 240px;
+    }
+}
+
 
 /* Large screen sizes - 992px up*/
 
@@ -134,7 +151,7 @@ h2 {
     }
 
     .hero {
-     height: 90vh;
-     background: url("../images/hero.webp") no-repeat bottom center / cover; 
-}
+        height: 90vh;
+        background: url("../images/hero.webp") no-repeat bottom center / cover;
+    }
 }
