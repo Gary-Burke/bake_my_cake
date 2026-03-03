@@ -1,5 +1,8 @@
 {% load static %}
 
+{% url 'index' as home_url %}
+{% url 'cakes' as cakes_url %}
+
 <!DOCTYPE html>
 <html lang="en-US">
 
@@ -56,10 +59,10 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-1">
-                            <a class="nav-link active" href="#">Home</a>
+                            <a class="nav-link {% if request.path == home_url %}active" aria-current="page{% endif %}" href="{% url 'index' %}">Home</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="#">Cakes</a>
+                            <a class="nav-link {% if request.path == cakes_url %}active" aria-current="page{% endif %}" href="{% url 'cakes' %}">Cakes</a>
                         </li>
                         <li class="nav-item mx-1">
                             <a class="nav-link" href="#">Cupcakes</a>
