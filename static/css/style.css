@@ -94,13 +94,13 @@ h2 {
 
 /* ----- Product Page ----- */
 
-.cake-card img {
+.product-card img {
     width: auto;
     height: 250px;
     max-width: 200px;
 }
 
-.cake-card {
+.product-card {
     border: 1px solid black;
 }
 
