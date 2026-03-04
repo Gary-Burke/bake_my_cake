@@ -23,13 +23,10 @@ class ProductList(ListView):
     context_object_name = "products_list"
 
     def get_queryset(self):
-        print(self.request.GET)  # TODO: Delete print
-        print(self.request.path)  # TODO: Delete print
+        print(f"GET request: {self.request.GET}")  # TODO: Delete print
+
         queryset = Product.objects.all()
-
         category = self.request.GET.get("category")
-        print(category)  # TODO: Delete print
-
         allowed_categories = [
             "all-cakes", "kids-cakes", "birthday-cakes",
             "event-cakes", "cupcakes"
@@ -42,11 +39,28 @@ class ProductList(ListView):
         else:
             queryset = queryset.filter(category__name=category)
 
+        if "sort" in self.request.GET:
+            sort_key = self.request.GET.get("sort")
+            sort_direction = self.request.GET.get("direction")
+
+            if sort_key == "price":
+                sort_key = "base_price"
+
+            if sort_direction == "asc":
+                sort = sort_key
+            else:
+                sort = f"-{sort_key}"
+
+            return queryset.order_by(sort)
+
         return queryset.order_by("name")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["current_category"] = self.request.GET.get(
             "category").replace("-", " ").title()
-        print(f"Context: {context}")  # TODO: Delete print
+        sort = self.request.GET.get("sort")
+        direction = self.request.GET.get("direction")
+        context["current_sorting"] = f"{sort}_{direction}"
+
         return context
