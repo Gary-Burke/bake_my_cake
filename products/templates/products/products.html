@@ -1,7 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block content %}
+<div class="list-group position-fixed" id="categories">
+    <li class="list-group-item lead">Categories</li>
+    <a href="{% url 'products' %}?category=all-cakes" class="list-group-item list-group-item-action">All Cakes</a>
+    <a href="{% url 'products' %}?category=birthday-cakes" class="list-group-item list-group-item-action">Birthdays</a>
+    <a href="{% url 'products' %}?category=kids-cakes" class="list-group-item list-group-item-action">Kids</a>
+    <a href="{% url 'products' %}?category=event-cakes" class="list-group-item list-group-item-action">Events</a>
+    <a href="{% url 'products' %}?category=cupcakes" class="list-group-item list-group-item-action">Cupcakes</a>
+</div>
+
 <section class="container text-center">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3">
@@ -30,4 +40,13 @@
 
 </section>
 
+{% endblock %}
+
+{% block extras %}
+<!-- jQuery CDN link -->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'js/products.js' %}" defer></script>
 {% endblock %}

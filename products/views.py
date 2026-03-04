@@ -24,19 +24,21 @@ class ProductList(ListView):
 
     def get_queryset(self):
         print(self.request.GET)  # TODO: Delete print
+        print(self.request.path)  # TODO: Delete print
         queryset = Product.objects.all()
 
         category = self.request.GET.get("category")
         print(category)  # TODO: Delete print
 
         allowed_categories = [
-            "all-cakes", "kids-cake", "birthday-cake", "event-cake", "cupcake"
+            "all-cakes", "kids-cakes", "birthday-cakes",
+            "event-cakes", "cupcakes"
         ]
 
         if category not in allowed_categories:
-            return queryset.order_by("name")
+            return queryset
         elif category == "all-cakes":
-            queryset = queryset.exclude(category__name="cupcake")
+            queryset = queryset.exclude(category__name="cupcakes")
         else:
             queryset = queryset.filter(category__name=category)
 
