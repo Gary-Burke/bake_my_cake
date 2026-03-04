@@ -21,6 +21,7 @@ class ProductList(ListView):
 
     template_name = "products/products.html"
     context_object_name = "products_list"
+    paginate_by = 24
 
     def get_queryset(self):
         print(f"GET request: {self.request.GET}")  # TODO: Delete print

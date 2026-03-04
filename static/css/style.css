@@ -118,6 +118,18 @@ h2 {
     border: 1px solid black;
 }
 
+/* Pagination Element */
+
+.pagination .page-link {
+    text-decoration: none;
+    color: var(--dark-color);
+}
+
+#current-page {
+    background-color: var(--primary-color);
+    color: var(--highlight-color);
+}
+
 /* ----- Media Queries ----- */
 
 /* small screen sizes - 576px up*/
