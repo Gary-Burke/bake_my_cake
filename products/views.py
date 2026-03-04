@@ -43,3 +43,10 @@ class ProductList(ListView):
             queryset = queryset.filter(category__name=category)
 
         return queryset.order_by("name")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["current_category"] = self.request.GET.get(
+            "category").replace("-", " ").title()
+        print(f"Context: {context}")  # TODO: Delete print
+        return context

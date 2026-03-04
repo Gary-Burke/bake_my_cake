@@ -3,16 +3,22 @@
 
 
 {% block content %}
-<div class="list-group position-fixed" id="categories">
-    <li class="list-group-item lead">Categories</li>
-    <a href="{% url 'products' %}?category=all-cakes" class="list-group-item list-group-item-action">All Cakes</a>
-    <a href="{% url 'products' %}?category=birthday-cakes" class="list-group-item list-group-item-action">Birthdays</a>
-    <a href="{% url 'products' %}?category=kids-cakes" class="list-group-item list-group-item-action">Kids</a>
-    <a href="{% url 'products' %}?category=event-cakes" class="list-group-item list-group-item-action">Events</a>
-    <a href="{% url 'products' %}?category=cupcakes" class="list-group-item list-group-item-action">Cupcakes</a>
-</div>
-
 <section class="container text-center">
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="">Categories</span>
+        </button>
+        <button type="button" class="btn btn-outline-secondary">{{ current_category }}</button>
+        <ul class="dropdown-menu" id="categories">
+            <li><a href="{% url 'products' %}?category=all-cakes" class="dropdown-item">All Cakes</a></li>
+            <li><a href="{% url 'products' %}?category=birthday-cakes" class="dropdown-item">Birthdays</a></li>
+            <li><a href="{% url 'products' %}?category=kids-cakes" class="dropdown-item">Kids</a></li>
+            <li><a href="{% url 'products' %}?category=event-cakes" class="dropdown-item">Events</a></li>
+            <li><a href="{% url 'products' %}?category=cupcakes" class="dropdown-item">Cupcakes</a></li>
+        </ul>
+    </div>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3">
         {% for product in products_list %}
