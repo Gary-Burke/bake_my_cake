@@ -64,6 +64,7 @@ h2 {
     position: fixed;
     width: 100%;
     padding-top: 5.625rem;
+    z-index: 99;
 }
 
 #bag {
@@ -111,11 +112,15 @@ h2 {
 .product-card img {
     width: auto;
     height: 250px;
-    max-width: 200px;
+    max-width: 250px;
+    filter: drop-shadow(0.5rem 0.5rem 0.5rem black);
 }
 
 .product-card {
-    border: 1px solid black;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    font-family: var(--heading-font);
+    cursor: pointer;
 }
 
 /* Pagination Element */

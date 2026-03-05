@@ -5,7 +5,7 @@
 {% block content %}
 <section class="container text-center">
 
-    <div class="row">
+    <div class="row my-1">
 
         <!-- Category Selection -->
         <div class="col-6 col-md-4 col-lg-2">
@@ -37,10 +37,10 @@
     </div>
 
     <!-- Disply Product Cards -->
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-2 g-lg-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 gx-3 gy-3 gy-lg-5 gx-lg-4 mt-1">
         {% for product in products_list %}
         <div class="col">
-            <div class="p-3 product-card">
+            <div class="product-card">
                 {% if product.image_url %}
                 <img src="{{ product.image_url }}" alt="{{ product.name }}">
                 {% elif product.image %}
@@ -49,9 +49,9 @@
                 <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
                 {% endif %}
                 
-                <div class="row justify-content-between">
-                    <p class="col-8 lead">{{ product.name }}</p>
-                    <p class="col-4 lead">{{ product.base_price }}€</p>
+                <div class="d-flex flex-row justify-content-evenly mt-3">
+                    <p><strong>{{ product.name }}</strong></p>
+                    <p><strong>{{ product.base_price }}€</strong></p>
                 </div>
             </div>
         </div>
