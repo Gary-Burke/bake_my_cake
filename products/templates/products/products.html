@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+{% endblock %}
 
 {% block content %}
 <section class="container text-center">
@@ -94,5 +97,6 @@
     crossorigin="anonymous"></script>
 
 <!-- Custom JS -->
-<script src="{% static 'js/products.js' %}" defer></script>
+<script src="{% static 'products/js/products.js' %}" defer></script>
 {% endblock %}
+
