@@ -1,36 +1,36 @@
-/* jshint esversion: 11 */
+/* jshint esversion: 11, jquery: true */
 
 // Wait for the DOM to load before executing functions
 $(document).ready(function () {
 
+    /**
+     * On category selection change from user, get value from input
+     * and write the parameter 'category' with retrieved input to url.
+     * If no input 'reset' selected then remove parameter from url
+     */
     $("#category-selector").change(function (e) {
         var selectedVal = $(this).val();
         var currentUrl = new URL(window.location);
-        
-        console.log(`selectedVal: ${selectedVal}`)
-        console.log(`currentUrl: ${currentUrl}`)
 
         if (selectedVal != "reset") {
             var category = selectedVal;
 
-            currentUrl.searchParams.set("category", category);            
+            currentUrl.searchParams.set("category", category);
             window.location.replace(currentUrl);
         } else {
             currentUrl.searchParams.delete("category");
             window.location.replace(currentUrl);
         }
-
-        
     });
 
-
+    /**
+     * On sort selection change from user, get value from input
+     * and write the parameters 'sort' and 'direction' with retrieved input to url.
+     * If no input 'reset' selected then remove parameter from url.
+     */
     $('#sort-selector').change(function () {
-        var selector = $(this);
+        var selectedVal = $(this).val();
         var currentUrl = new URL(window.location);
-        var selectedVal = selector.val();
-
-        console.log(`selectedVal: ${selectedVal}`)
-        console.log(`currentUrl: ${currentUrl}`)
 
         if (selectedVal != "reset") {
             var sort = selectedVal.split("_")[0];
