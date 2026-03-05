@@ -13,6 +13,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
+        ordering = ["pk"]
 
     def __str__(self):
         return self.display_name
@@ -26,6 +27,7 @@ class Product(models.Model):
         ("round", "Round"),
         ("square", "Square"),
         ("rectangle", "Rectangle"),
+        ("cupcake", "Cupcake")
     )
 
     category = models.ForeignKey(
