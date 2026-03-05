@@ -13,7 +13,9 @@ class ProductList(ListView):
 
     ``queryset``
     All instances of products in :model:`products.Product` based on:
-     - filter by category
+     - filter by category input
+     - sort by user input
+     - pagination by 24
 
     **Template**
     :template:`products/products.html`
@@ -24,7 +26,6 @@ class ProductList(ListView):
     paginate_by = 24
 
     def get_queryset(self):
-        print(f"GET request: {self.request.GET}")  # TODO: Delete print
 
         queryset = Product.objects.all()
 
@@ -60,9 +61,15 @@ class ProductList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context["current_category"] = self.request.GET.get("category")
+
         sort = self.request.GET.get("sort")
         direction = self.request.GET.get("direction")
         context["current_sorting"] = f"{sort}_{direction}"
+
+        query_params = self.request.GET.copy()
+        query_params.pop("page", None)
+        context["query_string"] = query_params.urlencode()
 
         return context

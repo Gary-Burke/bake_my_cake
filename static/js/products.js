@@ -14,13 +14,13 @@ $(document).ready(function () {
 
         if (selectedVal != "reset") {
             var category = selectedVal;
-
             currentUrl.searchParams.set("category", category);
-            window.location.replace(currentUrl);
         } else {
             currentUrl.searchParams.delete("category");
-            window.location.replace(currentUrl);
         }
+
+        currentUrl.searchParams.delete("page");
+        window.location.replace(currentUrl);
     });
 
     /**
@@ -35,15 +35,15 @@ $(document).ready(function () {
         if (selectedVal != "reset") {
             var sort = selectedVal.split("_")[0];
             var direction = selectedVal.split("_")[1];
-
             currentUrl.searchParams.set("sort", sort);
             currentUrl.searchParams.set("direction", direction);
-            window.location.replace(currentUrl);
         } else {
             currentUrl.searchParams.delete("sort");
             currentUrl.searchParams.delete("direction");
-            window.location.replace(currentUrl);
         }
+
+        currentUrl.searchParams.delete("page");
+        window.location.replace(currentUrl);
     });
 
 });
