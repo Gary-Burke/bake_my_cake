@@ -107,34 +107,6 @@ h2 {
     background: url("../images/hero-small.webp") no-repeat bottom center / cover;
 }
 
-/* ----- Product Page ----- */
-
-.product-card img {
-    width: auto;
-    height: 250px;
-    max-width: 250px;
-    filter: drop-shadow(0.5rem 0.5rem 0.5rem black);
-}
-
-.product-card {
-    font-size: 1.25rem;
-    color: var(--primary-color);
-    font-family: var(--heading-font);
-    cursor: pointer;
-}
-
-/* Pagination Element */
-
-.pagination .page-link {
-    text-decoration: none;
-    color: var(--dark-color);
-}
-
-#current-page {
-    background-color: var(--primary-color);
-    color: var(--highlight-color);
-}
-
 /* ----- Media Queries ----- */
 
 /* small screen sizes - 576px up*/
@@ -143,16 +115,6 @@ h2 {
     .hero {
         height: 70vh;
         background: url("../images/hero-small.webp") no-repeat bottom center / cover;
-    }
-}
-
-/* small screen sizes - 768px up*/
-
-@media screen and (min-width: 768px) {
-    .cake-card img {
-        width: auto;
-        height: 300px;
-        max-width: 240px;
     }
 }
 
