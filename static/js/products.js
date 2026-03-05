@@ -3,13 +3,24 @@
 // Wait for the DOM to load before executing functions
 $(document).ready(function () {
 
-    $("#categories > a").on("click", function (e) {
-        var currentUrl = window.location.href;
-        var selectedUrl = this.href;
+    $("#category-selector").change(function (e) {
+        var selectedVal = $(this).val();
+        var currentUrl = new URL(window.location);
+        
+        console.log(`selectedVal: ${selectedVal}`)
+        console.log(`currentUrl: ${currentUrl}`)
 
-        if (selectedUrl === currentUrl) {
-            e.preventDefault();
+        if (selectedVal != "reset") {
+            var category = selectedVal;
+
+            currentUrl.searchParams.set("category", category);            
+            window.location.replace(currentUrl);
+        } else {
+            currentUrl.searchParams.delete("category");
+            window.location.replace(currentUrl);
         }
+
+        
     });
 
 
@@ -17,6 +28,9 @@ $(document).ready(function () {
         var selector = $(this);
         var currentUrl = new URL(window.location);
         var selectedVal = selector.val();
+
+        console.log(`selectedVal: ${selectedVal}`)
+        console.log(`currentUrl: ${currentUrl}`)
 
         if (selectedVal != "reset") {
             var sort = selectedVal.split("_")[0];

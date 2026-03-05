@@ -7,29 +7,25 @@
 
     <div class="row">
 
-    <div class="btn-group col-6">
-        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="">Categories</span>
-        </button>
-        <button type="button" class="btn btn-outline-secondary">{{ current_category }}</button>
-        <ul class="dropdown-menu" id="categories">
-            <li><a href="{% url 'products' %}?category=all-cakes" class="dropdown-item">All Cakes</a></li>
-            <li><a href="{% url 'products' %}?category=birthday-cakes" class="dropdown-item">Birthdays</a></li>
-            <li><a href="{% url 'products' %}?category=kids-cakes" class="dropdown-item">Kids</a></li>
-            <li><a href="{% url 'products' %}?category=event-cakes" class="dropdown-item">Events</a></li>
-            <li><a href="{% url 'products' %}?category=cupcakes" class="dropdown-item">Cupcakes</a></li>
-        </ul>
+     <div class="col-6 col-md-4 col-lg-2">
+        <select class="form-select" id="category-selector" aria-label="Category selection">
+            <option value="reset" {% if current_category == 'None_None' %}selected{% endif %}>Categories</option>
+            <option value="all-cakes" {% if current_category == 'all-cakes' %}selected{% endif %}>All Cakes</option>
+            <option value="birthday-cakes" {% if current_category == 'birthday-cakes' %}selected{% endif %}>Birthdays</option>
+            <option value="kids-cakes" {% if current_category == 'kids-cakes' %}selected{% endif %}>Kids</option>
+            <option value="event-cakes" {% if current_category == 'event-cakes' %}selected{% endif %}>Events</option>
+            <option value="cupcakes" {% if current_category == 'cupcakes' %}selected{% endif %}>Cupcakes</option>
+         </select>
     </div>
 
-    <div class="col-6">
-    <select class="form-select" id="sort-selector" aria-label="Select sort by options">
-        <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by</option>
-        <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
-        <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
-        <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
-        <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
-    </select>
+    <div class="col-6 col-md-4 col-lg-2">
+        <select class="form-select" id="sort-selector" aria-label="Sort by options">
+            <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by</option>
+            <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+            <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+            <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+            <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+        </select>
     </div>
 
     </div>

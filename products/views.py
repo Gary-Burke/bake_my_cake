@@ -27,18 +27,20 @@ class ProductList(ListView):
         print(f"GET request: {self.request.GET}")  # TODO: Delete print
 
         queryset = Product.objects.all()
-        category = self.request.GET.get("category")
-        allowed_categories = [
-            "all-cakes", "kids-cakes", "birthday-cakes",
-            "event-cakes", "cupcakes"
-        ]
 
-        if category not in allowed_categories:
-            return queryset
-        elif category == "all-cakes":
-            queryset = queryset.exclude(category__name="cupcakes")
-        else:
-            queryset = queryset.filter(category__name=category)
+        if "category" in self.request.GET:
+            category = self.request.GET.get("category")
+            allowed_categories = [
+                "all-cakes", "kids-cakes", "birthday-cakes",
+                "event-cakes", "cupcakes"
+            ]
+
+            if category not in allowed_categories:
+                return queryset
+            elif category == "all-cakes":
+                queryset = queryset.exclude(category__name="cupcakes")
+            else:
+                queryset = queryset.filter(category__name=category)
 
         if "sort" in self.request.GET:
             sort_key = self.request.GET.get("sort")
@@ -58,8 +60,7 @@ class ProductList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["current_category"] = self.request.GET.get(
-            "category").replace("-", " ").title()
+        context["current_category"] = self.request.GET.get("category")
         sort = self.request.GET.get("sort")
         direction = self.request.GET.get("direction")
         context["current_sorting"] = f"{sort}_{direction}"
