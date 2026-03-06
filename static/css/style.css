@@ -17,12 +17,14 @@
 body {
     font-family: var(--body-font);
     color: var(--dark-color);
+    font-size: 1rem;
 }
 
 h1,
 h2 {
     font-family: var(--heading-font);
     color: var(--dark-color);
+    font-weight: 600;
 }
 
 /* prevents navbar from overlapping with main section due to fixed position */
@@ -117,6 +119,15 @@ h2 {
         background: url("../images/hero-small.webp") no-repeat bottom center / cover;
     }
 }
+
+/* Medium screen sizes - 768px up*/
+
+@media screen and (min-width: 768px) {
+    body {
+    font-size: 1.25rem;
+}
+}
+
 
 /* Large screen sizes - 992px up*/
 
