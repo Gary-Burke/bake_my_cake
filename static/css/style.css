@@ -9,7 +9,7 @@
     --highlight-color: #FFDAAD;
 
     --light-color: #fdf4e9;
-    --dark-color: #2C1B11;
+    --dark-color: #533528;
 }
 
 /* ----- General CSS ----- */
@@ -25,7 +25,9 @@ h2 {
     font-family: var(--heading-font);
     color: var(--dark-color);
     font-weight: 600;
+    letter-spacing: 0.06rem;
 }
+
 
 /* prevents navbar from overlapping with main section due to fixed position */
 .section {
