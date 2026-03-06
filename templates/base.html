@@ -43,15 +43,14 @@
 
     <!-- Navbar section -->
     <header class="mb-0">
-        <nav class="navbar navbar-expand-lg fixed-top py-0" id="nav-top" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg fixed-top" id="nav-top" data-bs-theme="dark">
             <div class="container">
 
                 <!-- Logo -->
                 <a class="navbar-brand" href="{% url 'index' %}">
-                    <img src="{% static 'images/logo-sm.webp' %}" alt="Bake my cake logo" class="logo" width="133"
-                        height="80">
+                    <img src="{% static 'images/logo-sm.webp' %}" alt="Bake my cake logo" class="logo">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -94,12 +93,12 @@
             <div class="container">
                 <ul class="list-unstyled list-inline py-2 mb-0 d-flex justify-content-end align-items-start">
                     <li class="list-inline-item text-center mx-4">
-                        <div><i class="fa-solid fa-user fa-xl"></i></div>
+                        <div><i class="fa-solid fa-user"></i></div>
                         <div class="account">Sign In / Register</div>
                     </li>
                     <li class="list-inline-item me-2">
                         <div id="bag">
-                            <i class="fa-solid fa-bag-shopping fa-xl"></i>
+                            <i class="fa-solid fa-bag-shopping"></i>
                             <div id="bag-count" class="d-flex justify-content-center align-items-center">
                                 <strong>2</strong></div>
                         </div>

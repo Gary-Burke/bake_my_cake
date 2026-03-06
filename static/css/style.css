@@ -31,7 +31,7 @@ h2 {
 
 /* prevents navbar from overlapping with main section due to fixed position */
 .section {
-    margin-top: 9.625rem;
+    margin-top: 7.75rem;
 }
 
 /* ----- Navbar ----- */
@@ -39,13 +39,16 @@ h2 {
 .logo {
     width: auto;
     height: 5rem;
-    position: relative;
-    top: 1rem;
+}
+
+a:has(.logo) {
+    position: absolute;
+    top: 0.2rem;
 }
 
 #nav-top {
     background-color: var(--primary-color);
-    min-height: 5rem;
+    min-height: 3rem;
 }
 
 #nav-top .nav-link {
@@ -67,7 +70,7 @@ h2 {
     background-color: var(--primary-color);
     position: fixed;
     width: 100%;
-    padding-top: 5.625rem;
+    padding-top: 3.5rem;
     z-index: 99;
 }
 
@@ -83,7 +86,7 @@ h2 {
     width: 1.3rem;
     height: 1.3rem;
     position: absolute;
-    bottom: -1rem;
+    bottom: -0.7rem;
     right: -0.5rem;
     z-index: 99;
 }
@@ -94,6 +97,7 @@ h2 {
 
 #nav-sub i {
     color: var(--dark-color);
+    font-size: 1.5rem;
 }
 
 .account {
@@ -120,14 +124,30 @@ h2 {
         height: 70vh;
         background: url("../images/hero-small.webp") no-repeat bottom center / cover;
     }
+
+    a:has(.logo) {
+        top: 0.6rem;
+    }
 }
 
 /* Medium screen sizes - 768px up*/
 
 @media screen and (min-width: 768px) {
     body {
-    font-size: 1.25rem;
-}
+        font-size: 1.25rem;
+    }
+
+    .logo {
+        height: 6rem;
+    }
+
+    #nav-sub i {
+        font-size: 1.7rem;
+    }
+
+    .section {
+        margin-top: 8.375rem;
+    }
 }
 
 
@@ -154,16 +174,33 @@ h2 {
         transform: translateX(-50%) scaleX(1);
     }
 
+    #nav-sub {
+        padding-top: 4.5rem;
+    }
+
     .hero {
         height: 80vh;
         background: url("../images/hero.webp") no-repeat bottom center / cover;
     }
 
     .logo {
-        width: auto;
-        height: 7rem;
-        position: absolute;
-        top: 1.5rem;
+        height: 6.5rem;
+    }
 
+    a:has(.logo) {
+        top: 1rem;
+    }
+
+    .section {
+        margin-top: 9.375rem;
+    }
+}
+
+/* small - medium screen sizes - 992px down*/
+
+@media screen and (max-width: 992px) {
+
+    #navbarNavDropdown>ul {
+        margin-top: 3.5rem;
     }
 }
