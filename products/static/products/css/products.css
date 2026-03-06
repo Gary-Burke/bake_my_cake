@@ -10,6 +10,7 @@
     color: var(--primary-color);
     font-family: var(--heading-font);
     cursor: pointer;
+    font-weight: bold;
 }
 
 #scroll-top {
