@@ -6,21 +6,27 @@
 {% endblock %}
 
 {% block content %}
-<section class="container text-center">
-    <div class="col-11 col-md-10 col-lg-8">
-        {% if product.image_url %}
-        <img src="{{ product.image_url }}" alt="{{ product.name }}">
-        {% elif product.image %}
-        <img src="{% static 'images/' %}{{ product.image }}" alt="{{ product.name }}">
-        {% else %}
-        <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
-        {% endif %}
+<section class="container">
 
-        <div class="d-flex flex-row justify-content-evenly mt-3">
-            <p>{{ product.name }}</p>
-            <p>{{ product.base_price }}€</p>
+    <div class="row product-details mx-auto mt-4">
+
+        <div class="col-md-5 text-center">
+            {% if product.image_url %}
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+            {% elif product.image %}
+            <img src="{% static 'images/' %}{{ product.image }}" alt="{{ product.name }}">
+            {% else %}
+            <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
+            {% endif %}
         </div>
+
+        <div class="col-md-7 ">
+            <h2>{{ product.name }}</h2>
+            <h3>{{ product.base_price }}€</h3>
+        </div>
+
     </div>
+
 </section>
 {% endblock %}
 

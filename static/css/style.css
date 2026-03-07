@@ -22,10 +22,15 @@ body {
 
 h1,
 h2 {
+    letter-spacing: 0.06rem;
+}
+
+h1,
+h2,
+h3 {
     font-family: var(--heading-font);
     color: var(--dark-color);
-    font-weight: 600;
-    letter-spacing: 0.06rem;
+    font-weight: bold;    
 }
 
 
@@ -41,9 +46,10 @@ h2 {
     height: 5rem;
 }
 
-/* Select parent link element of class product-card */
-a:has(.product-card) {
-    text-decoration: none;
+/* Select parent link element of class logo */
+a:has(.logo) {
+    position: absolute;
+    top: 0.2rem;
 }
 
 #nav-top {

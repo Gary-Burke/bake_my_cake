@@ -1,3 +1,5 @@
+/* Products List View */
+
 .product-card img {
     width: auto;
     height: 250px;
@@ -13,16 +15,16 @@
     font-weight: bold;
 }
 
-a:has(.logo) {
-    position: absolute;
-    top: 0.2rem;
+/* Select parent link element of class product-card */
+a:has(.product-card) {
+    text-decoration: none;
 }
 
 #scroll-top {
     display: none;
     position: fixed;
     z-index: 999;
-    cursor: pointer;    
+    cursor: pointer;
     bottom: 1.25rem;
     right: 1.25rem;
 }
@@ -33,7 +35,6 @@ a:has(.logo) {
 }
 
 /* Pagination Element */
-
 .pagination .page-link {
     text-decoration: none;
     color: var(--dark-color);
@@ -44,14 +45,34 @@ a:has(.logo) {
     color: var(--highlight-color);
 }
 
-/* ----- Media Queries ----- */
+/* Product Details View */
 
-/* medium screen sizes - 768px up*/
+.product-details img {
+    width: auto;
+    height: 300px;
+    max-width: 250px;
+    filter: drop-shadow(0.5rem 0.5rem 0.5rem #101010);
+}
+
+.product-details,
+.product-details > div {
+    border: 1px solid black;
+}
+
+/* Medium screen sizes - 768px up*/
 
 @media screen and (min-width: 768px) {
-    .cake-card img {
-        width: auto;
+    .product-details img {        
         height: 300px;
-        max-width: 240px;
+        max-width: 250px;
+    }
+}
+
+/* Large screen sizes - 1024px up*/
+
+@media screen and (min-width: 992px) {
+    .product-details img {        
+        height: 500px;
+        max-width: 350px;
     }
 }
