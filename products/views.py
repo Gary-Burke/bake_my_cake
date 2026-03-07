@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
 from .models import Product, Category
 
@@ -73,3 +73,15 @@ class ProductList(ListView):
         context["query_string"] = query_params.urlencode()
 
         return context
+
+
+def product_details(request, slug, product_id):
+    """
+    """
+    product = get_object_or_404(Product, pk=product_id)
+    template = "products/product_details.html"
+    context = {
+        "product": product,
+    }
+
+    return render(request, template, context)

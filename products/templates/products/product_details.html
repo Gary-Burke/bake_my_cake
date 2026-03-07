@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="container text-center">
+    <div class="col-11 col-md-10 col-lg-8">
+        {% if product.image_url %}
+        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+        {% elif product.image %}
+        <img src="{% static 'images/' %}{{ product.image }}" alt="{{ product.name }}">
+        {% else %}
+        <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
+        {% endif %}
+
+        <div class="d-flex flex-row justify-content-evenly mt-3">
+            <p>{{ product.name }}</p>
+            <p>{{ product.base_price }}€</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extras %}
+<!-- jQuery CDN link -->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'products/js/products.js' %}" defer></script>
+{% endblock %}

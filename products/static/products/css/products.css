@@ -13,6 +13,11 @@
     font-weight: bold;
 }
 
+a:has(.logo) {
+    position: absolute;
+    top: 0.2rem;
+}
+
 #scroll-top {
     display: none;
     position: fixed;

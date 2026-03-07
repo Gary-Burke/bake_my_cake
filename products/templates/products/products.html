@@ -39,24 +39,29 @@
 
     </div>
 
-    <!-- Disply Product Cards -->
+    <!-- Display Product Cards -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 gx-3 gy-3 gy-lg-5 gx-lg-4 mt-1">
+
         {% for product in products_list %}
         <div class="col">
-            <div class="product-card">
-                {% if product.image_url %}
-                <img src="{{ product.image_url }}" alt="{{ product.name }}">
-                {% elif product.image %}
-                <img src="{% static 'images/' %}{{ product.image }}" alt="{{ product.name }}">
-                {% else %}
-                <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
-                {% endif %}
-                
-                <div class="d-flex flex-row justify-content-evenly mt-3">
-                    <p>{{ product.name }}</p>
-                    <p>{{ product.base_price }}€</p>
+            <a href="{% url 'product_details' product.slug product.id %}">
+                <div class="product-card" data-product-id="{{ product.id }}" data-shape="{{ product.shape }}">
+
+                    {% if product.image_url %}
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                    {% elif product.image %}
+                    <img src="{% static 'images/' %}{{ product.image }}" alt="{{ product.name }}">
+                    {% else %}
+                    <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
+                    {% endif %}
+
+                    <div class="d-flex flex-row justify-content-evenly mt-3">
+                        <p>{{ product.name }}</p>
+                        <p>{{ product.base_price }}€</p>
+                    </div>
+
                 </div>
-            </div>
+            </a>
         </div>
         {% endfor %}
     </div>
@@ -90,9 +95,9 @@
 {% endif %}
 
 <!-- Scroll to Top Button -->
- <div id="scroll-top">
+<div id="scroll-top">
     <i class="fa-solid fa-circle-up"></i>
- </div>
+</div>
 
 
 {% endblock %}
@@ -105,4 +110,3 @@
 <!-- Custom JS -->
 <script src="{% static 'products/js/products.js' %}" defer></script>
 {% endblock %}
-

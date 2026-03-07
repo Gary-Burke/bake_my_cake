@@ -41,9 +41,9 @@ h2 {
     height: 5rem;
 }
 
-a:has(.logo) {
-    position: absolute;
-    top: 0.2rem;
+/* Select parent link element of class product-card */
+a:has(.product-card) {
+    text-decoration: none;
 }
 
 #nav-top {
