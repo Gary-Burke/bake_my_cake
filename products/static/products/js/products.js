@@ -46,19 +46,19 @@ $(document).ready(function () {
         window.location.replace(currentUrl);
     });
 
-    
+
     let mybutton = document.getElementById("scroll-top");
 
     $(mybutton).hover(function () {
         $(this).toggleClass("fa-beat");
     });
 
-    
+
     // https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
     window.onscroll = function () {
         scrollFunction()
     };
-    
+
     function scrollFunction() {
         if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
             mybutton.style.display = "block";
@@ -74,8 +74,29 @@ $(document).ready(function () {
 
     mybutton.addEventListener("click", () => {
         topFunction();
-    })
+    });
 
-    
+    $("#product-details .form-select").change(function () {
+        const form = $("#product-details");
+        const slug = form.data("slug");
+        const id = form.data("product-id");
+
+        const params = {
+            size: $("#size").val(),
+            tiers: $("#tiers").val(),
+            sponge: $("#sponge").val(),
+            filling: $("#filling").val(),
+            icing: $("#icing").val(),
+        };
+
+        // Pass the params values to the view in the get request as a query
+        $.get(`/products/${slug}/${id}/`, params)
+        .done(function (data) {
+            $("#product-total").text(data.total + "€");
+        })
+        .fail(function () {
+            console.error("Price calculation failed");
+        });
+    });
 
 });
