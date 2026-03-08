@@ -87,6 +87,7 @@ $(document).ready(function () {
             sponge: $("#sponge").val(),
             filling: $("#filling").val(),
             icing: $("#icing").val(),
+            quantity: $("#quantity").val(),
         };
 
         // Pass the params values to the view in the get request as a query

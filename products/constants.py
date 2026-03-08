@@ -8,7 +8,7 @@ PRODUCT_COST = {
     "tiers": {
         "one": 1,
         "two": 1.5,
-        "three": 2,
+        "three": 2.2,
     },
 
     "sponge": {
@@ -33,5 +33,39 @@ PRODUCT_COST = {
         "ganache": 8,
         "fondant": 6,
         "cream_cheese": 4,
+    },
+
+    "main_colour": {
+        "default": 0,
+        "black": 0,
+        "blue": 0,
+        "brown": 0,
+        "green": 0,
+        "pink": 0,
+        "purple": 0,
+        "red": 0,
+        "white": 0,
+        "yellow": 0,
+    },
+
+    "secondary_colour": {
+        "default": 0,
+        "black": 0,
+        "blue": 0,
+        "brown": 0,
+        "green": 0,
+        "pink": 0,
+        "purple": 0,
+        "red": 0,
+        "white": 0,
+        "yellow": 0,
+    },
+
+    "quantity": {
+        "one": 1,
+        "two": 2,
+        "three": 3,
+        "four": 4,
+        "five": 5,
     },
 }
