@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from django.http import JsonResponse
 from .models import Product
-from .constants import PRODUCT_COST
+from .constants import PRODUCT_COST, PRODUCT_COST_CUPCAKE
 from decimal import Decimal
 
 # Create your views here.
@@ -80,9 +80,23 @@ class ProductList(ListView):
 
 def product_details(request, slug, product_id):
     """
+    Returns a detailed view of a product :model:`products.Product`
+
+    **Context**
+    Imported values from constants.py used for template field generations
+    and for price calculation.
+
+    **Template**
+    :template:`products/product_detail.html`
     """
     product = get_object_or_404(Product, pk=product_id)
     template = "products/product_details.html"
+
+    # Used to loop through in template input fields
+    if product.shape == "cupcake":
+        product_cost = PRODUCT_COST_CUPCAKE
+    else:
+        product_cost = PRODUCT_COST
 
     if request.GET.get("sponge"):
         try:
@@ -94,14 +108,21 @@ def product_details(request, slug, product_id):
             )
             icing = Decimal(
                 str(PRODUCT_COST["icing"].get(request.GET.get("icing"), 0)))
-            size = Decimal(
-                str(PRODUCT_COST["size"].get(request.GET.get("size"), 1)))
+
+            if product.shape == "cupcake":
+                size = Decimal(
+                    str(PRODUCT_COST_CUPCAKE["size"].get(request.GET.get(
+                        "size"), 1))
+                )
+            else:
+                size = Decimal(
+                    str(PRODUCT_COST["size"].get(request.GET.get("size"), 1)))
             tiers = Decimal(
                 str(PRODUCT_COST["tiers"].get(request.GET.get("tiers"), 1)))
             quantity = Decimal(
                 str(PRODUCT_COST["quantity"].get(request.GET.get(
                     "quantity"), 1))
-            )
+            )           
 
             total = (((product.base_price + sponge + filling + icing)
                      * size) * tiers) * quantity
@@ -115,7 +136,7 @@ def product_details(request, slug, product_id):
 
     context = {
         "product": product,
-        "product_cost": PRODUCT_COST,
+        "product_cost": product_cost,
     }
 
     return render(request, template, context)
