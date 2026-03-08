@@ -22,97 +22,97 @@
 
         <div class="col-md-7 ">
             <h2>{{ product.name }}</h2>
-            <h3>{{ product.base_price }}€</h3>
+            <h3 id="product-total">{{ product.base_price }}€</h3>
 
-            <form action="" class="row">
+            <form class="row" id="product-details" data-product-id="{{ product.id }}" data-slug="{{ product.slug }}">
 
                 <div class="col-12 col-lg-6 my-2">
                     <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
-                            <option value="1">Small</option>
-                            <option value="2">Medium</option>
-                            <option value="3">Large</option>
+                        <select class="form-select" id="size">
+                            {% for s in size %}
+                            <option value="{{ s }}">{{ s }}</option>   
+                            {% endfor %}                         
                         </select>
-                        <label for="floatingSelectGrid">Size</label>
+                        <label for="size">Size</label>
                     </div>
                 </div>
 
                 <div class="col-12 col-lg-6 my-2">
                     <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
+                        <select class="form-select" id="tiers">
+                            {% for t in tiers %}
+                            <option value="{{ t }}">{{ t }}</option>   
+                            {% endfor %}
+                        </select>
+                        <label for="tiers">Tiers</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 my-2">
+                    <div class="form-floating">
+                        <select class="form-select" id="sponge">
+                            {% for s in sponge %}
+                            <option value="{{ s }}">{{ s }}</option>   
+                            {% endfor %}
+                        </select>
+                        <label for="sponge">Sponge</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 my-2">
+                    <div class="form-floating">
+                        <select class="form-select" id="filling">
+                            {% for f in filling %}
+                            <option value="{{ f }}">{{ f }}</option>   
+                            {% endfor %}
+                        </select>
+                        <label for="filling">Filling</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 my-2">
+                    <div class="form-floating">
+                        <select class="form-select" id="icing">
+                            {% for i in icing %}
+                            <option value="{{ i }}">{{ i }}</option>   
+                            {% endfor %}
+                        </select>
+                        <label for="icing">Icing</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 my-2">
+                    <div class="form-floating">
+                        <select class="form-select" id="primary-colour">
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
-                        <label for="floatingSelectGrid">Tiers</label>
+                        <label for="primary-colour">Main Colour</label>
                     </div>
                 </div>
 
                 <div class="col-12 col-lg-6 my-2">
                     <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
-                            <option value="1">Chocolate</option>
-                            <option value="2">Vanilla</option>
-                            <option value="3">Coffee</option>
-                            <option value="4">Carrot</option>
-                            <option value="5">Lemon</option>
-                        </select>
-                        <label for="floatingSelectGrid">Sponge</label>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6 my-2">
-                    <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
+                        <select class="form-select" id="secondary-colour">
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
-                        <label for="floatingSelectGrid">Filling</label>
+                        <label for="secondary-colour">Secondary Colour</label>
                     </div>
                 </div>
 
                 <div class="col-12 col-lg-6 my-2">
                     <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="form-select" id="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                         </select>
-                        <label for="floatingSelectGrid">Icing</label>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6 my-2">
-                    <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <label for="floatingSelectGrid">Main Colour</label>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6 my-2">
-                    <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <label for="floatingSelectGrid">Secondary Colour</label>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6 my-2">
-                    <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <label for="floatingSelectGrid">Quantity</label>
+                        <label for="quantity">Quantity</label>
                     </div>
                 </div>
 
@@ -122,6 +122,11 @@
     </div>
 
 </section>
+
+<!-- Scroll to Top Button -->
+<div id="scroll-top">
+    <i class="fa-solid fa-circle-up"></i>
+</div>
 {% endblock %}
 
 {% block extras %}
