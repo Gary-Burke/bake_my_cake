@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load display_lables %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
@@ -32,11 +33,11 @@
                         <select class="form-select" id="{{ key }}" name="{{ key }}">
                             {% for options in value.keys %}
                             <option value="{{ options }}">
-                                {{ options }}
+                                {{ options|friendly_label }}
                             </option>
                             {% endfor %}
                         </select>
-                        <label for="{{ key }}">{{ key }}</label>
+                        <label for="{{ key }}">{{ key|friendly_label }}</label>
                     </div>
                 </div>
                 {% endfor %}

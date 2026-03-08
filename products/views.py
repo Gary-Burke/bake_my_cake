@@ -86,14 +86,25 @@ def product_details(request, slug, product_id):
 
     if request.GET.get("sponge"):
         try:
-            sponge = Decimal(str(PRODUCT_COST["sponge"].get(request.GET.get("sponge"), 0)))
-            filling = Decimal(str(PRODUCT_COST["filling"].get(request.GET.get("filling"), 0)))
-            icing = Decimal(str(PRODUCT_COST["icing"].get(request.GET.get("icing"), 0)))
-            size = Decimal(str(PRODUCT_COST["size"].get(request.GET.get("size"), 1)))
-            tiers = Decimal(str(PRODUCT_COST["tiers"].get(request.GET.get("tiers"), 1)))
-            quantity = Decimal(str(PRODUCT_COST["quantity"].get(request.GET.get("quantity"), 1)))
+            sponge = Decimal(
+                str(PRODUCT_COST["sponge"].get(request.GET.get("sponge"), 0)))
+            filling = Decimal(
+                str(PRODUCT_COST["filling"].get(request.GET.get(
+                    "filling"), 0))
+            )
+            icing = Decimal(
+                str(PRODUCT_COST["icing"].get(request.GET.get("icing"), 0)))
+            size = Decimal(
+                str(PRODUCT_COST["size"].get(request.GET.get("size"), 1)))
+            tiers = Decimal(
+                str(PRODUCT_COST["tiers"].get(request.GET.get("tiers"), 1)))
+            quantity = Decimal(
+                str(PRODUCT_COST["quantity"].get(request.GET.get(
+                    "quantity"), 1))
+            )
 
-            total = (((product.base_price + sponge + filling + icing) * size) * tiers) * quantity
+            total = (((product.base_price + sponge + filling + icing)
+                     * size) * tiers) * quantity
 
             return JsonResponse(
                 {"total": str(total.quantize(Decimal("0.01")))}
