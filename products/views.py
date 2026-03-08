@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from django.http import JsonResponse
 from .models import Product
-from .contexts import product_cost
+from .constants import PRODUCT_COST
 from decimal import Decimal
 
 # Create your views here.
@@ -82,25 +82,17 @@ def product_details(request, slug, product_id):
     """
     """
     product = get_object_or_404(Product, pk=product_id)
-    current_cost = product_cost(request)
     template = "products/product_details.html"
 
     if request.GET.get("sponge"):
         try:
-            sponge_cost = Decimal(
-                str(current_cost["sponge"].get(request.GET.get("sponge"), 0)))
-            filling_cost = Decimal(
-                str(current_cost["filling"].get(request.GET.get("filling"), 0))
-            )
-            icing_cost = Decimal(
-                str(current_cost["icing"].get(request.GET.get("icing"), 0)))
-            size_cost = Decimal(
-                str(current_cost["size"].get(request.GET.get("size"), 1)))
-            tiers_cost = Decimal(
-                str(current_cost["tiers"].get(request.GET.get("tiers"), 1)))
+            sponge = Decimal(str(PRODUCT_COST["sponge"].get(request.GET.get("sponge"), 0)))
+            filling = Decimal(str(PRODUCT_COST["filling"].get(request.GET.get("filling"), 0)))
+            icing = Decimal(str(PRODUCT_COST["icing"].get(request.GET.get("icing"), 0)))
+            size = Decimal(str(PRODUCT_COST["size"].get(request.GET.get("size"), 1)))
+            tiers = Decimal(str(PRODUCT_COST["tiers"].get(request.GET.get("tiers"), 1)))
 
-            total = ((product.base_price + sponge_cost + filling_cost
-                      + icing_cost) * size_cost) * tiers_cost
+            total = ((product.base_price + sponge + filling + icing) * size) * tiers
 
             return JsonResponse(
                 {"total": str(total.quantize(Decimal("0.01")))}
@@ -111,6 +103,7 @@ def product_details(request, slug, product_id):
 
     context = {
         "product": product,
+        "product_cost": PRODUCT_COST,
     }
 
     return render(request, template, context)

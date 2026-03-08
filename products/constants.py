@@ -1,47 +1,37 @@
-
-def product_cost(request):
-    size = {
+PRODUCT_COST = {
+    "size": {
         "small": 1,
         "medium": 1.4,
         "large": 1.8,
-    }
+    },
 
-    tiers = {
+    "tiers": {
         "one": 1,
         "two": 1.5,
         "three": 2,
-    }
+    },
 
-    sponge = {
+    "sponge": {
         "vanilla": 0,
         "chocolate": 0,
         "coffee": 3,
         "carrot": 5,
         "lemon": 2,
-    }
+    },
 
-    filling = {
+    "filling": {
         "vanilla": 0,
         "chocolate": 0,
         "caramel_treat": 6,
         "strawberry_jam": 2,
         "butter_cream": 4,
-    }
+    },
 
-    icing = {
+    "icing": {
         "royal_icing": 0,
         "buttercream": 2,
         "ganache": 8,
         "fondant": 6,
         "cream_cheese": 4,
-    }
-
-    context = {
-        "size": size,
-        "tiers": tiers,
-        "sponge": sponge,
-        "filling": filling,
-        "icing": icing,
-    }
-
-    return context
+    },
+}

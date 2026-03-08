@@ -90,11 +90,9 @@ $(document).ready(function () {
         };
 
         // Pass the params values to the view in the get request as a query
-        $.get(`/products/${slug}/${id}/`, params)
-        .done(function (data) {
+        $.get(`/products/${slug}/${id}/`, params).done(function (data) {
             $("#product-total").text(data.total + "€");
-        })
-        .fail(function () {
+        }).fail(function () {
             console.error("Price calculation failed");
         });
     });
