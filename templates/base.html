@@ -2,6 +2,9 @@
 
 {% url 'index' as home_url %}
 {% url 'products' as products_url %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_logout' as logout_url %}
 
 <!DOCTYPE html>
 <html lang="en-US">
@@ -75,14 +78,16 @@
 
                         <li class="nav-item mx-1"><a class="nav-link" href="#">Custom Orders</a></li>
 
+                        {% if request.user.is_superuser %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">Admin</a>
+                            <button class="nav-link" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">Admin</button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Add Items</a></li>
                                 <li><a class="dropdown-item" href="#">Edit Items</a></li>
                             </ul>
                         </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -92,10 +97,32 @@
         <nav id="nav-sub">
             <div class="container">
                 <ul class="list-unstyled list-inline py-2 mb-0 d-flex justify-content-end align-items-start">
-                    <li class="list-inline-item text-center mx-4">
-                        <div><i class="fa-solid fa-user"></i></div>
-                        <div class="account">Sign In / Register</div>
+
+                    <!-- Profile -->
+                    <li class="list-inline-item text-center mx-4 dropdown">
+                        <button class="btn-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i>
+                            {% if user.is_authenticated %}
+                            <div class="account">{{ user }}</div>
+                            {% else %}
+                            <div class="account">Login | Sign Up</div>
+                            {% endif %}
+                        </button>
+                        <ul class="dropdown-menu">
+                            {% if user.is_authenticated %}
+                            <li><a class="dropdown-item" href="#">Current Orders</a></li>
+                            <li><a class="dropdown-item" href="#">Order History</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                            {% else %}
+                            <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
+                            <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
+                            {% endif %}
+                        </ul>
                     </li>
+
+                    <!-- Basket -->
                     <li class="list-inline-item me-2">
                         <div id="bag">
                             <i class="fa-solid fa-bag-shopping"></i>
