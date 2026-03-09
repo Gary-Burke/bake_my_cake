@@ -1,4 +1,4 @@
-/* Products List View */
+/* ----- Products List View ----- */
 
 .product-card img {
     width: auto;
@@ -45,7 +45,7 @@ a:has(.product-card) {
     color: var(--highlight-color);
 }
 
-/* Product Details View */
+/* ----- Product Details View ----- */
 
 .product-details img {
     width: auto;
@@ -54,25 +54,20 @@ a:has(.product-card) {
     filter: drop-shadow(0.5rem 0.5rem 0.5rem #101010);
 }
 
-.product-details,
-.product-details > div {
-    border: 1px solid black;
+.product-details h2,
+.product-details h3 {
+    color: var(--dark-color);
 }
 
-/* Medium screen sizes - 768px up*/
 
-@media screen and (min-width: 768px) {
-    .product-details img {        
-        height: 300px;
-        max-width: 250px;
-    }
-}
+/* ----- Media Queries ----- */
 
-/* Large screen sizes - 1024px up*/
+/* Large screen sizes - 992px up*/
 
 @media screen and (min-width: 992px) {
     .product-details img {        
-        height: 500px;
+        height: 400px;
         max-width: 350px;
     }
 }
+
