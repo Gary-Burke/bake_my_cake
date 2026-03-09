@@ -25,7 +25,7 @@
             <h2>{{ product.name }}</h2>
             <h3 id="product-total">{{ product.base_price }}€</h3>
 
-            <form class="row" id="product-details" data-product-id="{{ product.id }}" data-slug="{{ product.slug }}">
+            <form class="row" id="product-details" data-product-id="{{ product.id }}" data-slug="{{ product.slug }}" data-shape="{{ product.shape }}">
 
                 {% for key, value in product_cost.items %}
                 <div class="col-12 col-lg-6 my-2">
