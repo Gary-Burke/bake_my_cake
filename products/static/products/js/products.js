@@ -110,16 +110,16 @@ $(document).ready(function () {
         $("select option[value='large']").text("36 Cupcakes");
     } else if (shape === "square") {
         $("select option[value='small']").text("15cm x 15cm");
-        $("select option[value='medium']").text("18cm x 18cm");
+        $("select option[value='medium']").text("20cm x 20cm");
         $("select option[value='large']").text("25cm x 25cm");
     } else if (shape === "rectangle") {
         $("select option[value='small']").text("15cm x 20cm");
-        $("select option[value='medium']").text("20cm x 25cm");
-        $("select option[value='large']").text("30cm x 25cm");
+        $("select option[value='medium']").text("20cm x 30cm");
+        $("select option[value='large']").text("30cm x 40cm");
     } else {
         $("select option[value='small']").text("15cm Ø");
-        $("select option[value='medium']").text("18cm Ø");
-        $("select option[value='large']").text("20cm Ø");
+        $("select option[value='medium']").text("20cm Ø");
+        $("select option[value='large']").text("25cm Ø");
     };
 
 
