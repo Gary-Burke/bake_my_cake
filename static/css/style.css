@@ -17,7 +17,7 @@
 body {
     font-family: var(--body-font);
     color: var(--dark-color);
-    font-size: 1rem;
+    font-size: 1.25rem;
 }
 
 h1,
@@ -30,7 +30,7 @@ h2,
 h3 {
     font-family: var(--heading-font);
     color: var(--dark-color);
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 
@@ -139,9 +139,6 @@ a:has(.logo) {
 /* Medium screen sizes - 768px up*/
 
 @media screen and (min-width: 768px) {
-    body {
-        font-size: 1.25rem;
-    }
 
     .logo {
         height: 6rem;
