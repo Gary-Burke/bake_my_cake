@@ -140,16 +140,13 @@ a:has(.logo) {
     background: url("../images/hero-small.webp") no-repeat bottom center / cover;
 }
 
-/* ----- Alert Messages ----- */
+/* ----- bootstrap toasts ----- */
 
-#messages {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 2rem;
-    margin: auto;
-    text-align: center;
-    z-index: 99999;
+.message-container {
+    position: fixed;
+    top: 0px;
+    right: 1rem;
+    z-index: 999999;
 }
 
 /* ----- Media Queries ----- */
