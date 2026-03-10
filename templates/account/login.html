@@ -12,11 +12,12 @@
   <div class="row">
     <div class="col col-md-8 col-lg-6 mt-4 offset-md-2">
       <h2>{% trans "Sign In" %}</h2>
-      <p class="lead">{% blocktrans %}Test</p>
+      <h3 class="my-2">{% blocktrans %}Welcome to Bake My Cake!</h3>
+
       <p>If you don't have an account yet, please <a class="link" href="{{ signup_url }}">sign up</a> first.
         {% endblocktrans %}</p>
 
-      <form class="login col-sm-9 col-md-10 col-xl-8 col-xxl-7" method="POST" action="{% url 'account_login' %}">
+      <form class="login col-sm-9 col-md-10 col-xl-8" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
         {{ form|crispy }}
 
@@ -24,7 +25,7 @@
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
         
-        <button class="btn btn-confirm col-12 mt-4 mb-5" type="submit">{% trans "Sign In" %}</button>
+        <button class="col-12 mt-2 button-primary" type="submit">{% trans "Sign In" %}</button>
       </form>
 
     </div>
