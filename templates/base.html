@@ -113,7 +113,9 @@
                             <li><a class="dropdown-item" href="#">Current Orders</a></li>
                             <li><a class="dropdown-item" href="#">Order History</a></li>
                             <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                             {% else %}
                             <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
@@ -135,6 +137,20 @@
             </div>
         </nav>
     </header>
+
+    <!-- Alert Messages -->
+    <div class="container" id="messages">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                    {{ message | safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
     <!-- Main section -->
     <main class="section">
