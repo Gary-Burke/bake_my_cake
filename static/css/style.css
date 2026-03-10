@@ -54,7 +54,7 @@ h3 {
 
 /* prevents navbar from overlapping with main section due to fixed position */
 .section {
-    margin-top: 8.25rem;
+    margin-top: 8.1875rem;
 }
 
 /* ----- Navbar ----- */
@@ -126,6 +126,7 @@ a:has(.logo) {
 
 .account {
     color: var(--light-color);
+    font-size: 1.125rem;
 }
 
 .account:hover {
@@ -167,7 +168,7 @@ a:has(.logo) {
     }
 
     .section {
-        margin-top: 8.375rem;
+        margin-top: 8.3125rem;
     }
 }
 
@@ -213,7 +214,7 @@ a:has(.logo) {
     }
 
     .section {
-        margin-top: 9.375rem;
+        margin-top: 9.3125rem;
     }
 }
 
