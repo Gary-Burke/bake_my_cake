@@ -161,6 +161,11 @@
         {% endblock content %}
     </main>
 
+    <!-- Scroll to Top Button -->
+    <div id="scroll-top">
+        <i class="fa-solid fa-circle-up"></i>
+    </div>
+
     <!-- Footer Section -->
     <footer>
     </footer>
@@ -176,15 +181,8 @@
     {% block extras %}
     {% endblock %}
 
-    {% block postloadjs %}
-
-    <script>
-        document.querySelectorAll('.toast').forEach(toast => {
-            new bootstrap.Toast(toast).show();
-        });
-    </script>
-
-    {% endblock %}
+    <!-- Custom JS -->
+    <script src="{% static 'js/base.js' %}" defer></script>
 
 </body>
 
