@@ -52,11 +52,6 @@ h3 {
     background-color: transparent;
 }
 
-/* prevents navbar from overlapping with main section due to fixed position */
-.section {
-    margin-top: 8.1875rem;
-}
-
 /* ----- Navbar ----- */
 
 .logo {
@@ -92,10 +87,6 @@ a:has(.logo) {
 
 #nav-sub {
     background-color: var(--primary-color);
-    position: fixed;
-    width: 100%;
-    padding-top: 3.5rem;
-    z-index: 99;
 }
 
 #bag {
@@ -143,9 +134,9 @@ a:has(.logo) {
 /* ----- bootstrap toasts ----- */
 
 .message-container {
-    position: fixed;
-    top: 0px;
-    right: 1rem;
+    position: absolute;
+    top: 9.1rem;
+    right: 2rem;
     z-index: 999999;
 }
 
@@ -170,17 +161,8 @@ a:has(.logo) {
 
     .logo {
         height: 6rem;
-    }
-
-    #nav-sub i {
-        font-size: 1.7rem;
-    }
-
-    .section {
-        margin-top: 8.3125rem;
-    }
+    }     
 }
-
 
 /* Large screen sizes - 992px up*/
 
@@ -205,10 +187,6 @@ a:has(.logo) {
         transform: translateX(-50%) scaleX(1);
     }
 
-    #nav-sub {
-        padding-top: 4.5rem;
-    }
-
     .hero {
         height: 80vh;
         background: url("../images/hero.webp") no-repeat bottom center / cover;
@@ -217,20 +195,13 @@ a:has(.logo) {
     .logo {
         height: 6.5rem;
     }
-
-    a:has(.logo) {
-        top: 1rem;
-    }
-
-    .section {
-        margin-top: 9.3125rem;
-    }
 }
 
 /* small - medium screen sizes - 992px down*/
 
 @media screen and (max-width: 992px) {
 
+    /* Moves navbar down below logo when expanded */
     #navbarNavDropdown>ul {
         margin-top: 3.5rem;
     }
