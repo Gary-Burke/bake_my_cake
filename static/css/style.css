@@ -36,7 +36,7 @@ h3 {
 .button-primary {
     background-color: var(--primary-color);
     border: 0.15rem solid var(--primary-color);
-    border-radius: 0.75rem;
+    border-radius: 1rem;
     color: var(--light-color);
     padding: 0.2rem 0;
 }
