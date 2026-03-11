@@ -1,9 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.http import JsonResponse
 from .models import Product
 from .constants import PRODUCT_COST, PRODUCT_COST_CUPCAKE
 from decimal import Decimal
+from .forms import ProductForm
 
 # Create your views here.
 
@@ -122,7 +125,7 @@ def product_details(request, slug, product_id):
             quantity = Decimal(
                 str(PRODUCT_COST["quantity"].get(request.GET.get(
                     "quantity"), 1))
-            )           
+            )
 
             total = (((product.base_price + sponge + filling + icing)
                      * size) * tiers) * quantity
@@ -137,6 +140,50 @@ def product_details(request, slug, product_id):
     context = {
         "product": product,
         "product_cost": product_cost,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def add_product(request):
+    """
+    Creates an instance of :model:`products.Product`
+
+    **Context**
+    ``product_form``
+     An instance of :form:`products.ProductForm`
+
+    **Template**
+    :template:`products/add_product.html`
+    """
+    if not request.user.is_superuser:
+        messages.add_message(
+            request, messages.ERROR,
+            "Products can only be added by an Admin!"
+        )
+        return redirect(reverse('index'))
+
+    if request.method == "POST":
+        product_form = ProductForm(data=request.POST)
+        if product_form.is_valid():
+            product = product_form.save(commit=False)
+            product.slug = product.name.replace(" ", "-").lower()
+            product.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                f"{product.name} was successfully added to the database!"
+            )
+        else:
+            messages.add_message(
+                request, messages.ERROR,
+                "Unable to add product. Please try again later"
+            )
+
+    product_form = ProductForm()
+    template = "products/add_product.html"
+    context = {
+        "product_form": product_form,
     }
 
     return render(request, template, context)
