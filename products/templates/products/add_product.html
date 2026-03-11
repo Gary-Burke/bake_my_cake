@@ -19,7 +19,7 @@
                 The business model requires all products to be added at their lowest possible
                 cost. This means <strong>smallest and cheapest</strong> options for the <strong>base price.</strong></p>
 
-            <form method="post" class="col-md-8 col-xl-7 mt-3">
+            <form method="post" enctype="multipart/form-data" class="col-md-8 col-xl-7 mt-3">
                 {{ product_form|crispy }}
                 {% csrf_token %}
                 <button id="submitButton" type="submit" class="button-primary px-3 mt-1">Submit</button>

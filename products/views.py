@@ -165,7 +165,7 @@ def add_product(request):
         return redirect(reverse('index'))
 
     if request.method == "POST":
-        product_form = ProductForm(data=request.POST)
+        product_form = ProductForm(data=request.POST, files=request.FILES)
         if product_form.is_valid():
             product = product_form.save(commit=False)
             product.slug = product.name.replace(" ", "-").lower()
@@ -181,6 +181,7 @@ def add_product(request):
             )
 
     product_form = ProductForm()
+
     template = "products/add_product.html"
     context = {
         "product_form": product_form,
