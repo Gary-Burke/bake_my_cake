@@ -2,7 +2,7 @@
 <div class="row mt-2 mb-5 justify-content-center">
 
     {% for product in products_list %}
-    <div class="product-card-admin col-11 col-md-6 col-lg-4 col-xl-3 d-flex p-3" data-product-id="{{ product.id }}">
+    <div class="product-card-admin col-10 col-md-6 col-lg-4 col-xl-3 d-flex p-3 justify-content-evenly" data-product-id="{{ product.id }}">
 
         {% if product.image_url %}
         <img src="{{ product.image_url.url }}" alt="{{ product.name }}">
@@ -12,9 +12,13 @@
         <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
         {% endif %}
 
-        <ul class="list-unstyled text-start ms-3 mt-3">
+        <ul class="list-unstyled text-start ms-3 mt-2 d-flex flex-column">
             <li><strong>{{ product.name }}</strong></li>
             <li>{{ product.base_price }}€</li>
+            <li class="admin-icons  mt-auto">
+                    <a class="button-edit" data-product-id="{{ product.id }}" href="#"><i class="fa-solid fa-pencil fa-beat"></i></a>
+                    <a class="button-delete ms-3" data-product-id="{{ product.id }}" href="#"><i class="fa-solid fa-trash-can"></i></a>
+                </li>
         </ul>
     </div>
 

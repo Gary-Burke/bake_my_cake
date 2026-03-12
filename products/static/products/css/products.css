@@ -31,6 +31,23 @@
     cursor: pointer;
 }
 
+/* Icons for edit and delete */
+
+.button-edit,
+.button-delete {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+.button-edit {
+    color: #045879;
+}
+
+.button-delete {
+    color: #c92939;
+}
+
 /* Select parent link element of class product-card */
 a:has(.product-card) {
     text-decoration: none;
