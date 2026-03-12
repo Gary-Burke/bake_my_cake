@@ -52,6 +52,12 @@ class ProductList(ListView):
 
         if "sort" in self.request.GET:
             sort_key = self.request.GET.get("sort")
+            allowed_keys = [
+                "price_asc", "price_desc", "name_asc", "name_desc"
+            ]
+            if sort_key not in allowed_keys:
+                return queryset
+
             sort_direction = self.request.GET.get("direction")
 
             if sort_key == 'name':
