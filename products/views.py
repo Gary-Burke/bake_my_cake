@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.http import JsonResponse
+from django.db.models.functions import Lower
 from .models import Product
 from .constants import PRODUCT_COST, PRODUCT_COST_CUPCAKE
 from decimal import Decimal
@@ -52,6 +53,12 @@ class ProductList(ListView):
         if "sort" in self.request.GET:
             sort_key = self.request.GET.get("sort")
             sort_direction = self.request.GET.get("direction")
+
+            if sort_key == 'name':
+                # Django sorts capital and lowercase letters differently.
+                # Converting all to lowercase ensures correct sorting
+                sort_key = 'lower_name'
+                queryset = queryset.annotate(lower_name=Lower('name'))
 
             if sort_key == "price":
                 sort_key = "base_price"
