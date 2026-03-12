@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.http import JsonResponse
 from django.db.models.functions import Lower
@@ -31,6 +32,7 @@ class ProductList(ListView):
     template_name = "products/products.html"
     context_object_name = "products_list"
     paginate_by = 24
+    is_admin_view = False
 
     def get_queryset(self):
 
@@ -94,7 +96,13 @@ class ProductList(ListView):
         query_params.pop("page", None)
         context["query_string"] = query_params.urlencode()
 
+        context["is_admin_view"] = self.is_admin_view
+
         return context
+
+
+class ProductListAdmin(LoginRequiredMixin, ProductList):
+    is_admin_view = True
 
 
 def product_details(request, slug, product_id):
