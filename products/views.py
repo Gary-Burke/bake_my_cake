@@ -35,7 +35,9 @@ class ProductList(ListView):
     def get_queryset(self):
 
         queryset = Product.objects.all()
+        sort = "name"
 
+        # Filter by user category selection
         if "category" in self.request.GET:
             category = self.request.GET.get("category")
             allowed_categories = [
@@ -43,26 +45,29 @@ class ProductList(ListView):
                 "event-cakes", "cupcakes"
             ]
 
-            if category not in allowed_categories:
-                return queryset
-            elif category == "all-cakes":
-                queryset = queryset.exclude(category__name="cupcakes")
-            else:
-                queryset = queryset.filter(category__name=category)
+            if category in allowed_categories:
+                if category == "all-cakes":
+                    queryset = queryset.exclude(category__name="cupcakes")
+                else:
+                    queryset = queryset.filter(category__name=category)
 
+        # Sort by user selection
         if "sort" in self.request.GET:
             sort_key = self.request.GET.get("sort")
-            allowed_keys = [
-                "price_asc", "price_desc", "name_asc", "name_desc"
-            ]
+            allowed_keys = ["price", "name"]
+
             if sort_key not in allowed_keys:
-                return queryset
+                sort_key = "name"
 
             sort_direction = self.request.GET.get("direction")
+            allowed_direction = ["asc", "desc"]
 
+            if sort_direction not in allowed_direction:
+                sort_direction = "asc"
+
+            # Django sorts capital and lowercase letters differently.
+            # Converting all to lowercase ensures correct sorting
             if sort_key == 'name':
-                # Django sorts capital and lowercase letters differently.
-                # Converting all to lowercase ensures correct sorting
                 sort_key = 'lower_name'
                 queryset = queryset.annotate(lower_name=Lower('name'))
 
@@ -74,9 +79,7 @@ class ProductList(ListView):
             else:
                 sort = f"-{sort_key}"
 
-            return queryset.order_by(sort)
-
-        return queryset.order_by("name")
+        return queryset.order_by(sort)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
