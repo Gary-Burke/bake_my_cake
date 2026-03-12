@@ -15,6 +15,22 @@
     font-weight: bold;
 }
 
+/* ----- Products List View - Admin ----- */
+
+.product-card-admin img {
+    width: auto;
+    height: 120px;
+    max-width: 100px;
+}
+
+.product-card-admin {
+    border: var(--primary-color) dotted 1px;
+}
+
+.product-card-admin:hover {
+    cursor: pointer;
+}
+
 /* Select parent link element of class product-card */
 a:has(.product-card) {
     text-decoration: none;
@@ -51,9 +67,14 @@ a:has(.product-card) {
 /* Large screen sizes - 992px up*/
 
 @media screen and (min-width: 992px) {
-    .product-details img {        
+    .product-details img {
         height: 400px;
         max-width: 350px;
     }
-}
 
+    .product-card-admin img {
+        width: auto;
+        height: 180px;
+        max-width: 150px;
+    }
+}
