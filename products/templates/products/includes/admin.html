@@ -2,7 +2,7 @@
 <div class="row mt-2 mb-5 justify-content-center">
 
     {% for product in products_list %}
-    <div class="product-card-admin col-10 col-md-6 col-lg-4 col-xl-3 d-flex p-3 justify-content-evenly"
+    <div class="product-card-admin col-10 col-md-6 col-lg-4 col-xl-3 d-flex p-3 justify-content-start"
         data-product-id="{{ product.id }}">
 
         {% if product.image_url %}
@@ -22,6 +22,27 @@
             </li>
         </ul>
     </div>
-
     {% endfor %}
+</div>
+
+<!-- Delete Product Confirmation modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Product?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start">
+                Are you sure you want to delete this product from the database? <br>
+                This action cannot be undone!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a id="delete-confirm" href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

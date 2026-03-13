@@ -196,7 +196,6 @@ def add_product(request):
     **Template**
     :template:`products/add_product.html`
     """
-    superuser_check(request)
 
     if request.method == "POST":
         product_form = ProductForm(data=request.POST, files=request.FILES)
@@ -236,7 +235,6 @@ def edit_product(request, product_id):
     **Template**
     :template:`products/edit_product.html`
     """
-    superuser_check(request)
 
     product = get_object_or_404(Product, pk=product_id)
 
@@ -266,3 +264,17 @@ def edit_product(request, product_id):
     }
 
     return render(request, template, context)
+
+
+@superuser_check
+def delete_product(request, product_id):
+    """
+    Delete an instance of :model:`products.Product`
+    """
+    product = get_object_or_404(Product, pk=product_id)
+    product.delete()
+    messages.add_message(
+        request, messages.SUCCESS, f"{product.name} "
+        "was successfully deleted from the database."
+    )
+    return redirect(reverse('products_admin'))

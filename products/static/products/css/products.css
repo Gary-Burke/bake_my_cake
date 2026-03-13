@@ -36,7 +36,7 @@ a:has(.product-card) {
 .product-card-admin img {
     width: auto;
     height: 120px;
-    max-width: 100px;
+    max-width: 90px;
 }
 
 .product-card-admin {

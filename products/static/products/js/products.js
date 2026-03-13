@@ -98,14 +98,25 @@ $(document).ready(function () {
     });
 
     /**
-     * Gets productId from clicked product to build dynamic URL
-     * Set href and action attributes for clicked product icon    
-     */ 
-
+     * Gets productId from clicked product edit icon to build dynamic URL.
+     * Set href attributes for clicked product to open product edit form.
+     */
     $(".button-edit").click(function () {
         let productId = $(this).closest('.product-card-admin').attr("data-product-id");
         $(this).attr("href", `/products/edit/${productId}`);
-        
+
     });
 
+    /**
+     * Triggers bootstrap delete modal confirmation.
+     * Gets productId from clicked product delete icon to build dynamic URL.
+     * If delete confirm clicked then set URL dynamically to delete product.         
+     */
+    const deleteModal = new bootstrap.Modal($("#deleteModal"));
+
+    $(".button-delete").on("click", function () {
+        let productId = $(this).closest('.product-card-admin').attr("data-product-id");
+        $("#delete-confirm").attr("href", `/products/delete/${productId}`);
+        deleteModal.show();
+    });
 });
