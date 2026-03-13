@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.http import JsonResponse
@@ -9,8 +9,23 @@ from .models import Product
 from .constants import PRODUCT_COST, PRODUCT_COST_CUPCAKE
 from decimal import Decimal
 from .forms import ProductForm, EditProductForm
+from functools import wraps
 
 # Create your views here.
+
+
+# Used Claude.ai to turn my function into a working decorator
+def superuser_check(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.add_message(
+                request, messages.ERROR,
+                "These rights are only reserved for Admins!"
+            )
+            return redirect(reverse('account_login'))
+        return view_func(request, *args, **kwargs)
+    return wrapper
 
 
 class ProductList(ListView):
@@ -169,7 +184,7 @@ def product_details(request, slug, product_id):
     return render(request, template, context)
 
 
-@login_required
+@superuser_check
 def add_product(request):
     """
     Creates an instance of :model:`products.Product`
@@ -181,12 +196,7 @@ def add_product(request):
     **Template**
     :template:`products/add_product.html`
     """
-    if not request.user.is_superuser:
-        messages.add_message(
-            request, messages.ERROR,
-            "Products can only be added by an Admin!"
-        )
-        return redirect(reverse('index'))
+    superuser_check(request)
 
     if request.method == "POST":
         product_form = ProductForm(data=request.POST, files=request.FILES)
@@ -214,7 +224,7 @@ def add_product(request):
     return render(request, template, context)
 
 
-@login_required
+@superuser_check
 def edit_product(request, product_id):
     """
     Display an instance to edit of :model:`products.Product`
@@ -226,12 +236,7 @@ def edit_product(request, product_id):
     **Template**
     :template:`products/edit_product.html`
     """
-    if not request.user.is_superuser:
-        messages.add_message(
-            request, messages.ERROR,
-            "Access to the database is only permitted for Admins!"
-        )
-        return redirect(reverse('index'))
+    superuser_check(request)
 
     product = get_object_or_404(Product, pk=product_id)
 
