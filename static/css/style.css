@@ -162,6 +162,11 @@ a:has(.logo) {
     background: url("../images/hero-small.webp") no-repeat bottom center / cover;
 }
 
+.error-bg {
+    height: 80vh;
+    background: url("../images/404.jpg") no-repeat bottom center / cover;
+}
+
 /* ----- Footer ----- */
 
 footer {

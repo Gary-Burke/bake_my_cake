@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .views import handler404
 
 urlpatterns = [
     path('', include('pages.urls'), name='pages_urls'),
@@ -24,3 +25,4 @@ urlpatterns = [
     path('basket/', include("basket.urls"), name='basket_urls'),
     path('products/', include("products.urls"), name='products_urls'),
 ]
+handler404 = 'bake_my_cake.views.handler404'
