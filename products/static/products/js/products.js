@@ -62,6 +62,7 @@ $(document).ready(function () {
         };
 
         // Pass the params values to the view in the get request as a query
+        // Return the calculated total from view and update html with total
         $.get(`/products/${slug}/${id}/`, params).done(function (data) {
             $("#product-total").text(data.total + "€");
         }).fail(function () {
@@ -91,5 +92,8 @@ $(document).ready(function () {
         $("select option[value='large']").text("25cm Ø");
     };
 
+    $(".admin-icons i").hover(function () {
+        $(this).toggleClass("fa-beat");
+    });
 
 });

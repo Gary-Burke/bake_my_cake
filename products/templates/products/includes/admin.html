@@ -12,11 +12,11 @@
         <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
         {% endif %}
 
-        <ul class="list-unstyled text-start ms-3 mt-2 d-flex flex-column">
+        <ul class="list-unstyled text-start ms-3 mt-2">
             <li><strong>{{ product.name }}</strong></li>
             <li>{{ product.base_price }}€</li>
-            <li class="admin-icons  mt-auto">
-                    <a class="button-edit" data-product-id="{{ product.id }}" href="#"><i class="fa-solid fa-pencil fa-beat"></i></a>
+            <li class="admin-icons mt-2">
+                    <a class="button-edit" data-product-id="{{ product.id }}" href="#"><i class="fa-solid fa-pencil"></i></a>
                     <a class="button-delete ms-3" data-product-id="{{ product.id }}" href="#"><i class="fa-solid fa-trash-can"></i></a>
                 </li>
         </ul>
