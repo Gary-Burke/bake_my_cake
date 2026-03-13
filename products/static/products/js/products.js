@@ -92,8 +92,20 @@ $(document).ready(function () {
         $("select option[value='large']").text("25cm Ø");
     };
 
+    // Add animation to edit/delete icons when hovered
     $(".admin-icons i").hover(function () {
         $(this).toggleClass("fa-beat");
+    });
+
+    /**
+     * Gets productId from clicked product to build dynamic URL
+     * Set href and action attributes for clicked product icon    
+     */ 
+
+    $(".button-edit").click(function () {
+        let productId = $(this).closest('.product-card-admin').attr("data-product-id");
+        $(this).attr("href", `/products/edit/${productId}`);
+        
     });
 
 });

@@ -24,3 +24,26 @@ class ProductForm(forms.ModelForm):
             "base_price",
             "image_url",
         )
+
+
+class EditProductForm(forms.ModelForm):
+    """
+    Form to edit products from the database for superuser
+    """
+    image_url = CloudinaryFileField(
+        options={'folder': 'products'},
+        required=False
+    )
+
+    class Meta:
+        """
+        :model:`products.Product`
+        """
+        model = Product
+        fields = (
+            "name",
+            "shape",
+            "category",
+            "base_price",
+            "image_url",
+        )

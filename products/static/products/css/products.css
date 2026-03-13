@@ -43,6 +43,12 @@ a:has(.product-card) {
     border: var(--primary-color) dotted 1px;
 }
 
+.edit img {
+    width: auto;
+    height: 180px;
+    max-width: 160px;
+}
+
 /* Icons for edit and delete */
 
 .button-edit,
@@ -99,4 +105,9 @@ a:has(.product-card) {
         height: 180px;
         max-width: 150px;
     }
+
+    .edit img {
+    height: 300px;
+    max-width: 280px;
+}
 }

@@ -8,7 +8,7 @@ from django.db.models.functions import Lower
 from .models import Product
 from .constants import PRODUCT_COST, PRODUCT_COST_CUPCAKE
 from decimal import Decimal
-from .forms import ProductForm
+from .forms import ProductForm, EditProductForm
 
 # Create your views here.
 
@@ -209,6 +209,55 @@ def add_product(request):
     template = "products/add_product.html"
     context = {
         "product_form": product_form,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def edit_product(request, product_id):
+    """
+    Display an instance to edit of :model:`products.Product`
+
+    **Context**
+    ``edit_product_form``
+     An instance of :form:`products.EditProductForm`
+
+    **Template**
+    :template:`products/edit_product.html`
+    """
+    if not request.user.is_superuser:
+        messages.add_message(
+            request, messages.ERROR,
+            "Access to the database is only permitted for Admins!"
+        )
+        return redirect(reverse('index'))
+
+    product = get_object_or_404(Product, pk=product_id)
+
+    if request.method == "POST":
+
+        edit_product_form = EditProductForm(
+            data=request.POST, instance=product, files=request.FILES)
+
+        if edit_product_form.is_valid():
+            product = edit_product_form.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 f"{product.name} successfully updated!")
+            return redirect(reverse('products_admin'))
+        else:
+            messages.add_message(
+                request, messages.ERROR, f"Unable to update {product.name} "
+                "at this moment. Please try again later."
+            )
+
+    else:
+        edit_product_form = EditProductForm(instance=product)
+
+    template = "products/edit_product.html"
+    context = {
+        "product": product,
+        "edit_product_form": edit_product_form,
     }
 
     return render(request, template, context)

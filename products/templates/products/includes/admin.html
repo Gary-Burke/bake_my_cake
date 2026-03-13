@@ -2,7 +2,8 @@
 <div class="row mt-2 mb-5 justify-content-center">
 
     {% for product in products_list %}
-    <div class="product-card-admin col-10 col-md-6 col-lg-4 col-xl-3 d-flex p-3 justify-content-evenly" data-product-id="{{ product.id }}">
+    <div class="product-card-admin col-10 col-md-6 col-lg-4 col-xl-3 d-flex p-3 justify-content-evenly"
+        data-product-id="{{ product.id }}">
 
         {% if product.image_url %}
         <img src="{{ product.image_url.url }}" alt="{{ product.name }}">
@@ -16,9 +17,9 @@
             <li><strong>{{ product.name }}</strong></li>
             <li>{{ product.base_price }}€</li>
             <li class="admin-icons mt-2">
-                    <a class="button-edit" data-product-id="{{ product.id }}" href="#"><i class="fa-solid fa-pencil"></i></a>
-                    <a class="button-delete ms-3" data-product-id="{{ product.id }}" href="#"><i class="fa-solid fa-trash-can"></i></a>
-                </li>
+                <a class="button-edit" href="#"><i class="fa-solid fa-pencil"></i></a>
+                <a class="button-delete ms-3" href="#"><i class="fa-solid fa-trash-can"></i></a>
+            </li>
         </ul>
     </div>
 

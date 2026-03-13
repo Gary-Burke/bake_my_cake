@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% load display_lables %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="container">
+    <div class="row ">
+        <div class="col-md-10 col-xl-8 mt-4 offset-md-1">
+            <h2>Hello {{ request.user }},</h2>
+            <p class="my-2 fs-4">Here you can edit and update products directly from the Bake My Cake database!</p>
+
+            <p class="my-2"><strong>Important!</strong><br>
+                The business model requires all products to be added at their lowest possible
+                cost. This means <strong>smallest and cheapest</strong> options for the <strong>base price.</strong></p>
+
+            <div class="d-flex flex-column flex-md-row my-3 justify-content-between">
+
+                <div class="edit order-md-last">
+                    <p>Current Image:</p>
+                    {% if product.image_url %}
+                    <img src="{{ product.image_url.url }}" alt="{{ product.name }}">
+                    {% elif product.image %}
+                    <img src="{% static 'images/' %}{{ product.image }}" alt="{{ product.name }}">
+                    {% else %}
+                    <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
+                    {% endif %}
+                </div>
+
+                <form method="post" enctype="multipart/form-data" class="col-md-8 col-lg-6">
+                    {{ edit_product_form|crispy }}
+                    {% csrf_token %}
+                    <a class="button button-cancel" href="{% url 'products_admin' %}">Cancel</a>
+                    <button id="submitButton" type="submit" class="button button-primary ms-2">Submit</button>
+                </form>
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extras %}
+<!-- jQuery CDN link -->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'products/js/products.js' %}" defer></script>
+{% endblock %}
