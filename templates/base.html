@@ -156,7 +156,7 @@
     </div>
 
     <!-- Main section -->
-    <main>
+    <main class="mb-4">
         {% block content %}
         {% endblock content %}
     </main>
@@ -167,7 +167,24 @@
     </div>
 
     <!-- Footer Section -->
-    <footer>
+    <footer class="mt-auto pt-3">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row align-items-center col-md-10 col-lg-8 col-xl-7 mb-md-3 mx-auto justify-content-between">
+                <a href="https://www.facebook.com" target="_blank"
+                    aria-label="Visit our Facebook page (opens in a new tab)" rel="noopener"
+                    class="order-md-last  align-items-center">Follow us on <i class="fa-brands fa-facebook fa-lg ms-2"></i></a>
+                <ul class="list-unstyled list-inline fs-6 my-3 my-md-0">
+                    <li class="list-inline-item ps-2">Newsletter</li>
+                    <li class="list-inline-item border-start border-end px-2">Disclaimer</li>
+                    <li class="list-inline-item pe-2">Privacy Policy</li>
+                </ul>
+            </div>
+            <hr class="my-2">
+            <p class="text-center fs-6 my-2">Developed by <a href="https://www.github.com/Gary-Burke" target="_blank"
+                    rel="noopener" aria-label="Visit Github page of the developer Gary Burke">Gary
+                    Burke</a> &copy; 2026
+            </p>
+        </div>
     </footer>
 
     <!-- Bootstrap JS -->

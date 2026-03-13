@@ -74,7 +74,7 @@ h3 {
     position: fixed;
     z-index: 999;
     cursor: pointer;
-    bottom: 4rem;
+    bottom: 9rem;
     right: 0.5rem;
 }
 
@@ -162,6 +162,18 @@ a:has(.logo) {
     background: url("../images/hero-small.webp") no-repeat bottom center / cover;
 }
 
+/* ----- Footer ----- */
+
+footer {
+    background-color: var(--dark-color);
+    color: var(--highlight-color);
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--highlight-color);
+}
+
 /* ----- bootstrap toasts ----- */
 
 .message-container {
@@ -228,7 +240,7 @@ a:has(.logo) {
     }
 
     #scroll-top {
-    bottom: 5rem;
+    bottom: 6.5rem;
     right: 1.5rem;
 }
 }
