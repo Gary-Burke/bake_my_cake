@@ -37,6 +37,15 @@
     <link rel="preload" href="{% static 'fonts/source-sans-3-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 
+    <!-- Newsletter -->
+    <script id="mcjs">
+        ! function (c, h, i, m, p) {
+            m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(
+                m, p)
+        }(document, "script",
+            "https://chimpstatic.com/mcjs-connected/js/users/b4403bda55ed3ccd9dd98a100/09bd6e2195dd3cac73e5df835.js");
+    </script>
+
     {% block extra_css %}
     {% endblock %}
 
@@ -169,14 +178,18 @@
     <!-- Footer Section -->
     <footer class="mt-auto pt-3">
         <div class="container">
-            <div class="d-flex flex-column flex-md-row align-items-center col-md-10 col-lg-8 col-xl-7 mb-md-3 mx-auto justify-content-between">
+            <div
+                class="d-flex flex-column flex-md-row align-items-center col-md-10 col-lg-8 col-xl-7 mb-md-3 mx-auto justify-content-between">
                 <a href="https://www.facebook.com" target="_blank"
                     aria-label="Visit our Facebook page (opens in a new tab)" rel="noopener"
-                    class="order-md-last  align-items-center">Follow us on <i class="fa-brands fa-facebook fa-lg ms-2"></i></a>
+                    class="order-md-last  align-items-center">Follow us on <i
+                        class="fa-brands fa-facebook fa-lg ms-2"></i></a>
                 <ul class="list-unstyled list-inline fs-6 my-3 my-md-0">
                     <li class="list-inline-item ps-2">Newsletter</li>
                     <li class="list-inline-item border-start border-end px-2">Disclaimer</li>
-                    <li class="list-inline-item pe-2">Privacy Policy</li>
+                    <li class="list-inline-item pe-2"><a
+                            href="https://www.termsfeed.com/live/e5045f95-3e2b-4c62-b638-c6651bcdc671"
+                            target="_blank">Privacy Policy</a></li>
                 </ul>
             </div>
             <hr class="my-2">
