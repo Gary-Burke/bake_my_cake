@@ -43,7 +43,7 @@ h3 {
     border: 0.15rem solid var(--primary-color);
     border-radius: 1rem;
     color: var(--light-color);
-    
+
 }
 
 .button-primary:hover {
@@ -179,6 +179,22 @@ footer a {
     color: var(--highlight-color);
 }
 
+/* ----- About Page ----- */
+
+#about {
+    color: var(--dark-color);
+}
+
+#about i {
+    color: var(--dark-color);
+
+}
+
+#about a {
+    text-decoration: none;
+    color: var(--dark-color);
+}
+
 /* ----- bootstrap toasts ----- */
 
 .message-container {
@@ -209,7 +225,7 @@ footer a {
 
     .logo {
         height: 6rem;
-    }     
+    }
 }
 
 /* Large screen sizes - 992px up*/
@@ -245,9 +261,9 @@ footer a {
     }
 
     #scroll-top {
-    bottom: 6.5rem;
-    right: 1.5rem;
-}
+        bottom: 6.5rem;
+        right: 1.5rem;
+    }
 }
 
 /* small - medium screen sizes - 992px down*/

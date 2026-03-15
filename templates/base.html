@@ -1,6 +1,7 @@
 {% load static %}
 
 {% url 'index' as home_url %}
+{% url 'about' as about_url %}
 {% url 'products' as products_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
@@ -77,7 +78,8 @@
                         </li>
 
                         <li class="nav-item mx-1">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link {% if request.path == about_url %}active" aria-current="page{% endif %}"
+                                href="{% url 'about' %}">About</a>
                         </li>
 
                         <li class="nav-item mx-1">
@@ -184,9 +186,10 @@
                     aria-label="Visit our Facebook page (opens in a new tab)" rel="noopener"
                     class="order-md-last  align-items-center">Follow us on <i
                         class="fa-brands fa-facebook fa-lg ms-2"></i></a>
-                <ul class="list-unstyled list-inline fs-6 my-3 my-md-0">                    
-                    <li class="list-inline-item border-end px-2">Disclaimer</li>
-                    <li class="list-inline-item pe-2"><a
+                <ul class="list-unstyled list-inline fs-6 my-3 my-md-0">
+                    <li class="list-inline-item border-end px-2 mx-0"><a href="{% url 'about' %}">Store Details</a></li>
+                    <li class="list-inline-item border-end px-2 mx-0">Disclaimer</li>
+                    <li class="list-inline-item px-2 mx-0"><a
                             href="https://www.termsfeed.com/live/e5045f95-3e2b-4c62-b638-c6651bcdc671"
                             target="_blank">Privacy Policy</a></li>
                 </ul>
