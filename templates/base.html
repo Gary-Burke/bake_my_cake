@@ -2,6 +2,7 @@
 
 {% url 'index' as home_url %}
 {% url 'about' as about_url %}
+{% url 'custom' as custom_url %}
 {% url 'products' as products_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
@@ -85,9 +86,12 @@
                         <li class="nav-item mx-1">
                             <a class="nav-link {% if request.path == products_url %}active"
                                 aria-current="page{% endif %}" href="{% url 'products' %}">Baked Goods</a>
-                        </li>
+                        </li>                    
 
-                        <li class="nav-item mx-1"><a class="nav-link" href="#">Custom Orders</a></li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link {% if request.path == custom_order_url %}active"
+                                aria-current="page{% endif %}" href="{% url 'custom_order' %}">Custom Order</a>
+                        </li>
 
                         {% if request.user.is_superuser %}
                         <li class="nav-item dropdown">

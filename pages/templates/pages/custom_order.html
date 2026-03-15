@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<section class="container">
+    <div class="row ">
+        <div class="col-10 col-md-10 col-lg-8 col-xl-7 mt-4 offset-md-1">
+            {% if user.is_authenticated %}
+            <h2>Hello {{ request.user }},</h2>
+            {% else %}
+            <h2>Hello guest,</h2>
+            {% endif %}
+            
+            <p class="my-2 fs-4">Here you can submit a custom order and we will respond to you within 2-3 business days.</p>
+
+            <p class="my-2">This is a no-obligation quote. We will send you a quote free of charge. No strings attached!</p>
+
+            <form method="post" enctype="multipart/form-data" class="col-md-8 col-xl-7 mt-3">
+                {{ custom_order_form|crispy }}
+                {% csrf_token %}
+                <button id="submitButton" type="submit" class="button button-primary px-3 mt-1">Submit</button>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
