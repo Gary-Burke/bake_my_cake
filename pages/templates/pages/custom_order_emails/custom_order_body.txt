@@ -1,0 +1,23 @@
+Order ID:         #{{ custom_order.pk }}
+Submitted on:     {{ custom_order.created_on|date:"d M Y, H:i" }}
+
+--- CUSTOMER ---
+Name:             {{ custom_order.name }}
+Email:            {{ custom_order.email }}
+
+--- CAKE DETAILS ---
+Shape:            {{ custom_order.shape }}
+Size:             {{ custom_order.size }}
+Tiers:            {{ custom_order.tiers }}
+Sponge:           {{ custom_order.sponge }}
+Filling:          {{ custom_order.filling }}
+Icing:            {{ custom_order.icing }}
+
+--- ADDITIONAL INFO ---
+{% if custom_order.additional_info %}{{ custom_order.additional_info }}{% else %}None provided.{% endif %}
+
+--- IMAGE ---
+{% if custom_order.image_url %}{{ custom_order.image_url.url }}{% else %}No image uploaded.{% endif %}
+
+---
+Sent from {{ contact_email }}
