@@ -18,10 +18,23 @@ def about(request):
 
 
 def custom_order(request):
+    """
+    Store an instance of :model:`pages.CustomOrder`
+
+    **Context**
+    ``custom_order_form``
+     An instance of :form:`pages.CustomOrderForm`
+
+     **Template**
+    :template:`pages/custom_order.html`
+    """
     custom_order_form = CustomOrderForm()
 
     def _send_confirmation_email(custom_order):
-        """Send the user a confirmation email"""
+        """
+        Send an email to the business with the details
+        of the custom ordered submitted by user.
+        """
         subject = render_to_string(
             'pages/custom_order_emails/custom_order_subject.txt',
             {'custom_order': custom_order})
