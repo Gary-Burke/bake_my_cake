@@ -47,10 +47,6 @@ a:has(.product-card) {
     max-width: 90px;
 }
 
-.product-card-admin {
-    border: var(--primary-color) dotted 1px;
-}
-
 .edit img {
     width: auto;
     height: 180px;
