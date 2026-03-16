@@ -5,8 +5,8 @@
     --body-font: "Source Sans 3", sans-serif;
 
     --primary-color: #69776e;
-    --secondary-color: #c9c1a6;
-    --highlight-color: #FFDAAD;
+    --secondary-color: #DD8705;
+    --highlight-color: #ffd199;
 
     --light-color: #fdf4e9;
     --dark-color: #533528;
@@ -39,11 +39,10 @@ h3 {
 }
 
 .button-primary {
-    background-color: var(--primary-color);
-    border: 0.15rem solid var(--primary-color);
+    background-color: var(--dark-color);
+    border: 0.15rem solid var(--dark-color);
     border-radius: 1rem;
-    color: var(--light-color);
-
+    color: var(--highlight-color);
 }
 
 .button-primary:hover {
@@ -52,8 +51,8 @@ h3 {
 }
 
 .button-cancel {
-    background-color: rgb(110, 110, 110);
-    border: 0.15rem solid rgb(110, 110, 110);
+    background-color: rgb(120, 120, 120);
+    border: 0.15rem solid rgb(120, 120, 120);
     border-radius: 1rem;
     color: var(--light-color);
 }
