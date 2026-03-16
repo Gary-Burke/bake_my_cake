@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.http import JsonResponse
 from django.db.models.functions import Lower
+from django.db.models import Q
 from .models import Product
 from .constants import PRODUCT_COST, PRODUCT_COST_CUPCAKE
 from decimal import Decimal
@@ -54,6 +54,16 @@ class ProductList(ListView):
         queryset = Product.objects.all()
         sort = "name"
 
+        # Filter by user search input
+        if "q" in self.request.GET:
+            search = self.request.GET.get("q")
+            if search:
+                queryset = queryset.filter(
+                    Q(name__icontains=search) |
+                    Q(shape__icontains=search) |
+                    Q(category__display_name__icontains=search)
+                )
+
         # Filter by user category selection
         if "category" in self.request.GET:
             category = self.request.GET.get("category")
@@ -88,6 +98,7 @@ class ProductList(ListView):
                 sort_key = 'lower_name'
                 queryset = queryset.annotate(lower_name=Lower('name'))
 
+            # model field is "base_price" but html uses "price" in parameters
             if sort_key == "price":
                 sort_key = "base_price"
 
@@ -107,6 +118,7 @@ class ProductList(ListView):
         direction = self.request.GET.get("direction")
         context["current_sorting"] = f"{sort}_{direction}"
 
+        # Retain pagination page parameters for URL
         query_params = self.request.GET.copy()
         query_params.pop("page", None)
         context["query_string"] = query_params.urlencode()
@@ -169,6 +181,8 @@ def product_details(request, slug, product_id):
             total = (((product.base_price + sponge + filling + icing)
                      * size) * tiers) * quantity
 
+            # Return calculated total to JS to update field
+            # wihtout having to reload whole query
             return JsonResponse(
                 {"total": str(total.quantize(Decimal("0.01")))}
             )

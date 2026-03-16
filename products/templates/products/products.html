@@ -6,46 +6,69 @@
 {% endblock %}
 
 {% block content %}
-<section class="container text-center">
+<div class="filters">
+    <div class="container">
+        <div class="row">
 
-    <div class="row my-1">
+            <!-- Search field -->
+            <div class="col-12 col-md-10 col-lg-6 mt-2 mt-lg-3 text-end">
+                <form method="get" id="form-search" action="{% url 'products' %}">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <button class="btn border-light-subtle text-body bg-white" type="submit" id="button-search"><i
+                                class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+                        <input type="text" class="form-control" placeholder="Search our products ..." name="q"
+                            aria-label="Search our products" aria-describedby="basic-search">
+                    </div>
+                </form>
+            </div>
 
-        <!-- Category Selection -->
-        <div class="col-6 col-md-4 col-lg-2">
-            <select class="form-select" id="category-selector" aria-label="Category selection">
-                <option value="reset" {% if current_category == 'None_None' %}selected{% endif %}>Categories</option>
-                <option value="all-cakes" {% if current_category == 'all-cakes' %}selected{% endif %}>All Cakes</option>
-                <option value="birthday-cakes" {% if current_category == 'birthday-cakes' %}selected{% endif %}>
-                    Birthdays</option>
-                <option value="kids-cakes" {% if current_category == 'kids-cakes' %}selected{% endif %}>Kids</option>
-                <option value="event-cakes" {% if current_category == 'event-cakes' %}selected{% endif %}>Events
-                </option>
-                <option value="cupcakes" {% if current_category == 'cupcakes' %}selected{% endif %}>Cupcakes</option>
-            </select>
+            <!-- Category Selection -->
+            <div class="col-6 col-md-5 col-lg-3 my-2 my-lg-3">
+                <select class="form-select" id="category-selector" aria-label="Category selection">
+                    <option value="reset" {% if current_category == 'None_None' %}selected{% endif %}>Categories
+                    </option>
+                    <option value="all-cakes" {% if current_category == 'all-cakes' %}selected{% endif %}>All Cakes
+                    </option>
+                    <option value="birthday-cakes" {% if current_category == 'birthday-cakes' %}selected{% endif %}>
+                        Birthdays</option>
+                    <option value="kids-cakes" {% if current_category == 'kids-cakes' %}selected{% endif %}>Kids
+                    </option>
+                    <option value="event-cakes" {% if current_category == 'event-cakes' %}selected{% endif %}>Events
+                    </option>
+                    <option value="cupcakes" {% if current_category == 'cupcakes' %}selected{% endif %}>Cupcakes
+                    </option>
+                </select>
+            </div>
+
+            <!-- Sort by options -->
+            <div class="col-6 col-md-5 col-lg-3 my-2 my-lg-3">
+                <select class="form-select" id="sort-selector" aria-label="Sort by options">
+                    <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by</option>
+                    <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to
+                        high)
+                    </option>
+                    <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high
+                        to
+                        low)</option>
+                    <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)
+                    </option>
+                    <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)
+                    </option>
+                </select>
+            </div>
+
         </div>
-
-        <!-- Sort by options -->
-        <div class="col-6 col-md-4 col-lg-2">
-            <select class="form-select" id="sort-selector" aria-label="Sort by options">
-                <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by</option>
-                <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)
-                </option>
-                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to
-                    low)</option>
-                <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
-                <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
-            </select>
-        </div>
-
     </div>
+</div>
 
-    <!-- Display Product Cards --> 
+<section class="container text-center">
+    <!-- Display Product Cards -->
     {% if request.user.is_superuser and is_admin_view %}
     {% include 'products/includes/admin.html' %}
     {% else %}
     {% include 'products/includes/user.html' %}
     {% endif %}
-
 </section>
 
 <!-- Pagination -->

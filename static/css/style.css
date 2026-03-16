@@ -5,7 +5,7 @@
     --body-font: "Source Sans 3", sans-serif;
 
     --primary-color: #69776e;
-    --secondary-color: #DD8705;
+    --secondary-color: #c9c1a6;
     --highlight-color: #ffd199;
 
     --light-color: #fdf4e9;
@@ -152,6 +152,10 @@ a:has(.logo) {
 
 .account:hover {
     color: var(--highlight-color);
+}
+
+#nav-sub .dropdown-menu {
+    z-index: 99999;
 }
 
 /* ----- Hero image ----- */

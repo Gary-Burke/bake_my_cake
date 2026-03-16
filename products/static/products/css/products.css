@@ -1,3 +1,11 @@
+/* ----- Search Bar ----- */
+.filters {
+    background-color: var(--secondary-color);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
 /* Pagination Element */
 .pagination .page-link {
     text-decoration: none;
