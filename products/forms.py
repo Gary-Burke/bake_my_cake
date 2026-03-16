@@ -42,6 +42,7 @@ class EditProductForm(forms.ModelForm):
         model = Product
         fields = (
             "name",
+            "tags",
             "shape",
             "category",
             "base_price",

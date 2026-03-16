@@ -34,6 +34,8 @@ class Product(models.Model):
         Category, null=True, blank=True, on_delete=models.SET_NULL
     )
     name = models.CharField(max_length=255)
+    tags = models.CharField('Search Tags', max_length=255,
+                            null=True, blank=True)
     slug = models.SlugField(max_length=255)
     shape = models.CharField(choices=SHAPE, default="round", max_length=20)
     base_price = models.DecimalField(max_digits=5, decimal_places=2)
