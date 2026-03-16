@@ -12,8 +12,7 @@
 
             <!-- Search field -->
             <div class="col-12 col-md-10 col-lg-6 mt-2 mt-lg-3 text-end">
-                <form method="get" id="form-search" action="{% url 'products' %}">
-                    {% csrf_token %}
+                <form method="get" id="form-search">                    
                     <div class="input-group">
                         <button class="btn border-light-subtle text-body bg-white" type="submit" id="button-search"><i
                                 class="fa-solid fa-magnifying-glass fa-lg"></i></button>
