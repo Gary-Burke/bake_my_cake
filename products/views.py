@@ -58,11 +58,12 @@ class ProductList(ListView):
         if "q" in self.request.GET:
             search = self.request.GET.get("q")
             if search:
-                queryset = queryset.filter(
-                    Q(name__icontains=search) |
-                    Q(shape__icontains=search) |
-                    Q(category__display_name__icontains=search)
-                )
+                queries = Q(name__icontains=search) | Q(
+                    shape__icontains=search) | Q(
+                    category__display_name__icontains=search) | Q(
+                        tags__icontains=search
+                    )
+                queryset = queryset.filter(queries)
 
         # Filter by user category selection
         if "category" in self.request.GET:
