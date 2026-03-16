@@ -2,8 +2,10 @@
 
 {% url 'index' as home_url %}
 {% url 'about' as about_url %}
-{% url 'custom' as custom_url %}
 {% url 'products' as products_url %}
+{% url 'custom_order' as custom_order_url %}
+{% url 'products_admin' as products_admin_url %}
+{% url 'add_product' as add_product_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
@@ -92,7 +94,8 @@
 
                         {% if request.user.is_superuser %}
                         <li class="nav-item dropdown">
-                            <button class="nav-link" type="button" data-bs-toggle="dropdown"
+                            <button class="nav-link {% if request.path == add_product_url or request.path == products_admin_url %}active"
+                                aria-current="page{% endif %}" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">Admin</button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{% url 'add_product' %}">Add Items</a></li>
