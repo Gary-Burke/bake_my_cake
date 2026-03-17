@@ -12,7 +12,7 @@ $(document).ready(function () {
         var selectedVal = $(this).val();
         var currentUrl = new URL(window.location);
 
-        if (selectedVal != "reset") {
+        if (selectedVal != "all_categories") {
             var category = selectedVal;
             currentUrl.searchParams.set("category", category);
         } else {
@@ -119,4 +119,14 @@ $(document).ready(function () {
         $("#delete-confirm").attr("href", `/products/delete/${productId}`);
         deleteModal.show();
     });
+
+    /**
+     * Get the search parameters from the URL passed through with name "q"
+     * Take that string to prepopulate search field after submission 
+     */
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("q")) {
+        $("#form-search input[name='q']").val(params.get("q"));
+    }
+
 });

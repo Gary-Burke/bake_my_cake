@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load display_lables %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
@@ -25,15 +26,15 @@
             <!-- Category Selection -->
             <div class="col-6 col-md-5 col-lg-3 my-2 my-lg-3">
                 <select class="form-select" id="category-selector" aria-label="Category selection">
-                    <option value="reset" {% if current_category == 'None_None' %}selected{% endif %}>Categories
+                    <option value="all_categories" {% if current_category == 'all_categories' %}selected{% endif %}>All Categories
                     </option>
-                    <option value="all-cakes" {% if current_category == 'all-cakes' %}selected{% endif %}>All Cakes
+                    <option value="all_cakes" {% if current_category == 'all_cakes' %}selected{% endif %}>All Cakes
                     </option>
-                    <option value="birthday-cakes" {% if current_category == 'birthday-cakes' %}selected{% endif %}>
-                        Birthdays</option>
-                    <option value="kids-cakes" {% if current_category == 'kids-cakes' %}selected{% endif %}>Kids
+                    <option value="birthday_cakes" {% if current_category == 'birthday_cakes' %}selected{% endif %}>
+                        Birthdays Cakes</option>
+                    <option value="kids_cakes" {% if current_category == 'kids_cakes' %}selected{% endif %}>Kids Cakes
                     </option>
-                    <option value="event-cakes" {% if current_category == 'event-cakes' %}selected{% endif %}>Events
+                    <option value="event_cakes" {% if current_category == 'event_cakes' %}selected{% endif %}>Event Cakes
                     </option>
                     <option value="cupcakes" {% if current_category == 'cupcakes' %}selected{% endif %}>Cupcakes
                     </option>
@@ -55,10 +56,17 @@
                     <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)
                     </option>
                 </select>
-            </div>
-
+            </div>            
         </div>
     </div>
+</div>
+
+<div class="container">
+    {% if search == None or search == '' %}
+    <p class="my-2 fs-6 ms-lg-4">Displaying products in <strong>{{ current_category|friendly_label }}</strong></p>
+    {% else %}
+    <p class="my-2 fs-6 ms-lg-4">Displaying results for "{{ search }}" in <strong>{{ current_category|friendly_label }}</strong></p>
+    {% endif %}
 </div>
 
 <section class="container text-center">

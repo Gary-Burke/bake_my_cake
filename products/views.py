@@ -56,27 +56,27 @@ class ProductList(ListView):
 
         # Filter by user search input
         if "q" in self.request.GET:
-            search = self.request.GET.get("q")
+            search = self.request.GET.get("q").replace("-", "")
             if search:
                 queries = Q(name__icontains=search) | Q(
                     shape__icontains=search) | Q(
                     category__display_name__icontains=search) | Q(
                         tags__icontains=search
-                    )
+                )
                 queryset = queryset.filter(queries)
 
         # Filter by user category selection
         if "category" in self.request.GET:
             category = self.request.GET.get("category")
             allowed_categories = [
-                "all-cakes", "kids-cakes", "birthday-cakes",
-                "event-cakes", "cupcakes"
+                "all_cakes", "kids_cakes", "birthday_cakes",
+                "event_cakes", "cupcakes"
             ]
 
             if category in allowed_categories:
-                if category == "all-cakes":
+                if category == "all_cakes":
                     queryset = queryset.exclude(category__name="cupcakes")
-                else:
+                elif category == "cupcakes":
                     queryset = queryset.filter(category__name=category)
 
         # Sort by user selection
@@ -113,7 +113,10 @@ class ProductList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["current_category"] = self.request.GET.get("category")
+        context["current_category"] = self.request.GET.get(
+            "category", "all_categories")
+
+        context["search"] = self.request.GET.get("q", None)
 
         sort = self.request.GET.get("sort")
         direction = self.request.GET.get("direction")
