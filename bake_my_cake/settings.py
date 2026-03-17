@@ -70,7 +70,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_LOGIN_METHODS = {'username', 'email'}
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
