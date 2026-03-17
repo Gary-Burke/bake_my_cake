@@ -22,7 +22,7 @@
     width: auto;
     height: 250px;
     max-width: 250px;
-    filter: drop-shadow(0.5rem 0.5rem 0.5rem #101010);
+    filter: drop-shadow(0.5rem 0.5rem 0.5rem #202020);
 }
 
 .product-card {
@@ -89,7 +89,7 @@ a:has(.product-card) {
     width: auto;
     height: 300px;
     max-width: 250px;
-    filter: drop-shadow(0.5rem 0.5rem 0.5rem #101010);
+    filter: drop-shadow(0.5rem 0.5rem 0.5rem #202020);
 }
 
 .product-details h2,
