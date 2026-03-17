@@ -40,9 +40,8 @@ class EditProductForm(forms.ModelForm):
     Form to edit products from the database for superuser
     """
     image_url = CloudinaryFileField(
-        options={'folder': 'products'},
-        required=False
-    )
+        label="Image Upload", options={'folder': 'products'},
+        required=False)
 
     class Meta:
         """
