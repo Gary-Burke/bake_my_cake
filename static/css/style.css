@@ -71,7 +71,6 @@ h3 {
 #scroll-top {
     display: none;
     position: fixed;
-    z-index: 999;
     cursor: pointer;
     bottom: 11rem;
     right: 0.5rem;
@@ -133,7 +132,6 @@ a:has(.logo) {
     position: absolute;
     bottom: -0.7rem;
     right: -0.5rem;
-    z-index: 99;
 }
 
 #nav-sub li {
@@ -152,10 +150,6 @@ a:has(.logo) {
 
 .account:hover {
     color: var(--highlight-color);
-}
-
-#nav-sub .dropdown-menu {
-    z-index: 99999;
 }
 
 /* ----- Hero image ----- */
@@ -204,7 +198,6 @@ footer a {
     position: absolute;
     top: 9.1rem;
     right: 2rem;
-    z-index: 999999;
 }
 
 /* ----- Media Queries ----- */
