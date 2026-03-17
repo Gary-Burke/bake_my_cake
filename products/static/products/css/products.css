@@ -3,6 +3,7 @@
     background-color: var(--secondary-color);
     position: sticky;
     top: 0;
+    z-index: 10;
 }
 
 /* Pagination Element */
@@ -31,11 +32,6 @@
     font-family: var(--heading-font);
     cursor: pointer;
     font-weight: bold;
-}
-
-.card-grid {
-    position: relative;
-    z-index: -1;
 }
 
 /* Select parent link element of class product-card */
