@@ -195,9 +195,10 @@ footer a {
 /* ----- bootstrap toasts ----- */
 
 .message-container {
-    position: absolute;
-    top: 9.1rem;
-    right: 2rem;
+    position: fixed;
+    top: 8.6875rem;
+    right: 1rem;
+    z-index: 1000;
 }
 
 /* ----- Media Queries ----- */
@@ -260,6 +261,10 @@ footer a {
         bottom: 9.5rem;
         right: 1.5rem;
     }
+
+    .message-container {
+    top: 9.0625rem;    
+}
 }
 
 /* small - medium screen sizes - 992px down*/
