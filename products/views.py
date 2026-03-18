@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.db.models.functions import Lower
 from django.db.models import Q
 from .models import Product
+from .utils import calculate_total
 from .constants import PRODUCT_COST, PRODUCT_COST_CUPCAKE
 from decimal import Decimal
 from .forms import ProductForm, EditProductForm
@@ -176,39 +177,13 @@ def product_details(request, slug, product_id):
 
     if request.GET.get("sponge"):
         try:
-            sponge = Decimal(
-                str(PRODUCT_COST["sponge"].get(request.GET.get("sponge"), 0)))
-            filling = Decimal(
-                str(PRODUCT_COST["filling"].get(request.GET.get(
-                    "filling"), 0))
-            )
-            icing = Decimal(
-                str(PRODUCT_COST["icing"].get(request.GET.get("icing"), 0)))
-
-            if product.shape == "cupcake":
-                size = Decimal(
-                    str(PRODUCT_COST_CUPCAKE["size"].get(request.GET.get(
-                        "size"), 1))
-                )
-            else:
-                size = Decimal(
-                    str(PRODUCT_COST["size"].get(request.GET.get("size"), 1)))
-            tiers = Decimal(
-                str(PRODUCT_COST["tiers"].get(request.GET.get("tiers"), 1)))
-            quantity = Decimal(
-                str(PRODUCT_COST["quantity"].get(request.GET.get(
-                    "quantity"), 1))
-            )
-
-            total = (((product.base_price + sponge + filling + icing)
-                     * size) * tiers) * quantity
+            total = calculate_total(request, product)
 
             # Return calculated total to JS to update field
-            # wihtout having to reload whole query
+            # wihtout having to reload whole query in template
             return JsonResponse(
                 {"total": str(total.quantize(Decimal("0.01")))}
             )
-
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
 
