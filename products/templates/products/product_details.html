@@ -11,7 +11,7 @@
 
     <div class="row product-details mx-auto mt-4">
 
-        <div class="col-md-5 text-center">
+        <div class="col-md-5 col-xl-4 text-center">
             {% if product.image_url %}
             <img src="{{ product.image_url.url }}" alt="{{ product.name }}">
             {% elif product.image %}
@@ -21,31 +21,46 @@
             {% endif %}
         </div>
 
-        <div class="col-md-7 mt-3 mt-md-0">
+        <div class="col-md-7 col-lg-6 mt-3 mt-md-0">
             <h2>{{ product.name }}</h2>
             <h3 id="product-total">{{ product.base_price }}€</h3>
 
-            <form class="row" id="product-details" data-product-id="{{ product.id }}" data-slug="{{ product.slug }}" data-shape="{{ product.shape }}">
-
-                {% for key, value in product_cost.items %}
-                <div class="col-12 col-lg-6 my-2">
-                    <div class="form-floating">
-                        <select class="form-select" id="{{ key }}" name="{{ key }}">
-                            {% for options in value.keys %}
-                            <option value="{{ options }}">
-                                {{ options|friendly_label }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                        <label for="{{ key }}">{{ key|friendly_label }}</label>
+            <div id="product-details" data-product-id="{{ product.id }}" data-slug="{{ product.slug }}" data-shape="{{ product.shape }}">
+                
+                <form class="row" method="POST" action="{% url 'add_to_basket' product.id %}">
+                    {% csrf_token %}
+                    {% for key, value in product_cost.items %}
+                    <div class="col-12 col-lg-6 my-2">
+                        <div class="form-floating">
+                            <select class="form-select" id="{{ key }}" name="{{ key }}">
+                                {% for options in value.keys %}
+                                <option value="{{ options }}">
+                                    {{ options|friendly_label }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <label for="{{ key }}">{{ key|friendly_label }}</label>
+                        </div>
                     </div>
-                </div>
-                {% endfor %}
-            </form>
+                    {% endfor %}
+
+                    <div class="form-floating my-2">
+                        <input type="text" class="form-control" id="cake-topper" placeholder="e.g. Happy Birthday">
+                        <label class="ms-2" for="cake-topper">Message / Name on Cake</label>
+                    </div>
+
+                    <div class="d-flex flex-row flex-wrap my-2 justify-content-end">
+                        <a class="button button-cancel" href="{% url 'products' %}">&larr; Back</a>
+                        <button id="submitButton" type="submit" class="button button-primary ms-2">Add to
+                            Basket</button>
+                    </div>
+
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                </form>
+            </div>
 
         </div>
     </div>
-
 </section>
 
 {% endblock %}

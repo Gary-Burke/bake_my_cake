@@ -48,9 +48,9 @@ $(document).ready(function () {
 
     // Get the values for the params from the product html
     $("#product-details .form-select").change(function () {
-        const form = $("#product-details");
-        const slug = form.data("slug");
-        const id = form.data("product-id");
+        const formDiv = $("#product-details");
+        const slug = formDiv.data("slug");
+        const id = formDiv.data("product-id");
 
         const params = {
             size: $("#size").val(),
