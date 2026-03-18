@@ -112,13 +112,18 @@ $(document).ready(function () {
      * Gets productId from clicked product delete icon to build dynamic URL.
      * If delete confirm clicked then set URL dynamically to delete product.         
      */
-    const deleteModal = new bootstrap.Modal($("#deleteModal"));
+    const ModalExist = $("#deleteModal")
 
-    $(".button-delete").on("click", function () {
-        let productId = $(this).closest('.product-card-admin').attr("data-product-id");
-        $("#delete-confirm").attr("href", `/products/delete/${productId}`);
-        deleteModal.show();
-    });
+    if (ModalExist.length) {
+        const deleteModal = new bootstrap.Modal($("#deleteModal"));
+
+        $(".button-delete").on("click", function () {
+            let productId = $(this).closest('.product-card-admin').attr("data-product-id");
+            $("#delete-confirm").attr("href", `/products/delete/${productId}`);
+            deleteModal.show();
+        });
+    }
+
 
     /**
      * Get the search parameters from the URL passed through with name "q"
