@@ -28,6 +28,17 @@ def superuser_check(view_func):
     return wrapper
 
 
+# maketrans():
+# https://www.geeksforgeeks.org/python/python-replace-multiple-characters-at-once/
+#
+# Remove all extra spaces and listed special characters to join string
+# with single spaced separators
+def clean_string(string):
+    replacements = str.maketrans({"-": " ", "_": " ", ".": " "})
+    string = " ".join(string.translate(replacements).split())
+    return string
+
+
 class ProductList(ListView):
     """
     Returns all products in :model:`products.Product`
@@ -56,13 +67,20 @@ class ProductList(ListView):
 
         # Filter by user search input
         if "q" in self.request.GET:
-            search = self.request.GET.get("q").replace("-", "")
+
+            # compensate for common misspellings where words are hyphenanted
+            # e.g. spiderman and spider-man as search_alt
+            search = clean_string(self.request.GET.get("q"))
+            search_alt = "".join(search.split())
+
             if search:
                 queries = Q(name__icontains=search) | Q(
                     shape__icontains=search) | Q(
                     category__display_name__icontains=search) | Q(
-                        tags__icontains=search
-                )
+                        tags__icontains=search) | Q(
+                            name__icontains=search_alt) | Q(
+                    tags__icontains=search_alt)
+
                 queryset = queryset.filter(queries)
 
         # Filter by user category selection
@@ -219,6 +237,7 @@ def add_product(request):
         product_form = ProductForm(data=request.POST, files=request.FILES)
         if product_form.is_valid():
             product = product_form.save(commit=False)
+            product.name = clean_string(product.name)
             product.slug = product.name.replace(" ", "-").lower()
             product.save()
             messages.add_message(
@@ -262,7 +281,9 @@ def edit_product(request, product_id):
             data=request.POST, instance=product, files=request.FILES)
 
         if edit_product_form.is_valid():
-            product = edit_product_form.save()
+            product = edit_product_form.save(commit=False)
+            product.name = clean_string(product.name)
+            edit_product_form.save()
             messages.add_message(request, messages.SUCCESS,
                                  f"{product.name} successfully updated!")
             return redirect(reverse('products_admin'))
