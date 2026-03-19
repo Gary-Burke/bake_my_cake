@@ -4,32 +4,24 @@ from decimal import Decimal
 
 def calculate_total(request, product):
 
-    if request.method == "GET":
-        sponge = Decimal(str(PRODUCT_COST["sponge"].get(request.GET.get("sponge"), 0)))
-        filling = Decimal(str(PRODUCT_COST["filling"].get(request.GET.get("filling"), 0)))
-        icing = Decimal(str(PRODUCT_COST["icing"].get(request.GET.get("icing"), 0)))
-        tiers = Decimal(str(PRODUCT_COST["tiers"].get(request.GET.get("tiers"), 1)))
-        quantity = Decimal(str(PRODUCT_COST["quantity"].get(request.GET.get("quantity"), 1)))
+    data = request.GET if request.method == "GET" else request.POST
 
-        if product.shape == "cupcake":
-            size = Decimal(str(PRODUCT_COST_CUPCAKE["size"].get(request.GET.get("size"), 1)))
-        else:
-            size = Decimal(str(PRODUCT_COST["size"].get(request.GET.get("size"), 1)))
+    sponge = Decimal(PRODUCT_COST["sponge"].get(data.get("sponge"), 0))
+    filling = Decimal(PRODUCT_COST["filling"].get(data.get("filling"), 0))
+    icing = Decimal(PRODUCT_COST["icing"].get(data.get("icing"), 0))
+    tiers = Decimal(PRODUCT_COST["tiers"].get(data.get("tiers"), 1))
+    quantity = Decimal(PRODUCT_COST["quantity"].get(data.get("quantity"), 1))
 
-        total = (((product.base_price + sponge + filling + icing) * size) * tiers) * quantity
-             
+    if product.shape == "cupcake":
+        size = Decimal(PRODUCT_COST_CUPCAKE["size"].get(data.get("size"), 1))
     else:
-        sponge = Decimal(str(PRODUCT_COST["sponge"].get(request.POST.get("sponge"), 0)))
-        filling = Decimal(str(PRODUCT_COST["filling"].get(request.POST.get("filling"), 0)))
-        icing = Decimal(str(PRODUCT_COST["icing"].get(request.POST.get("icing"), 0)))
-        tiers = Decimal(str(PRODUCT_COST["tiers"].get(request.POST.get("tiers"), 1)))
-        quantity = Decimal(str(PRODUCT_COST["quantity"].get(request.POST.get("quantity"), 1)))
+        size = Decimal(PRODUCT_COST["size"].get(data.get("size"), 1))
 
-        if product.shape == "cupcake":
-            size = Decimal(str(PRODUCT_COST_CUPCAKE["size"].get(request.POST.get("size"), 1)))
-        else:
-            size = Decimal(str(PRODUCT_COST["size"].get(request.POST.get("size"), 1)))
+    base_price = Decimal(product.base_price)
 
-        total = (((product.base_price + sponge + filling + icing) * size) * tiers) * quantity
+    total = (
+        ((base_price + sponge + filling + icing) * size) * tiers) * quantity
+
+    total = total.quantize(Decimal("0.01"))
 
     return total

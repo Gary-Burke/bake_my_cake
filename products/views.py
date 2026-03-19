@@ -8,7 +8,6 @@ from django.db.models import Q
 from .models import Product
 from .utils import calculate_total
 from .constants import PRODUCT_COST, PRODUCT_COST_CUPCAKE
-from decimal import Decimal
 from .forms import ProductForm, EditProductForm
 from functools import wraps
 
@@ -69,8 +68,9 @@ class ProductList(ListView):
         # Filter by user search input
         if "q" in self.request.GET:
 
-            # compensate for common misspellings where words are hyphenanted
-            # e.g. spiderman and spider-man as search_alt
+            # compensate for common misspellings where words are hyphenanted or
+            # written with/without spaces e.g. spiderman, spider man
+            # and spider-man as search_alt alternative
             search = clean_string(self.request.GET.get("q"))
             search_alt = "".join(search.split())
 
@@ -181,8 +181,9 @@ def product_details(request, slug, product_id):
 
             # Return calculated total to JS to update field
             # wihtout having to reload whole query in template
+            # str() needed to convert Decimal object for JSON handling
             return JsonResponse(
-                {"total": str(total.quantize(Decimal("0.01")))}
+                {"total": str(total)}
             )
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
