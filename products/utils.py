@@ -3,6 +3,11 @@ from decimal import Decimal
 
 
 def calculate_total(request, product):
+    """
+    Business logic for calculating the cost of a product based on the user
+    customization input. This function returns the total cost of a product
+    including the quantity selected.
+    """
 
     data = request.GET if request.method == "GET" else request.POST
 

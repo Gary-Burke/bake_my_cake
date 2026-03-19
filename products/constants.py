@@ -1,4 +1,5 @@
-# Used for template fields generation and views price calculation
+# Used for template form fields generation
+# and for product cost calculation in products.utils.py
 
 PRODUCT_COST = {
     "size": {
@@ -8,9 +9,9 @@ PRODUCT_COST = {
     },
 
     "tiers": {
-        "one": 1,
-        "two": 1.5,
-        "three": 2.2,
+        "1": 1,
+        "2": 1.5,
+        "3": 2.2,
     },
 
     "sponge": {
@@ -64,11 +65,11 @@ PRODUCT_COST = {
     },
 
     "quantity": {
-        "one": 1,
-        "two": 2,
-        "three": 3,
-        "four": 4,
-        "five": 5,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
     },
 }
 

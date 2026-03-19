@@ -114,6 +114,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Makes the context of basket_contents available
+                # across all templates
+                'basket.contexts.basket_contents',
             ],
         },
     },

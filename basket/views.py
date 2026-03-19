@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from products.models import Product
 from products.utils import calculate_total
@@ -13,17 +13,40 @@ def view_basket(request):
 
 
 def add_to_basket(request, product_id):
+    """
+    Stores products in session storage inside a dictionary named basket
+
+    **Model**
+    :model:`products.Product`
+    """
 
     if request.method == "POST":
         product = get_object_or_404(Product, pk=product_id)
         redirect_url = request.POST.get('redirect_url')
-
-        print(f"request.POST : {request.POST}")
-        print(f"redirect_url : {redirect_url}")
-        print(f"product : {product}")
-
+        data = request.POST
+        basket = request.session.get("basket", {})
         total = calculate_total(request, product)
+        item_id = "item_" + str(len(basket) + 1)
 
-        print(f"total : {total}")
+        basket[item_id] = {}
+        basket[item_id]["name"] = product.name
+        basket[item_id]["product_id"] = product_id
+        basket[item_id]["size"] = data.get("size")
+        basket[item_id]["tiers"] = data.get("tiers")
+        basket[item_id]["sponge"] = data.get("sponge")
+        basket[item_id]["filling"] = data.get("filling")
+        basket[item_id]["icing"] = data.get("icing")
+        basket[item_id]["main_colour"] = data.get("main_colour")
+        basket[item_id]["secondary_colour"] = data.get("secondary_colour")
+        basket[item_id]["quantity"] = data.get("quantity", 1)
+        basket[item_id]["cake_topper"] = data.get("cake_topper")
+        basket[item_id]["total"] = str(total)
+
+        request.session["basket"] = basket
+
+        messages.add_message(
+            request, messages.SUCCESS,
+            f"{product.name} has been added to your basket!"
+        )
 
         return redirect(redirect_url)
