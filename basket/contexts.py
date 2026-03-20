@@ -10,9 +10,9 @@ def basket_contents(request):
     """
 
     basket = request.session.get("basket", {})
-    print(f"basket: {basket}")
     basket_qty = 0
     grand_total = 0
+
     if len(basket):
         for item in basket.values():
             basket_qty += int(item["quantity"])
@@ -20,7 +20,6 @@ def basket_contents(request):
 
     basket_items = []
     for item_id, item_data in basket.items():
-
         product = get_object_or_404(Product, pk=item_data["product_id"])
         basket_items.append({
             "item_id": item_id,
@@ -37,12 +36,12 @@ def basket_contents(request):
             "total": item_data["total"],
         })
 
-    print(f"basket_items: {basket_items}")
+    grand_total = grand_total.quantize(Decimal("0.01"))
 
     context = {
         "basket_items": basket_items,
         "basket_qty": basket_qty,
-        "grand_total": grand_total.quantize(Decimal("0.01")),
+        "grand_total": grand_total,
     }
 
     return context
