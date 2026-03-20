@@ -141,11 +141,11 @@
 
                     <!-- Basket -->
                     <li class="list-inline-item me-2">
-                        <div id="bag">
+                        <a id="basket" href="{% url 'view_basket' %}">
                             <i class="fa-solid fa-bag-shopping"></i>
-                            <div id="bag-count" class="d-flex justify-content-center align-items-center">
+                            <div id="basket-count" class="d-flex justify-content-center align-items-center">
                                 <strong>{{ basket_qty }}</strong></div>
-                        </div>
+                        </a>
                     </li>
 
                 </ul>

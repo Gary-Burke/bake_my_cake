@@ -118,11 +118,11 @@ a:has(.logo) {
     background-color: var(--primary-color);
 }
 
-#bag {
+#basket {
     position: relative;
 }
 
-#bag-count {
+#basket-count {
     background-color: var(--highlight-color);
     color: var(--dark-color);
     border-radius: 50%;
