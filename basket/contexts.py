@@ -11,7 +11,7 @@ def basket_contents(request):
 
     basket = request.session.get("basket", {})
     basket_qty = 0
-    grand_total = 0
+    grand_total = Decimal("0")
 
     if len(basket):
         for item in basket.values():
@@ -36,12 +36,10 @@ def basket_contents(request):
             "total": item_data["total"],
         })
 
-    grand_total = grand_total.quantize(Decimal("0.01"))
-
     context = {
         "basket_items": basket_items,
         "basket_qty": basket_qty,
-        "grand_total": grand_total,
+        "grand_total": grand_total.quantize(Decimal("0.01")),
     }
 
     return context
