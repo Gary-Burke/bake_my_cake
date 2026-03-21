@@ -20,6 +20,29 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 
-<!-- Custom JS -->
-<script src="{% static 'basket/js/basket.js' %}" defer></script>
+<!-- Custom jQuery -->
+<script type="text/javascript">
+
+    // Add animation to edit/delete icons when hovered
+    $(".basket-icons i").hover(function () {
+        $(this).toggleClass("fa-beat");
+    });
+
+    // Remove item from basket end reload url
+    // {{ csrf_token }} can be passed from template to view because JS is inline in template
+    $(".button-delete").click(function () {
+        const csrfToken = "{{ csrf_token }}";
+        const itemId = $(this).data("item-id")
+        const url = `/basket/delete/${itemId}/`
+        const data = {
+            "csrfmiddlewaretoken": csrfToken,
+            "item_id": itemId
+        };
+
+        $.post(url, data).done(function () {
+            location.reload();
+        });
+    });
+</script>
+
 {% endblock %}

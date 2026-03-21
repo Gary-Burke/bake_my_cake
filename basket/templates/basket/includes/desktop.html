@@ -31,17 +31,17 @@
 
                 <td>
                     <ul class="list-unstyled">
-                        <li>Name: {{ item.product.name }}</li>
-                        <li>Size: {{ item.size|friendly_label }}</li>
+                        <li><span class="text-bold">Name:</span> {{ item.product.name }}</li>
+                        <li><span class="text-bold">Size:</span> {{ item.size|friendly_label }}</li>
                         {% if item.tiers %}
-                        <li>Tiers: {{ item.tiers }}</li>
+                        <li><span class="text-bold">Tiers:</span> {{ item.tiers }}</li>
                         {% endif %}
-                        <li>Sponge: {{ item.sponge|friendly_label }}</li>
-                        <li>Filling: {{ item.filling|friendly_label }}</li>
-                        <li>Icing: {{ item.icing|friendly_label }}</li>
-                        <li>Main Colour: {{ item.main_colour|friendly_label }}</li>
-                        <li>Secondary Colour: {{ item.secondary_colour|friendly_label }}</li>
-                        <li>Cake Topper: {{ item.cake_topper|friendly_label }}</li>
+                        <li><span class="text-bold">Sponge:</span> {{ item.sponge|friendly_label }}</li>
+                        <li><span class="text-bold">Filling:</span> {{ item.filling|friendly_label }}</li>
+                        <li><span class="text-bold">Icing:</span> {{ item.icing|friendly_label }}</li>
+                        <li><span class="text-bold">Main Colour:</span> {{ item.main_colour|friendly_label }}</li>
+                        <li><span class="text-bold">Secondary Colour:</span> {{ item.secondary_colour|friendly_label }}</li>
+                        <li><span class="text-bold">Cake Topper:</span> {{ item.cake_topper|friendly_label }}</li>
                     </ul>
                 </td>
                 <td>{{ item.quantity }}</td>
@@ -49,9 +49,8 @@
 
                 <!-- Edit Delete Icons -->
                 <td class="basket-icons">
-                    <a class="button-edit" href="#"><i class="fa-solid fa-pencil"></i></a>
-                    <a class="button-delete ms-3" href="#"><i class="fa-solid fa-trash-can"></i></a>
-
+                    <a class="button-edit"><i class="fa-solid fa-pencil"></i></a>
+                    <a class="button-delete ms-3" data-item-id="{{ item.item_id }}"><i class="fa-solid fa-trash-can"></i></a>
                 </td>
             </tr>
             {% endfor %}

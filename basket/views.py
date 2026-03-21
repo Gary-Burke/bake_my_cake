@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib import messages
 from products.models import Product
 from products.utils import calculate_total
@@ -50,3 +50,29 @@ def add_to_basket(request, product_id):
         )
 
         return redirect(redirect_url)
+
+
+def delete_from_basket(request, item_id):
+    """
+    Removes an item from the basket dictionary stored in the session
+
+    **Model**
+    :model:`products.Product`
+    """
+
+    try:
+        basket = request.session.get("basket", {})
+        product = get_object_or_404(Product, pk=basket[item_id]["product_id"])
+        basket.pop(item_id)
+        request.session["basket"] = basket
+
+        messages.add_message(
+            request, messages.SUCCESS,
+            f"{product.name} has been removed from your basket!"
+        )
+
+        return HttpResponse(status=200)
+
+    except Exception as e:
+        messages.error(request, f'Error removing item: {e}')
+        return HttpResponse(status=500)
