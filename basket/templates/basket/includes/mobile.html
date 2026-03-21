@@ -1,0 +1,72 @@
+{% load static %}
+{% load display_lables %}
+
+<div class="basket-mobile">
+    <h1 class="mb-2">Shopping Basket</h1>
+
+    {% if basket_qty %}
+    <div class="row">
+        {% for item in basket_items %}
+
+        <hr class="my-3">
+        <ul class="list-unstyled my-0 col-6">
+            <li>Name: {{ item.product.name }}</li>
+            <li>Size: {{ item.size|friendly_label }}</li>
+            {% if item.tiers %}
+            <li>Tiers: {{ item.tiers }}</li>
+            {% endif %}
+            <li>Sponge: {{ item.sponge|friendly_label }}</li>
+            <li>Filling: {{ item.filling|friendly_label }}</li>
+            <li>Icing: {{ item.icing|friendly_label }}</li>
+        </ul>
+
+        <!-- Image -->
+        <div class="col-6 text-center">
+            {% if item.product.image_url %}
+            <img src="{{ item.product.image_url.url }}" alt="{{ item.product.name }}">
+            {% elif item.product.image %}
+            <img src="{% static 'images/' %}{{ item.product.image }}" alt="{{ item.product.name }}">
+            {% else %}
+            <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
+            {% endif %}
+        </div>
+
+        <ul class="list-unstyled my-0 col-12">
+            <li>Main Colour: {{ item.main_colour|friendly_label }}</li>
+            <li>Secondary Colour: {{ item.secondary_colour|friendly_label }}</li>
+            <li>Cake Topper: {{ item.cake_topper|friendly_label }}</li>
+        </ul>
+
+        <div class="d-flex justify-content-start mt-1">
+
+            <div><strong>Quantity:</strong> {{ item.quantity }}</div>
+            <div class="mx-3"><strong>Total:</strong> {{ item.total }}€</div>
+
+            <!-- Edit Delete Icons -->
+            <div class="basket-icons mx-2 d-flex justify-content-around">
+                <a class="button-edit ms-2" href="#"><i class="fa-solid fa-pencil"></i></a>
+                <a class="button-delete ms-3" href="#"><i class="fa-solid fa-trash-can"></i></a>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        <hr class="my-2">
+        <!-- Total Summary -->
+        <ul class="list-unstyled text-end">
+            <li>Amount of Items: {{ basket_qty }}</li>
+            <li>Grand Total: {{ grand_total }}€</li>
+        </ul>
+
+        <!-- Buttons Checkout -->
+        <div class="text-end">
+            <a class="button button-cancel mt-2" href="{% url 'products' %}">&larr; Baked Goods</a>
+            <a class="button button-primary mt-2 ms-2" href="#">Checkout</a>
+        </div>
+
+    </div>
+    {% else %}
+    <p>Your basket is currently empty</p>
+    <a class="button button-primary mt-2" href="{% url 'products' %}">View Baked Goods</a>
+    {% endif %}
+</div>

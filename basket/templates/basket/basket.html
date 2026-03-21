@@ -7,58 +7,19 @@
 {% endblock %}
 
 {% block content %}
-<div class="container my-3">
-    <h1>Basket</h1>
+<div class="container my-3 d-flex justify-content-center">
 
-    <table class="table">
-        <thead class="thead">
-            <tr>
-                <th scope="col">Preview</th>
-                <th scope="col">Details</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-                <th scope="col">Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in basket_items %}
-            <tr>
-                <th scope="row">
-                    {% if item.product.image_url %}
-                    <img src="{{ item.product.image_url.url }}" alt="{{ item.product.name }}">
-                    {% elif item.product.image %}
-                    <img src="{% static 'images/' %}{{ item.product.image }}" alt="{{ item.product.name }}">
-                    {% else %}
-                    <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
-                    {% endif %}
-                </th>
+    {% include 'basket/includes/mobile.html' %}
+    {% include 'basket/includes/desktop.html' %}
 
-                <td>
-                    <ul class="list-unstyled">
-                        <li>Name: {{ item.product.name }}</li>
-                        <li>Size: {{ item.size|friendly_label }}</li>
-                        {% if item.tiers %}
-                        <li>Tiers: {{ item.tiers }}</li>
-                        {% endif %}
-                        <li>Sponge: {{ item.sponge|friendly_label }}</li>
-                        <li>Filling: {{ item.filling|friendly_label }}</li>
-                        <li>Icing: {{ item.icing|friendly_label }}</li>
-                        <li>Main Colour: {{ item.main_colour|friendly_label }}</li>
-                        <li>Secondary Colour: {{ item.secondary_colour|friendly_label }}</li>
-                        <li>Cake Topper: {{ item.cake_topper|friendly_label }}</li>
-                    </ul>
-                </td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.total }}€</td>
-                <td>Edit | Remove</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <ul class="list-unstyled text-end">
-        <li>Amount of Products: {{ basket_qty }}</li>
-        <li>Grand Total: {{ grand_total }}€</li>
-    </ul>
 </div>
+{% endblock %}
+
+{% block extras %}
+<!-- jQuery CDN link -->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'basket/js/basket.js' %}" defer></script>
 {% endblock %}

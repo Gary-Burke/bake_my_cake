@@ -1,20 +1,60 @@
-table img {
+.basket-desktop {
+    display: none;
+}
+
+.basket-desktop img {
+    height: 180px;
+    max-width: 160px;
+}
+
+.basket-mobile img {
     width: auto;
-    height: 150px;
+    height: 140px;
     max-width: 120px;
 }
 
-tbody {
+.basket-desktop,
+.basket-mobile {
     font-size: 1rem;
+}
+
+/* Icons for edit and delete */
+
+.button-edit,
+.button-delete {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+.button-edit {
+    color: #045879;
+}
+
+.button-delete {
+    color: #c92939;
 }
 
 /* ----- Media Queries ----- */
 
-/* Large screen sizes - 992px up*/
+/* Medium screen sizes - 768px up*/
 
-@media screen and (min-width: 992px) {
-    table img {        
-        height: 200px;
-        max-width: 180px;
+@media screen and (min-width: 768px) {
+    .basket-desktop {
+        display: block;
     }
+
+    .basket-mobile {
+        display: none;
+    }
+}
+
+/* X-Large screen sizes - 1440px up*/
+
+@media screen and (min-width: 1440px) {
+    .basket-desktop img {
+        height: 250px;
+        max-width: 220px;
+    }
+
 }
