@@ -33,7 +33,7 @@
                     <ul class="list-unstyled">
                         <li><span class="text-bold">Name:</span> {{ item.product.name }}</li>
                         <li><span class="text-bold">Size:</span> {{ item.size|friendly_label }}</li>
-                        {% if item.tiers %}
+                        {% if not item.product.shape == "cupcake" %}
                         <li><span class="text-bold">Tiers:</span> {{ item.tiers }}</li>
                         {% endif %}
                         <li><span class="text-bold">Sponge:</span> {{ item.sponge|friendly_label }}</li>

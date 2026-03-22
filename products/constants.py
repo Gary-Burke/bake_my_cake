@@ -76,8 +76,8 @@ PRODUCT_COST = {
 PRODUCT_COST_CUPCAKE = {
     "size": {
         "small": 1,
-        "medium": 1.6,
-        "large": 2.5,
+        "medium": 1.8,
+        "large": 3.4,
     },
 
     "sponge": {
@@ -128,5 +128,13 @@ PRODUCT_COST_CUPCAKE = {
         "red": 0,
         "white": 0,
         "yellow": 0,
+    },
+
+    "quantity": {
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
     },
 }

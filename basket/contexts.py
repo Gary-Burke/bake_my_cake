@@ -10,7 +10,7 @@ def basket_contents(request):
     """
 
     basket = request.session.get("basket", {})
-    basket_qty = 0
+    basket_qty = int(0)
     grand_total = Decimal("0")
 
     if len(basket):
