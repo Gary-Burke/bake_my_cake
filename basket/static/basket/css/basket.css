@@ -40,6 +40,20 @@
     color: #c92939;
 }
 
+/* ----- Product Details View ----- */
+
+.product-details img {
+    width: auto;
+    height: 300px;
+    max-width: 250px;
+    filter: drop-shadow(0.5rem 0.5rem 0.5rem #202020);
+}
+
+.product-details h2,
+.product-details h3 {
+    color: var(--dark-color);
+}
+
 /* ----- Media Queries ----- */
 
 /* Medium screen sizes - 768px up*/
@@ -51,6 +65,15 @@
 
     .basket-mobile {
         display: none;
+    }
+}
+
+/* Large screen sizes - 992px up*/
+
+@media screen and (min-width: 992px) {
+    .product-details img {
+        height: 400px;
+        max-width: 350px;
     }
 }
 

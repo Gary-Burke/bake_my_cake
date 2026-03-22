@@ -43,6 +43,13 @@
             location.reload();
         });
     });
+
+    // Open the template to edit the item clicked in the basket
+    $(".button-edit").click(function () {
+        const itemId = $(this).data("item-id")
+        const url = `/basket/edit/${itemId}/`  
+        window.location.replace(url);
+    });
 </script>
 
 {% endblock %}

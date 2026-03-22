@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib import messages
+from django.http import JsonResponse
 from products.models import Product
 from decimal import Decimal
 from products.utils import calculate_total
+from products.constants import PRODUCT_COST, PRODUCT_COST_CUPCAKE
 
 # Create your views here.
 
@@ -114,3 +116,66 @@ def delete_from_basket(request, item_id):
     except Exception as e:
         messages.error(request, f'Error removing item: {e}')
         return HttpResponse(status=500)
+
+
+def edit_basket(request, item_id):
+    """
+    Updates an instance of an item stored in the session basket
+
+    **Model**
+    :model:`products.Product`
+    """
+    basket = request.session.get("basket", {})
+    product = get_object_or_404(Product, pk=basket[item_id]["product_id"])
+    template = "basket/edit_basket.html"
+
+    # Used to loop through in template input fields
+    if product.shape == "cupcake":
+        product_cost = PRODUCT_COST_CUPCAKE
+    else:
+        product_cost = PRODUCT_COST
+
+    if request.GET.get("sponge"):
+        try:
+            total = calculate_total(request, product)
+
+            # Return calculated total to JS to update field
+            # wihtout having to reload whole query in template
+            # str() needed to convert Decimal object for JSON handling
+            return JsonResponse(
+                {"total": str(total)}
+            )
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+    total = calculate_total(request, product)
+
+    if request.method == "POST":
+        data = request.POST
+        basket[item_id]["size"] = data.get("size")
+        basket[item_id]["tiers"] = int(data.get("tiers", 1))
+        basket[item_id]["sponge"] = data.get("sponge")
+        basket[item_id]["filling"] = data.get("filling")
+        basket[item_id]["icing"] = data.get("icing")
+        basket[item_id]["main_colour"] = data.get("main_colour")
+        basket[item_id]["secondary_colour"] = data.get("secondary_colour")
+        basket[item_id]["quantity"] = int(data.get("quantity", 1))
+        basket[item_id]["cake_topper"] = data.get("cake_topper")
+        basket[item_id]["total"] = total
+
+        request.session["basket"] = basket
+
+        messages.add_message(
+            request, messages.SUCCESS,
+            "Your basket has been updated!"
+        )
+
+        return redirect("view_basket")
+
+    context = {
+        "product": product,
+        "product_cost": product_cost,
+        "item_id": item_id,
+    }
+
+    return render(request, template, context)

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load display_lables %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'basket/css/basket.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="container">
+
+    <div class="row product-details mx-auto mt-4">
+
+        <div class="col-md-5 col-xl-4 text-center">
+            {% if product.image_url %}
+            <img src="{{ product.image_url.url }}" alt="{{ product.name }}">
+            {% elif product.image %}
+            <img src="{% static 'images/' %}{{ product.image }}" alt="{{ product.name }}">
+            {% else %}
+            <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
+            {% endif %}
+        </div>
+
+        <div class="col-md-7 col-lg-6 mt-3 mt-md-0">
+            <h2>{{ product.name }}</h2>
+            <h3 id="product-total">{{ product.base_price }}€</h3>
+
+            <div id="product-details" data-product-id="{{ product.id }}" data-slug="{{ product.slug }}" data-shape="{{ product.shape }}">
+                
+                <form class="row" method="POST" action="{% url 'edit_basket' item_id %}">
+                    {% csrf_token %}
+                    {% for key, value in product_cost.items %}
+                    <div class="col-12 col-lg-6 my-2">
+                        <div class="form-floating">
+                            <select class="form-select" id="{{ key }}" name="{{ key }}">
+                                {% for options in value.keys %}
+                                <option value="{{ options }}">
+                                    {{ options|friendly_label }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <label for="{{ key }}">{{ key|friendly_label }}</label>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="form-floating my-2">
+                        <input type="text" class="form-control" id="cake-topper" placeholder="e.g. Happy Birthday" name="cake_topper" value="Default (As in Picture)">
+                        <label class="ms-2" for="cake-topper">Message / Name on Cake</label>
+                    </div>
+
+                    <div class="d-flex flex-row flex-wrap my-2 justify-content-end">
+                        <a class="button button-cancel" href="{% url 'view_basket' %}">&larr; Cancel</a>
+                        <button id="submitButton" type="submit" class="button button-primary ms-2">Update Basket</button>
+                    </div>
+
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extras %}
+<!-- jQuery CDN link -->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+<!-- Custom jQuery -->
+<script type="text/javascript">
+
+    // Add animation to edit/delete icons when hovered
+    $(".basket-icons i").hover(function () {
+        $(this).toggleClass("fa-beat");
+    });
+
+    // Get the values for the params from the product html
+    $("#product-details .form-select").change(function () {
+        const formDiv = $("#product-details");
+        const slug = formDiv.data("slug");
+        const id = formDiv.data("product-id");
+
+        const params = {
+            size: $("#size").val(),
+            tiers: $("#tiers").val(),
+            sponge: $("#sponge").val(),
+            filling: $("#filling").val(),
+            icing: $("#icing").val(),
+            quantity: $("#quantity").val(),
+        };
+
+        // Pass the params values to the view in the get request as a query
+        // Return the calculated total from view and update html with total
+        $.get(`/products/${slug}/${id}/`, params).done(function (data) {
+            $("#product-total").text(data.total + "€");
+        }).fail(function () {
+            console.error("Price calculation failed");
+        });
+    });
+</script>
+
+{% endblock %}
