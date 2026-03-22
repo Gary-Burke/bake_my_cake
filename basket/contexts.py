@@ -39,7 +39,7 @@ def basket_contents(request):
     context = {
         "basket_items": basket_items,
         "basket_qty": basket_qty,
-        "grand_total": grand_total.quantize(Decimal("0.01")),
+        "grand_total": str(grand_total.quantize(Decimal("0.01"))),
     }
 
     return context

@@ -27,6 +27,6 @@ def calculate_total(request, product):
     total = (
         ((base_price + sponge + filling + icing) * size) * tiers) * quantity
 
-    total = total.quantize(Decimal("0.01"))
+    total = str(total.quantize(Decimal("0.01")))
 
     return total
