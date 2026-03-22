@@ -75,21 +75,21 @@ $(document).ready(function () {
     let shape = $("#product-details").data("shape");
 
     if (shape === "cupcake") {
-        $("select option[value='small']").text("12 Cupcakes");
-        $("select option[value='medium']").text("24 Cupcakes");
-        $("select option[value='large']").text("36 Cupcakes");
+        $("select option[value='small']").text("Small 12 Cupcakes");
+        $("select option[value='medium']").text("Medium 24 Cupcakes");
+        $("select option[value='large']").text("Large 48 Cupcakes");
     } else if (shape === "square") {
-        $("select option[value='small']").text("15cm x 15cm");
-        $("select option[value='medium']").text("20cm x 20cm");
-        $("select option[value='large']").text("25cm x 25cm");
+        $("select option[value='small']").text("Small 15cm x 15cm");
+        $("select option[value='medium']").text("Medium 20cm x 20cm");
+        $("select option[value='large']").text("Large 25cm x 25cm");
     } else if (shape === "rectangle") {
-        $("select option[value='small']").text("15cm x 20cm");
-        $("select option[value='medium']").text("20cm x 30cm");
-        $("select option[value='large']").text("30cm x 40cm");
+        $("select option[value='small']").text("Small 15cm x 20cm");
+        $("select option[value='medium']").text("Medium 20cm x 30cm");
+        $("select option[value='large']").text("Large 30cm x 40cm");
     } else {
-        $("select option[value='small']").text("15cm Ø");
-        $("select option[value='medium']").text("20cm Ø");
-        $("select option[value='large']").text("25cm Ø");
+        $("select option[value='small']").text("Small 15cm Ø");
+        $("select option[value='medium']").text("Medium 20cm Ø");
+        $("select option[value='large']").text("Large 25cm Ø");
     };
 
     // Add animation to edit/delete icons when hovered
