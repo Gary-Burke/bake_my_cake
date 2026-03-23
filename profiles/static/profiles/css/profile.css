@@ -1,0 +1,9 @@
+.profile-tabs a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.profile-tabs a.selected {    
+    color: var(--dark-color);
+}

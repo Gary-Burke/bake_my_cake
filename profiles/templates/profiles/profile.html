@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="container">
+    <div class="row ">
+        <div class="col-md-10 col-xl-8 my-4 offset-md-1">
+            <h2>Hello {{ request.user }},</h2>
+            <p class="my-2 my-md-3">Here you can edit and update your profile.</p>
+
+            <div class="d-flex flex-column flex-md-row mt-2 justify-content-start">
+
+                <ul class="list-unstyled col-md-3 profile-tabs mb-3">
+                    <li><a href="">Current Orders</a></li>
+                    <li><a href="">Order History</a></li>
+                    <li><a href="{% url 'profile' %}" class="{% if path == 'profile' %}selected" aria-current="page{% endif %}">Billing Details</a></li>
+                </ul>
+                
+                <!-- Billing Address Form -->
+                <form method="post" class="col-md-8 col-lg-6">
+                    {{ userprofile_form|crispy }}
+                    {% csrf_token %}
+                    <a class="button button-cancel" href="{% url 'index' %}">Cancel</a>
+                    <button id="submitButton" type="submit" class="button button-primary ms-2">Update</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
