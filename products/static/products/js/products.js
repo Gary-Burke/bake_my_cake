@@ -103,7 +103,7 @@ $(document).ready(function () {
      */
     $(".button-edit").click(function () {
         let productId = $(this).closest('.product-card-admin').attr("data-product-id");
-        $(this).attr("href", `/products/edit/${productId}`);
+        $(this).attr("href", `/products/edit/${productId}/`);
 
     });
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
         $(".button-delete").on("click", function () {
             let productId = $(this).closest('.product-card-admin').attr("data-product-id");
-            $("#delete-confirm").attr("href", `/products/delete/${productId}`);
+            $("#delete-confirm").attr("href", `/products/delete/${productId}/`);
             deleteModal.show();
         });
     }
