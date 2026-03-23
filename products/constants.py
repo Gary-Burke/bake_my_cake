@@ -39,7 +39,7 @@ PRODUCT_COST = {
     },
 
     "main_colour": {
-        "default_(as_in_picture)": 0,
+        "as_in_picture": 0,
         "black": 0,
         "blue": 0,
         "brown": 0,
@@ -52,7 +52,7 @@ PRODUCT_COST = {
     },
 
     "secondary_colour": {
-        "default_(as_in_picture)": 0,
+        "as_in_picture": 0,
         "black": 0,
         "blue": 0,
         "brown": 0,
@@ -105,7 +105,7 @@ PRODUCT_COST_CUPCAKE = {
     },
 
     "main_colour": {
-        "default": 0,
+        "as_in_picture": 0,
         "black": 0,
         "blue": 0,
         "brown": 0,
@@ -118,7 +118,7 @@ PRODUCT_COST_CUPCAKE = {
     },
 
     "secondary_colour": {
-        "default": 0,
+        "as_in_picture": 0,
         "black": 0,
         "blue": 0,
         "brown": 0,
