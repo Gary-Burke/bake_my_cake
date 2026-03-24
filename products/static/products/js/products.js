@@ -97,15 +97,6 @@ $(document).ready(function () {
         $(this).toggleClass("fa-beat");
     });
 
-    /**
-     * Gets productId from clicked product edit icon to build dynamic URL.
-     * Set href attributes for clicked product to open product edit form.
-     */
-    $(".button-edit").click(function () {
-        let productId = $(this).closest('.product-card-admin').attr("data-product-id");
-        $(this).attr("href", `/products/edit/${productId}/`);
-
-    });
 
     /**
      * Triggers bootstrap delete modal confirmation.
