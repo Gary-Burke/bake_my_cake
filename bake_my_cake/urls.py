@@ -25,5 +25,6 @@ urlpatterns = [
     path('basket/', include("basket.urls"), name='basket_urls'),
     path('products/', include("products.urls"), name='products_urls'),
     path('profile/', include("profiles.urls"), name='profiles_urls'),
+    path('checkout/', include("checkout.urls"), name='checkout_urls'),
 ]
 handler404 = 'bake_my_cake.views.handler404'

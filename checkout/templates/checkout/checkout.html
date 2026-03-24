@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% load display_lables %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container checkout">
+    <h1 class="mt-2">Checkout</h1>
+    <hr>
+    <div class="d-flex flex-column flex-lg-row">
+
+        <!-- Payment Details -->
+        <div class="col col-lg-6">
+            <p>Please complete the following details</p>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col col-lg-6 order-first order-lg-last">
+            <p>Order Summary</p>
+            <div class="row order-summary">
+                {% for item in basket_items %}
+
+                <div class="col-3 col-lg-3 mb-md-4 mt-1 text-center">
+                    {% if item.product.image_url %}
+                    <img src="{{ item.product.image_url.url }}" alt="{{ item.product.name }}">
+                    {% elif item.product.image %}
+                    <img src="{% static 'images/' %}{{ item.product.image }}" alt="{{ item.product.name }}">
+                    {% else %}
+                    <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
+                    {% endif %}
+                </div>
+
+                <div class="d-flex flex-column flex-md-row col-9">
+                    <ul class="list-unstyled text-small col col-md-6 col-lg-5 my-0">
+                        <li><span class="text-bold">Name:</span> {{ item.product.name }}</li>
+                        <li><span class="text-bold">Size:</span> {{ item.size|friendly_label }}</li>
+                        {% if not item.product.shape == "cupcake" %}
+                        <li><span class="text-bold">Tiers:</span> {{ item.tiers }}</li>
+                        {% endif %}
+                        <li><span class="text-bold">Cake Topper:</span> {{ item.cake_topper|friendly_label }}</li>
+                    </ul>
+                    <div class="col col-md-3 col-lg-2 text-small"><span class="text-bold">Qty: </span>{{ item.quantity }}</div>
+                    <div class="col col-md-3 col-lg-2 text-small mb-4 mb-md-0"><span class="text-bold">Total: </span>{{ item.total }}€</div>
+                </div>
+                {% endfor %}
+                <hr>
+
+                <!-- Total Cost -->
+                <ul class="list-unstyled text-end col-8 col-lg-5 ms-auto">
+                    <li class="text-bold">Amount of Items:</li>
+                    <li class="text-bold">Grand Total:</li>
+                </ul>
+                <ul class="list-unstyled text-end col-4 col-lg-3 col-xl-2">
+                    <li>{{ basket_qty }}</li>
+                    <li>{{ grand_total }}€</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extras %}
+<!-- jQuery CDN link -->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'checkout/js/checkout.js' %}" defer></script>
+{% endblock %}
