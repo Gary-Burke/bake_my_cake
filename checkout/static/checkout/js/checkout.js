@@ -6,7 +6,12 @@ $(document).ready(function () {
     $("#delivery-date").flatpickr({
         minDate: new Date().fp_incr(7),
         dateFormat: "Y-m-d",
-        disableMobile: true,
+
+        onChange: function (selectedDates, dateStr, instance) {
+            $.get("/checkout/", {
+                delivery_date: dateStr
+            });
+        }
     });
 
 });
