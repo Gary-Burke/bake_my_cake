@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% load display_lables %}
+{% load crispy_forms_tags %}
 
 {% block extra_css %}
+<!-- Custom CSS -->
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+
+<!-- Flatpickr -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 {% endblock %}
 
 {% block content %}
@@ -12,9 +17,19 @@
     <hr>
     <div class="d-flex flex-column flex-lg-row">
 
-        <!-- Payment Details -->
-        <div class="col col-lg-6">
+        <!-- Checkout Details -->
+        <hr>
+        <div class="col col-lg-6 mt-2">
             <p>Please complete the following details</p>
+            <form action="" class="col col-md-8 col-lg-9 offset-md-1 offset-lg-0 text-small">
+                <!-- Date Selector -->
+                <div class="mb-3">
+                    <label for="delivery-date" class="form-label">Select a Pickup Date*</label>
+                    <input type="text" id="delivery-date" class="form-select" required>
+                </div>
+                {{ order_form|crispy}}
+                {% csrf_token %}
+            </form>
         </div>
 
         <!-- Order Summary -->
@@ -42,21 +57,25 @@
                         {% endif %}
                         <li><span class="text-bold">Cake Topper:</span> {{ item.cake_topper|friendly_label }}</li>
                     </ul>
-                    <div class="col col-md-3 col-lg-2 text-small"><span class="text-bold">Qty: </span>{{ item.quantity }}</div>
-                    <div class="col col-md-3 col-lg-2 text-small mb-4 mb-md-0"><span class="text-bold">Total: </span>{{ item.total }}€</div>
+                    <div class="col col-md-3 col-lg-2 text-small"><span class="text-bold">Qty:
+                        </span>{{ item.quantity }}</div>
+                    <div class="col col-md-3 col-lg-2 text-small mb-4 mb-md-0"><span class="text-bold">Total:
+                        </span>{{ item.total }}€</div>
                 </div>
                 {% endfor %}
                 <hr>
 
                 <!-- Total Cost -->
-                <ul class="list-unstyled text-end col-8 col-lg-5 ms-auto">
-                    <li class="text-bold">Amount of Items:</li>
-                    <li class="text-bold">Grand Total:</li>
-                </ul>
-                <ul class="list-unstyled text-end col-4 col-lg-3 col-xl-2">
-                    <li>{{ basket_qty }}</li>
-                    <li>{{ grand_total }}€</li>
-                </ul>
+                <div class="d-flex flex-row justify-content-end">
+                    <ul class="list-unstyled text-end my-0">
+                        <li class="text-bold">Amount of Items:</li>
+                        <li class="text-bold">Grand Total:</li>
+                    </ul>
+                    <ul class="list-unstyled ms-3 me-md-5 text-end my-0">
+                        <li>{{ basket_qty }}</li>
+                        <li>{{ grand_total }}€</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -68,6 +87,9 @@
 <!-- jQuery CDN link -->
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
+
+<!-- Flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <!-- Custom JS -->
 <script src="{% static 'checkout/js/checkout.js' %}" defer></script>
