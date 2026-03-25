@@ -21,14 +21,11 @@
         <hr>
         <div class="col col-lg-6 mt-2">
             <p>Please complete the following details</p>
-            <form action="" class="col col-md-8 col-lg-9 offset-md-1 offset-lg-0 text-small">
-                <!-- Date Selector -->
-                <div class="mb-3">
-                    <label for="delivery-date" class="form-label">Select a Pickup Date*</label>
-                    <input type="text" id="delivery-date" class="form-select" required>
-                </div>
+            <form action="{% url 'checkout' %}" method="POST" class="d-flex flex-column col col-md-8 col-lg-9 offset-md-1 offset-lg-0 text-small" id="checkout-details">
+                <!-- Date Selector -->                
                 {{ order_form|crispy}}
                 {% csrf_token %}
+                <button id="submitButton" type="submit" class="button button-primary px-3 mt-1 ms-auto">Secure Payment</button>
             </form>
         </div>
 
