@@ -35,4 +35,4 @@ class Order(models.Model):
     stripe_pid = models.CharField(max_length=254, default='')
 
     def __str__(self):
-        return self.order_number
+        return str(self.order_number)
