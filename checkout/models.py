@@ -23,6 +23,7 @@ class Order(models.Model):
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     name_surname = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20)
+    email = models.EmailField(max_length=80)
     street_address1 = models.CharField(max_length=80)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     town_or_city = models.CharField(max_length=40)

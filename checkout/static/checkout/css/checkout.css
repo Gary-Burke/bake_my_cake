@@ -12,6 +12,10 @@
     font-weight: bold;
 }
 
+.hidden {
+    display: none;
+}
+
 /* ----- Media Queries ----- */
 
 /* Large screen sizes - 992px up*/

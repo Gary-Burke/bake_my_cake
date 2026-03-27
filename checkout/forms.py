@@ -10,11 +10,18 @@ class OrderForm(forms.ModelForm):
                                     widget=forms.TextInput(attrs={
                                         "id": "delivery-date",
                                         "name": "delivery_date",
+                                        "placeholder": "Click to select a date...",
                                     }))
     name_surname = forms.CharField(
         max_length=255, label="Name and Surname")
     phone_number = forms.CharField(
         max_length=255, label="Phone Number")
+    email = forms.EmailField(
+        max_length=80,
+        widget=forms.TextInput(attrs={
+            "id": "email",
+        })
+    )
     street_address1 = forms.CharField(
         max_length=255, label="Street Address 1")
     street_address2 = forms.CharField(
