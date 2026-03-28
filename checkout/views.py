@@ -26,6 +26,17 @@ def checkout(request):
         messages.error(request, "Your basket is currently empty")
         return redirect("products")
 
+    # Stripe metadata values have a 500 character limit
+    basket_trimmed = {
+        item_key: {
+            "product_id": item_data["product_id"],
+            "size": item_data["size"],
+            "tiers": item_data["tiers"],
+            "quantity":   item_data["quantity"],
+        }
+        for item_key, item_data in basket.items()
+    }
+
     if request.method == "POST" and request.content_type == "application/json":
         current_basket = basket_contents(request)
         grand_total = Decimal(current_basket["grand_total"])
@@ -50,7 +61,7 @@ def checkout(request):
                 + "?session_id={CHECKOUT_SESSION_ID}"
             ),
             metadata={
-                "basket": json.dumps(basket),
+                "basket": json.dumps(basket_trimmed),
                 "username": str(request.user) if request.user.is_authenticated else "guest",
             },
         )
