@@ -14,6 +14,7 @@ $(document).ready(function () {
         maxDate:    new Date().fp_incr(maxDate),
         disable:    disabledDates,
         dateFormat: "Y-m-d",
+        disableMobile: "true",
         onChange: function (selectedDates, dateStr) {
             $.get("/checkout/", { delivery_date: dateStr });
         }
