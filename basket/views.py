@@ -25,7 +25,6 @@ def add_to_basket(request, product_id):
 
     if request.method == "POST":
         product = get_object_or_404(Product, pk=product_id)
-        redirect_url = request.POST.get('redirect_url')
         data = request.POST
         basket = request.session.get("basket", {})
         total = calculate_total(request, product)
@@ -34,7 +33,6 @@ def add_to_basket(request, product_id):
         # to compare with basket line items
         qty_check = {"check": dict(data.copy())}
         qty_check["check"].pop("csrfmiddlewaretoken")
-        qty_check["check"].pop("redirect_url")
         qty_check["check"].pop("quantity")
 
         # Some products don't have tiers as options, so set default to 1
@@ -89,7 +87,7 @@ def add_to_basket(request, product_id):
             f"{product.name} has been added to your basket!"
         )
 
-        return redirect(redirect_url)
+        return redirect("products")
 
 
 def delete_from_basket(request, item_id):
