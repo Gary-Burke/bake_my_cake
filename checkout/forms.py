@@ -6,12 +6,6 @@ class OrderForm(forms.ModelForm):
     """
     Form to add user and purchase details to order
     """
-    delivery_date = forms.DateField(label="Select a Pickup Date",
-                                    widget=forms.TextInput(attrs={
-                                        "id": "delivery-date",
-                                        "name": "delivery_date",
-                                        "placeholder": "Click to select a date...",
-                                    }))
     name_surname = forms.CharField(
         max_length=255, label="Name and Surname")
     phone_number = forms.CharField(
@@ -35,7 +29,7 @@ class OrderForm(forms.ModelForm):
         """
         model = Order
         fields = (
-            "delivery_date", "name_surname", "phone_number", "street_address1",
+            "name_surname", "phone_number", "street_address1",
             "street_address2", "town_or_city", "state", "postcode",
-            "country"
+            "country", "email",
         )

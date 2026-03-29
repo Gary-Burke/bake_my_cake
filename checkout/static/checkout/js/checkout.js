@@ -1,27 +1,25 @@
 /* jshint esversion: 11, jquery: true */
 
-// Wait for the DOM to load before executing functions
 $(document).ready(function () {
 
     // ── Flatpickr ────────────────────────────────────────────────────── //
-    const dateInput     = document.getElementById("delivery-date");
+    const dateInput     = document.getElementById("id_delivery_date");
     const minDate       = parseInt(dateInput.dataset.minDate, 10);
     const maxDate       = parseInt(dateInput.dataset.maxDate, 10);
-    const disabledDates = JSON.parse(dateInput.dataset.disabledDates);
+    const disabledDates = JSON.parse(dateInput.dataset.disabledDates || "[]");
 
-    $("#delivery-date").flatpickr({
+    $("#id_delivery_date").flatpickr({
         minDate:    new Date().fp_incr(minDate),
         maxDate:    new Date().fp_incr(maxDate),
         disable:    disabledDates,
         dateFormat: "Y-m-d",
-        disableMobile: "true",
+        disableMobile: true,
         onChange: function (selectedDates, dateStr) {
             $.get("/checkout/", { delivery_date: dateStr });
         }
     });
 
-    // ── Stripe ───────────────────────────────────────────────────────── //
-    // Read the public key Django injected via json_script — no hardcoding
+    // ── Stripe setup ─────────────────────────────────────────────────── //
     const stripePublicKey = JSON.parse(
         document.getElementById("stripe-public-key").textContent
     );
@@ -30,12 +28,13 @@ $(document).ready(function () {
     let checkout;
     let actions;
 
+    initialize();
+
     document
         .querySelector("#payment-form")
         .addEventListener("submit", handleSubmit);
 
-    initialize();
-
+    // ── Initialize Stripe Checkout Elements ──────────────────────────── //
     async function initialize() {
         const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
 
@@ -56,10 +55,6 @@ $(document).ready(function () {
             elementsOptions: { appearance },
         });
 
-        checkout.on("change", (session) => {
-            document.getElementById("submit").disabled = !session.canConfirm;
-        });
-
         const loadActionsResult = await checkout.loadActions();
         if (loadActionsResult.type === "success") {
             actions = loadActionsResult.actions;
@@ -68,7 +63,6 @@ $(document).ready(function () {
                 `Pay ${session.total.total.amount} now`;
         }
 
-        // Email field — id manually set to "email" in OrderForm
         const emailInput  = document.getElementById("email");
         const emailErrors = document.getElementById("email-errors");
 
@@ -89,13 +83,11 @@ $(document).ready(function () {
             });
         }
 
-        // Mount the Stripe payment element
         const paymentElement = checkout.createPaymentElement();
         paymentElement.mount("#payment-element");
     }
 
-    // ── Helpers ──────────────────────────────────────────────────────── //
-
+    // ── Validate email via Stripe ─────────────────────────────────────── //
     const validateEmail = async (email) => {
         const updateResult = await actions.updateEmail(email);
         const isValid = updateResult.type !== "error";
@@ -105,23 +97,92 @@ $(document).ready(function () {
         };
     };
 
+    // ── Validate order form via Django ────────────────────────────────── //
+    async function validateOrderForm() {
+        const csrfToken  = $('input[name="csrfmiddlewaretoken"]').val();
+        const addr2El    = document.getElementById("id_street_address2");
+
+        const formData = {
+            name_surname: document.getElementById("id_name_surname").value,
+            phone_number: document.getElementById("id_phone_number").value,
+            street_address1: document.getElementById("id_street_address1").value,
+            street_address2: addr2El ? addr2El.value : "",
+            town_or_city: document.getElementById("id_town_or_city").value,
+            state: document.getElementById("id_state").value,
+            postcode: document.getElementById("id_postcode").value,
+            country: document.getElementById("id_country").value,
+            delivery_date: document.getElementById("id_delivery_date").value,
+            email: document.getElementById("email").value,
+            save_info: document.getElementById("id_save_info")?.checked || false,
+        };
+
+        const response = await fetch("/checkout/validate/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken":  csrfToken,
+            },
+            body: JSON.stringify(formData),
+        });
+
+        return response.json();
+    }
+
+    // ── Clear previous validation state ──────────────────────────────── //
+    function clearValidationErrors() {
+        document.querySelectorAll(".is-invalid").forEach((el) => {
+            el.classList.remove("is-invalid");
+        });
+        document.querySelectorAll(".invalid-feedback").forEach((el) => {
+            el.remove();
+        });
+    }
+
+    // ── Handle form submission ────────────────────────────────────────── //
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
 
-        const emailInput = document.getElementById("email");
-        const emailErrors = document.getElementById("email-errors");
-        const email = emailInput.value;
+        // Clear any previous validation errors
+        clearValidationErrors();
 
-        const { isValid, message } = await validateEmail(email);
+        // Step 1: validate the order form fields server-side
+        const validationResponse = await validateOrderForm();
+
+        if (!validationResponse.valid) {
+            Object.entries(validationResponse.errors).forEach(([field, errors]) => {
+                const fieldId = field === "email" ? "email" : `id_${field}`;
+                const input   = document.getElementById(fieldId);
+                if (input) {
+                    input.classList.add("is-invalid");
+                    let errorDiv = input.nextElementSibling;
+                    if (!errorDiv || !errorDiv.classList.contains("invalid-feedback")) {
+                        errorDiv = document.createElement("div");
+                        errorDiv.classList.add("invalid-feedback");
+                        input.after(errorDiv);
+                    }
+                    errorDiv.textContent = errors[0];
+                }
+            });
+            showMessage("Please correct the errors above before paying.");
+            setLoading(false);
+            return;
+        }
+
+        // Step 2: validate email with Stripe
+        const emailInput  = document.getElementById("email");
+        const emailErrors = document.getElementById("email-errors");
+        const { isValid, message } = await validateEmail(emailInput.value);
+
         if (!isValid) {
-            emailInput.classList.add("error");
+            emailInput.classList.add("is-invalid");
             emailErrors.textContent = message;
             showMessage(message);
             setLoading(false);
             return;
         }
 
+        // Step 3: confirm payment with Stripe
         const { error } = await actions.confirm();
         if (error) {
             showMessage(error.message);
@@ -130,6 +191,7 @@ $(document).ready(function () {
         setLoading(false);
     }
 
+    // ── UI helpers ───────────────────────────────────────────────────── //
     function showMessage(messageText) {
         const el = document.querySelector("#payment-message");
         el.classList.remove("hidden");

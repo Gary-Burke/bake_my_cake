@@ -26,8 +26,38 @@
             <form action="{% url 'checkout' %}" method="POST"
                 class="d-flex flex-column col col-md-8 col-lg-9 offset-md-1 offset-lg-0 text-small" id="payment-form">
 
+                <!-- Delivery Date Field -->
+                <div class="mb-3">
+                    <label for="id_delivery_date" class="form-label">
+                        Select a Pickup Date<span class="asteriskField">*</span>
+                    </label>
+                    <input type="text" 
+                            id="id_delivery_date" 
+                            name="delivery_date" 
+                            class="form-control"
+                            data-min-date="{{ date_context.min_date }}"
+                            data-max-date="{{ date_context.max_date }}"
+                            data-disabled-dates='{{ date_context.dates_not_allowed|safe }}'
+                            placeholder="Click to Select..."
+                            required>
+                </div>
+
                 {{ order_form|crispy }}
                 {% csrf_token %}
+
+                <div class="form-check form-check-inline ms-auto mb-2">
+                    {% if user.is_authenticated %}
+                    <label class="form-check-label" for="id_save_info"><span class="text-bold">Update</span> my billing
+                        profile details</label>
+                    <input class="form-check-input" type="checkbox" id="id_save_info" name="save_info">
+                    {% else %}
+                    <label class="form-check-label">
+                        <a href="{% url 'account_signup' %}" class="text-bold">Create an account</a> or
+                        <a href="{% url 'account_login' %}" class="text-bold">login</a> to save this information
+                    </label>
+                    {% endif %}
+                </div>
+
 
                 <div id="email-errors"></div>
 
@@ -36,7 +66,7 @@
 
                 <div id="payment-message" class="hidden"></div>
 
-                <button id="submit" class="button button-primary px-3 mt-3 ms-auto" disabled>
+                <button id="submit" class="button button-primary px-3 mt-3 ms-auto">
                     <div class="spinner hidden spinner-border" id="spinner" role="status"></div>
                     <span id="button-text">Pay now</span>
                 </button>

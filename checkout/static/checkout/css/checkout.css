@@ -16,6 +16,10 @@
     display: none;
 }
 
+#payment-form .form-check-label a {
+    color: var(--dark-color);
+}
+
 /* ----- Media Queries ----- */
 
 /* Large screen sizes - 992px up*/
