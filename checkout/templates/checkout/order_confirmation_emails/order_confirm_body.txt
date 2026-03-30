@@ -1,0 +1,15 @@
+Hi {{ order.name_surname }},
+
+We have received your order at Bake My Cake.
+
+Order Number: {{ order_number }}
+Order Total: {{ order.grand_total }}€
+
+Your order will be ready for collection on: {{ order.delivery_date }}
+
+If you have any questions or concerns, please contact us at: {{ contact_email }}
+
+Thank you for chooosing us to bake your cake!
+
+Your favourite cake store,
+Bake My Cake

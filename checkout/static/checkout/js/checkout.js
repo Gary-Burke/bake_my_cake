@@ -19,6 +19,8 @@ $(document).ready(function () {
         }
     });
 
+    // https://docs.stripe.com/payments/quickstart-checkout-sessions ───── //
+    
     // ── Stripe setup ─────────────────────────────────────────────────── //
     const stripePublicKey = JSON.parse(
         document.getElementById("stripe-public-key").textContent

@@ -6,5 +6,16 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Thank you for your order</h1>
+<div class="container">
+  <div class="row">
+    <div class="col mt-4 offset-lg-2">
+      <h1 class="mb-2">Thank you for your order!</h1>
+      <p class="lead">A confirmation email has been sent to <strong>{{ order.email }}</strong></p>
+      <p>Your order will be ready for collection on: <strong>{{ order.delivery_date }}</strong></p>
+      <a href="{% url 'index' %}" class="button button-primary my-2">Home</a>
+    </div>
+  </div>
+
+</div>
+
 {% endblock %}

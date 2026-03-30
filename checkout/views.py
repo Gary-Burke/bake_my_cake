@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib import messages
 from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from .models import Order, DeliveryDate, OrderLineItem
 from products.models import Product
 from profiles.models import UserProfile
@@ -18,13 +20,22 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 # Create your views here.
 
 
-# Code from claude.ai to validate form separately since Stripe initializes
-# the POST request via JS with json data and so normal form validation
-# gets bypassed.
+# Code from claude.ai
 def validate_order_form(request):
+    """
+    **Context**
+    ``order_form``
+     An instance of :form:`checkout.OrderForm`
+
+    Returns an instance of a form for :form:`checkout.OrderForm`
+
+    It validates the order_form separately since Stripe initializes
+    the POST request via JS with json data and so normal form validation
+    gets bypassed in Django. When the form is valid the data from the form
+    gets stored in the request session as "pending_order"
+    """
     if request.method == "POST":
         data = json.loads(request.body)
-        print(f"DATA: {data}")  # TODO: Deltet TODO:
 
         # Validate delivery_date separately as a plain date
         delivery_date_str = data.get("delivery_date", "")
@@ -53,8 +64,23 @@ def validate_order_form(request):
 
 def checkout(request):
     """
-    TODO: Add comment when done TODO:
+    Create stripe checkout session and pass metadata from basket to stripe
+
+    **context**
+    ``order_form``
+    An instance of :form:`checkout.OrderForm`
+
+    ``date_context``
+    Dates and data passed to jQuery to handle Flatpickr calendar
+    in the template. Logic stored in .utils.py
+
+    ``stripe_public_key``
+    Global variable stored in settings.py
+
+    **Template**
+    :template:`checkout/checkout.html`
     """
+
     basket = request.session.get("basket", {})
     if not basket:
         messages.error(request, "Your basket is currently empty")
@@ -79,6 +105,7 @@ def checkout(request):
         stripe_total = int(grand_total.quantize(
             Decimal("0.01"), rounding=ROUND_HALF_UP) * 100)
 
+        # https://docs.stripe.com/payments/quickstart-checkout-sessions
         session = stripe.checkout.Session.create(
             ui_mode="elements",
             payment_method_types=["card"],
@@ -143,13 +170,54 @@ def checkout(request):
 
 def checkout_complete(request):
     """
-    TODO: Add comment when done TODO:
+    Upon successfull checkout it creates an instance of:
+        :model:`checkout.Order`
+        :model:`checkout.DeliveryDate`
+        :model:`checkout.OrderLineItem`
+        :model:`checkout.UserProfile`
+
+    Sends confirmation email to customer
+
+    **context**
+    ``order``
+    Creates an instance of :model:`checkout.Order` and also creates an instance
+    for the relationships between this model and the following:
+        :model:`checkout.DeliveryDate`
+        :model:`checkout.OrderLineItem`
+        :model:`checkout.UserProfile` - only if the user is logged in and has
+                                        opted to save their billing info
+
+    **Template**
+    :template:`checkout/complete.html`
     """
+
     session_id = request.GET.get("session_id")
     if not session_id:
         messages.error(request, "No session ID found.")
         return redirect("checkout")
 
+    def _send_confirmation_email(order):
+        """
+        Send a confirmation email to the customer with their order summary
+        """
+        customer_email = order.email
+        order_number = (str(order.order_number))[:10]
+        subject = render_to_string(
+            'checkout/order_confirmation_emails/order_confirm_subject.txt',
+            {'order': order, 'order_number': order_number})
+        body = render_to_string(
+            'checkout/order_confirmation_emails/order_confirm_body.txt',
+            {'order': order, 'order_number': order_number,
+             'contact_email': settings.DEFAULT_FROM_EMAIL})
+
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [customer_email]
+        )
+
+    # https://docs.stripe.com/payments/quickstart-checkout-sessions
     session = stripe.checkout.Session.retrieve(session_id)
 
     if session.payment_status == "paid":
@@ -180,9 +248,6 @@ def checkout_complete(request):
 
             order_form = OrderForm(form_data)
             save_info = pending_order["save_info"]
-
-            print(f"Email session: {pending_order["email"]}")
-            print(f"Email form: {form_data["email"]}")
 
             if order_form.is_valid():
                 order = order_form.save(commit=False)
@@ -241,7 +306,7 @@ def checkout_complete(request):
                                 "One of the prodcuts in your basket has been "
                                 "removed from our database. Please contact "
                                 "us for assistance"
-                                ))
+                            ))
 
                         order.delete()
                         return redirect("basket")
@@ -261,7 +326,9 @@ def checkout_complete(request):
                     profile.country = pending_order["country"]
                     profile.save()
 
-                    # Clear session data after saving
+                _send_confirmation_email(order)
+
+                # Clear session data after saving
                 del request.session["pending_order"]
 
             else:
@@ -272,7 +339,12 @@ def checkout_complete(request):
         if 'basket' in request.session:
             del request.session['basket']
 
-        return render(request, "checkout/complete.html", {"session": session})
+        template = "checkout/complete.html"
+        context = {
+            "order": order,
+        }
+
+        return render(request, template, context)
 
     messages.error(request, "Payment was not completed.")
     return redirect("checkout")
@@ -282,6 +354,8 @@ def session_status(request):
     """
     Called by complete.js to poll the session status via AJAX.
     """
+
+    # https://docs.stripe.com/payments/quickstart-checkout-sessions
     session_id = request.GET.get("session_id")
     if not session_id:
         return JsonResponse({"error": "No session_id provided"}, status=400)
