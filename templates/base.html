@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 
     <!-- Stripe -->
-     <script src="https://js.stripe.com/dahlia/stripe.js"></script>
+    <script src="https://js.stripe.com/dahlia/stripe.js"></script>
 
     <!-- Newsletter -->
     <script id="mcjs">
@@ -88,24 +88,12 @@
                         <li class="nav-item mx-1">
                             <a class="nav-link {% if request.path == products_url %}active"
                                 aria-current="page{% endif %}" href="{% url 'products' %}">Baked Goods</a>
-                        </li>                    
+                        </li>
 
                         <li class="nav-item mx-1">
                             <a class="nav-link {% if request.path == custom_order_url %}active"
                                 aria-current="page{% endif %}" href="{% url 'custom_order' %}">Custom Order</a>
                         </li>
-
-                        {% if request.user.is_superuser %}
-                        <li class="nav-item dropdown">
-                            <button class="nav-link {% if request.path == add_product_url or request.path == products_admin_url %}active"
-                                aria-current="page{% endif %}" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">Admin</button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'add_product' %}">Add Items</a></li>
-                                <li><a class="dropdown-item" href="{% url 'products_admin' %}">Edit Items</a></li>
-                            </ul>
-                        </li>
-                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -126,14 +114,22 @@
                             <div class="account">Account</div>
                             {% endif %}
                         </button>
+
+                        <!-- Dropdown Menu -->
                         <ul class="dropdown-menu">
+                            {% if request.user.is_superuser %}
+                            <li><a class="dropdown-item" href="{% url 'add_product' %}">Admin | Add Items</a></li>
+                            <li><a class="dropdown-item" href="{% url 'products_admin' %}">Admin | Edit Items</a></li>                            
+                            {% endif %}
+
                             {% if user.is_authenticated %}
-                            <li><a class="dropdown-item" href="{% url 'order_list' %}">Orders</a></li>                            
+                            <li><a class="dropdown-item" href="{% url 'order_list' %}">Orders</a></li>
                             <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+
                             {% else %}
                             <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
                             <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
