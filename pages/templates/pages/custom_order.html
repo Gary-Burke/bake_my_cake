@@ -21,7 +21,10 @@
             <form method="post" enctype="multipart/form-data" class="col-md-8 col-xl-7 mt-3">
                 {{ custom_order_form|crispy }}
                 {% csrf_token %}
-                <button id="submitButton" type="submit" class="button button-primary px-3 mt-1">Submit</button>
+                <div class="d-flex justify-content-end gap-2 mt-2 flex-wrap">
+                    <a class="button button-cancel" href="{% url 'index' %}">Cancel</a>
+                    <button id="submitButton" type="submit" class="button button-primary px-3">Submit</button>
+                </div>
             </form>
 
         </div>
