@@ -1,36 +1,93 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load display_lables %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
 {% endblock %}
 
 {% block content %}
-<section class="container">
-    <div class="row ">
-        <div class="col-md-10 col-xl-8 my-4 offset-md-1">
-            <h2>Hello {{ request.user }},</h2>
-            <p class="my-2 my-md-3">Here you can edit and update your profile.</p>
+<section class="container profile-page">
 
-            <div class="d-flex flex-column flex-md-row mt-2 justify-content-start">
+    <h2 class="my-3">Hello {{ request.user }}</h2>
+    <div class="d-flex flex-column flex-md-row mt-5">
 
-                <ul class="list-unstyled col-md-3 profile-tabs mb-3">
-                    <li><a href="">Current Orders</a></li>
-                    <li><a href="">Order History</a></li>
-                    <li><a href="{% url 'profile' %}" class="{% if path == 'profile' %}selected" aria-current="page{% endif %}">Billing Details</a></li>
-                </ul>
-                
-                <!-- Billing Address Form -->
-                <form method="post" class="col-md-8 col-lg-6">
-                    {{ userprofile_form|crispy }}
-                    {% csrf_token %}
-                    <a class="button button-cancel" href="{% url 'index' %}">Cancel</a>
-                    <button id="submitButton" type="submit" class="button button-primary ms-2">Update</button>
-                </form>
-
-            </div>
+        <!-- Legend Index -->
+        <div class="col-md-3 col-lg-2">
+            <ul class="list-unstyled" id="profile-tabs">
+                <li><a href="{% url 'order_list' %}" data-path="orders_current"
+                        class="{% if current_path == 'orders_current' %}selected" aria-current="page{% endif %}">Current Orders</a></li>
+                <li><a href="{% url 'order_list' %}" data-path="orders_history"
+                        class="{% if current_path == 'orders_history' %}selected" aria-current="page{% endif %}">Order History</a></li>
+                <li><a href="{% url 'profile' %}" data-path="profile" class="{% if current_path == 'profile' %}selected"
+                        aria-current="page{% endif %}">Billing Details</a></li>
+            </ul>
+            <hr class="d-md-none">
         </div>
+
+        {% if current_path == 'profile' %}
+
+        <!-- Billing Address Form -->
+        <div class="col-md-8 col-lg-7 col-xl-6">
+            <form method="post">
+                {{ userprofile_form|crispy }}
+                {% csrf_token %}
+                <a class="button button-cancel" href="{% url 'index' %}">Cancel</a>
+                <button id="submitButton" type="submit" class="button button-primary ms-2">Update</button>
+            </form>
+        </div>
+
+        {% else %}
+
+        <!-- Orders Placed -->
+        <div class="row col-md-9 offset-1 offset-md-0">
+
+            {% for item in order_list %}
+
+            <!-- Image -->
+            <div class="col-md-6 col-lg-5 col-xl-4 my-2 text-start text-md-center">
+                {% if item.product.image_url %}
+                <img src="{{ item.product.image_url.url }}" alt="{{ item.product.name }}">
+                {% elif item.product.image %}
+                <img src="{% static 'images/' %}{{ item.product.image }}" alt="{{ item.product.name }}">
+                {% else %}
+                <img src="{% static 'images/placeholder.webp' %}" alt="No image available">
+                {% endif %}
+            </div>
+
+            <!-- Product Details -->
+            <ul class="list-unstyled my-0 mb-4 col-md-6">
+                <li><span class="text-bold">Name:</span> {{ item.product.name }}</li>
+                <li><span class="text-bold">Size:</span> {{ item.size|friendly_label }}</li>
+                {% if not item.product.shape == "cupcake" %}
+                <li><span class="text-bold">Tiers:</span> {{ item.tiers }}</li>
+                {% endif %}
+                <li><span class="text-bold">Sponge:</span> {{ item.sponge|friendly_label }}</li>
+                <li><span class="text-bold">Filling:</span> {{ item.filling|friendly_label }}</li>
+                <li><span class="text-bold">Icing:</span> {{ item.icing|friendly_label }}</li>
+                <li><span class="text-bold">Quantity:</span> {{ item.quantity }}</li>
+                <li><span class="text-bold">Total:</span> {{ item.total }}€</li>
+                <li><span class="text-bold">Ordered On:</span> {{ item.created_on }}</li>
+                <li><span class="text-bold">Pickup Date:</span> {{ item.order.delivery_date }}</li>
+            </ul>
+
+
+            {% empty %}
+            <p>You have no orders listed here.</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
     </div>
 </section>
+{% endblock %}
+
+{% block extras %}
+<!-- jQuery CDN link -->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'profiles/js/profile.js' %}" defer></script>
 {% endblock %}

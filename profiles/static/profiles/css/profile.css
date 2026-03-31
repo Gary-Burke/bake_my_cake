@@ -1,9 +1,33 @@
-.profile-tabs a {
-    text-decoration: none;
-    color: var(--primary-color);
+.profile-page {
     font-size: 1rem;
 }
 
-.profile-tabs a.selected {    
+.text-bold {
+    font-weight: bold;
+}
+
+.profile-page img {
+    width: auto;
+    height: 180px;
+    max-width: 180px;
+}
+
+#profile-tabs a {
     color: var(--dark-color);
+    text-decoration: none;
+}
+
+#profile-tabs a.selected {
+    font-weight: bold;
+}
+
+/* ----- Media Queries ----- */
+
+/* Medium screen sizes - 768px up*/
+
+@media screen and (min-width: 768px) {
+    .profile-page img {
+        height: 200px;
+        max-width: 200px;
+    }
 }

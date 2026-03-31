@@ -128,8 +128,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             {% if user.is_authenticated %}
-                            <li><a class="dropdown-item" href="#">Current Orders</a></li>
-                            <li><a class="dropdown-item" href="#">Order History</a></li>
+                            <li><a class="dropdown-item" href="{% url 'order_list' %}">Orders</a></li>                            
                             <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
