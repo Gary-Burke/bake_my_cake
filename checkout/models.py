@@ -68,6 +68,7 @@ class OrderLineItem(models.Model):
     quantity = models.IntegerField()
     cake_topper = models.CharField(max_length=255)
     total = models.DecimalField(max_digits=6, decimal_places=2)
+    created_on = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"Product ID {self.product.id} {self.product.name}"

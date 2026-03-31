@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DeliveryDate, Order
+from .models import DeliveryDate, Order, OrderLineItem
 
 
 @admin.register(Order)
@@ -13,3 +13,4 @@ class OrderAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(DeliveryDate)
+admin.site.register(OrderLineItem)
