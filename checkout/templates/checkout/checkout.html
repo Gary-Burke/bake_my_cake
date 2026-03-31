@@ -66,10 +66,16 @@
 
                 <div id="payment-message" class="hidden"></div>
 
-                <button id="submit" class="button button-primary px-3 mt-3 ms-auto">
-                    <div class="spinner hidden spinner-border" id="spinner" role="status"></div>
-                    <span id="button-text">Pay now</span>
-                </button>
+                <div class="d-flex flex-row flex-wrap my-2 justify-content-end mt-4">
+                    <button class="btn-none align">
+                        <a class="button button-cancel" href="{% url 'view_basket' %}">&larr; Back</a>
+                    </button>
+                    <button id="submit" class="button button-primary px-3 ms-1">
+                        <div class="spinner hidden spinner-border" id="spinner" role="status"></div>
+                        <span id="button-text">Pay now</span>
+                    </button>
+                </div>
+
             </form>
         </div>
 
