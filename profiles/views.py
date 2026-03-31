@@ -92,9 +92,9 @@ class ItemListView(LoginRequiredMixin, ListView):
         today = date.today()
 
         if path == "orders_history":
-            queryset = queryset.filter(created_on__lt=today)
+            queryset = queryset.filter(order__delivery_date__date__lt=today)
         else:
-            queryset = queryset.filter(created_on__gte=today)
+            queryset = queryset.filter(order__delivery_date__date__gte=today)
 
         return queryset
 
