@@ -16,7 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     function scrollFunction() {
-        if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+        const threshold = window.innerHeight * 0.5;
+
+        if (document.body.scrollTop > threshold || document.documentElement.scrollTop > threshold) {
             mybutton.style.display = "block";
         } else {
             mybutton.style.display = "none";
