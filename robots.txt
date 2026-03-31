@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /accounts/ 
+Disallow: /basket/
+Disallow: /profiles/
+Sitemap: https://bake-my-cake-b1b688b8e8e7.herokuapp.com/sitemap.xml

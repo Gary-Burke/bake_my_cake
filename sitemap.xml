@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/about</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/custom-order</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/accounts/login/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/accounts/signup/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/basket/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/animals/45/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/barbie-girl/46/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/barbie-girl/51/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/barntastic/52/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/best-dad/1/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/best-husband/2/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/boss-baby/3/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/boss-baby-2/4/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/buffalo/5/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/butterfly-bonanza/6/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/chocolate-deluxe/7/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/corona/8/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/cupcake-flower/53/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/egg-surprise/9/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/elegance/54/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/fabulous-fun/55/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/faceless-beauty/47/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/feminine-toich/10/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/flower-design/11/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/flower-fantastic/12/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/flower-fun/56/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/flower-minimalistic/13/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/flower-power/14/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/flying-fun/15/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/?&amp;page=1</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/?&amp;page=2</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/?&amp;page=3</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/accounts/password/reset/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/frozen/16/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/fruity-mix/17/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/gone-fishing/18/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/hearts/57/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/jack-daniels/19/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/jack-daniels-2/20/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/jameson/21/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/kwv/22/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/lilo-and-stitch/23/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/lion-lager/24/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/little-mermaid/25/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/macarons/26/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/magic-duo/58/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/man-united/27/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/mermaid/59/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/mermaid-magic/60/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/mermaids/28/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/minecraft/61/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/minnie/29/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/minnie-mouse/48/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/nerf/30/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/ocean-magic/62/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/ocean-scene/63/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/paw-patrol/31/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/pearly-perfection/32/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/pretty-by-design/64/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/pretty-floral/65/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/rainbow-unicorn/33/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/red-ribbon/34/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/roblox/35/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/roses-and-more/66/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/simple-elegance/36/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/simply-flowers/67/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/sonic-boom/37/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/spiderman/68/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/spiderman/49/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/spongebob/69/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/sunny-flowers/38/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/teddy-time/39/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/tiktok-dark/50/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/tiktok/40/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/toddler-vroom/41/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/under-construction/70/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/unicorn-delight/42/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/vw-fun/43/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/watermelon/44/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/wheely-cool/71/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://bake-my-cake-b1b688b8e8e7.herokuapp.com/products/wild-animals/72/</loc>
+  <lastmod>2026-03-31T17:23:27+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
