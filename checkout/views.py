@@ -4,16 +4,17 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib import messages
 from django.conf import settings
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
+
 from .models import Order, DeliveryDate, OrderLineItem
 from products.models import Product
 from profiles.models import UserProfile
 from .forms import OrderForm
+
 from basket.contexts import basket_contents
 from .utils import get_dates
 from decimal import Decimal, ROUND_HALF_UP
 from datetime import datetime
+from .webhooks import send_confirmation_email
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -53,6 +54,7 @@ def validate_order_form(request):
         if order_form.is_valid():
             # save full data including date
             request.session["pending_order"] = data
+
             return JsonResponse({"valid": True})
         else:
             errors = {
@@ -86,24 +88,31 @@ def checkout(request):
         messages.error(request, "Your basket is currently empty")
         return redirect("products")
 
-    # Stripe metadata values have a 500 character limit so the basket
-    # needs to be trimmed down with essential info only before json dumps
-    basket_trimmed = {
-        item_key: {
-            "product_id": item_data["product_id"],
-            "size": item_data["size"],
-            "tiers": item_data["tiers"],
-            "quantity":   item_data["quantity"],
-        }
-        for item_key, item_data in basket.items()
-    }
-
     # Checks POST from JS - the initialize() function in checkout.js - Stripe
     if request.method == "POST" and request.content_type == "application/json":
         current_basket = basket_contents(request)
         grand_total = Decimal(current_basket["grand_total"])
         stripe_total = int(grand_total.quantize(
             Decimal("0.01"), rounding=ROUND_HALF_UP) * 100)
+
+        # Stripe metadata values have a 500 character limit for each key.
+        # Webhooks need a full basket to rebuild the Order and OrderLineItems.
+        # Solution: Store each basket item in its own metadata key
+        item_metadata = {}
+        for item_key, item_data in basket.items():
+            item_metadata[item_key] = json.dumps({
+                "product_id": item_data["product_id"],
+                "size": item_data["size"],
+                "tiers": item_data["tiers"],
+                "sponge": item_data["sponge"],
+                "filling": item_data["filling"],
+                "icing": item_data["icing"],
+                "main_colour": item_data["main_colour"],
+                "secondary_colour": item_data["secondary_colour"],
+                "cake_topper": item_data["cake_topper"],
+                "quantity": item_data["quantity"],
+                "total": item_data["total"],
+            })
 
         # https://docs.stripe.com/payments/quickstart-checkout-sessions
         session = stripe.checkout.Session.create(
@@ -124,14 +133,29 @@ def checkout(request):
                 + "?session_id={CHECKOUT_SESSION_ID}"
             ),
             metadata={
-                "basket": json.dumps(basket_trimmed),
-                "username": (
-                    str(request.user)
-                    if request.user.is_authenticated
-                    else "guest"
-                ),
+                # One key per basket item e.g. "item_1": "{}", "item_2": "{}"
+                **item_metadata,
+                "item_count": str(len(basket)),
+                "username": str(request.user) if request.user.is_authenticated else "guest",  # noqa
+                # Order details left empty - avoid timing problem
+                # filled in by update_session_metadata
+                "save_info": "",
+                "name_surname": "",
+                "phone_number": "",
+                "email": "",
+                "street_address1": "",
+                "street_address2": "",
+                "town_or_city": "",
+                "state": "",
+                "postcode": "",
+                "country": "",
+                "delivery_date": "",
             },
         )
+
+        # Store session ID in Django session so update endpoint can access it
+        request.session["stripe_session_id"] = session.id
+
         return JsonResponse({"clientSecret": session.client_secret})
 
     # Prepopulate form with user profile data if user is logged in
@@ -168,6 +192,41 @@ def checkout(request):
     return render(request, template, context)
 
 
+def update_session_metadata(request):
+    """
+    Called by JS after form validation succeeds.
+    Updates the Stripe session metadata with order details.
+    """
+    if request.method == "POST":
+        stripe_session_id = request.session.get("stripe_session_id")
+        if not stripe_session_id:
+            return JsonResponse({"error": "No session found"}, status=400)
+
+        pending_order = request.session.get("pending_order", {})
+        if not pending_order:
+            return JsonResponse(
+                {"error": "No pending order found"}, status=400
+            )
+
+        stripe.checkout.Session.modify(
+            stripe_session_id,
+            metadata={
+                "save_info":       str(pending_order.get("save_info", False)),
+                "name_surname":    pending_order.get("name_surname", ""),
+                "phone_number":    pending_order.get("phone_number", ""),
+                "email":           pending_order.get("email", ""),
+                "street_address1": pending_order.get("street_address1", ""),
+                "street_address2": pending_order.get("street_address2", ""),
+                "town_or_city":    pending_order.get("town_or_city", ""),
+                "state":           pending_order.get("state", ""),
+                "postcode":        pending_order.get("postcode", ""),
+                "country":         pending_order.get("country", ""),
+                "delivery_date":   pending_order.get("delivery_date", ""),
+            }
+        )
+        return JsonResponse({"success": True})
+
+
 def checkout_complete(request):
     """
     Upon successfull checkout it creates an instance of:
@@ -195,27 +254,6 @@ def checkout_complete(request):
     if not session_id:
         messages.error(request, "No session ID found.")
         return redirect("checkout")
-
-    def _send_confirmation_email(order):
-        """
-        Send a confirmation email to the customer with their order summary
-        """
-        customer_email = order.email
-        order_number = (str(order.order_number))[:10]
-        subject = render_to_string(
-            'checkout/order_confirmation_emails/order_confirm_subject.txt',
-            {'order': order, 'order_number': order_number})
-        body = render_to_string(
-            'checkout/order_confirmation_emails/order_confirm_body.txt',
-            {'order': order, 'order_number': order_number,
-             'contact_email': settings.DEFAULT_FROM_EMAIL})
-
-        send_mail(
-            subject,
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [customer_email]
-        )
 
     # https://docs.stripe.com/payments/quickstart-checkout-sessions
     session = stripe.checkout.Session.retrieve(session_id)
@@ -326,7 +364,7 @@ def checkout_complete(request):
                     profile.country = pending_order["country"]
                     profile.save()
 
-                _send_confirmation_email(order)
+                send_confirmation_email(order, settings.DEFAULT_FROM_EMAIL)
 
                 # Clear session data after saving
                 del request.session["pending_order"]
@@ -339,6 +377,7 @@ def checkout_complete(request):
         if 'basket' in request.session:
             del request.session['basket']
 
+        order = Order.objects.get(stripe_pid=session.payment_intent)
         template = "checkout/complete.html"
         context = {
             "order": order,
