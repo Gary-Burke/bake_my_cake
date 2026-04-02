@@ -87,6 +87,7 @@ class ProductList(ListView):
         # Filter by user category selection
         if "category" in self.request.GET:
             category = self.request.GET.get("category")
+
             allowed_categories = [
                 "all_cakes", "kids_cakes", "birthday_cakes",
                 "event_cakes", "cupcakes"
@@ -95,7 +96,7 @@ class ProductList(ListView):
             if category in allowed_categories:
                 if category == "all_cakes":
                     queryset = queryset.exclude(category__name="cupcakes")
-                elif category == "cupcakes":
+                else:
                     queryset = queryset.filter(category__name=category)
 
         # Sort by user selection
