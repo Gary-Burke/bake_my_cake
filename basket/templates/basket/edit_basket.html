@@ -45,16 +45,14 @@
                     {% endfor %}
 
                     <div class="form-floating my-2">
-                        <input type="text" class="form-control" id="cake-topper" placeholder="e.g. Happy Birthday" name="cake_topper" value="Default (As in Picture)">
+                        <input type="text" class="form-control" id="cake-topper" placeholder="e.g. Happy Birthday" name="cake_topper" value="As in Picture">
                         <label class="ms-2" for="cake-topper">Message / Name on Cake</label>
                     </div>
 
                     <div class="d-flex justify-content-end gap-2 mt-2 flex-wrap">
                         <a class="button button-cancel" href="{% url 'view_basket' %}">Cancel</a>
                         <button id="submitButton" type="submit" class="button button-primary">Update Basket</button>
-                    </div>
-
-                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    </div>                    
                 </form>
             </div>
 
