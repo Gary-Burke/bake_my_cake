@@ -1,7 +1,7 @@
 from decimal import Decimal
 
 
-def check_basket(request, basket, data, product, total):
+def check_basket(request, basket, product, total):
     """
     This functions checks newly added item and edit items
     to check if they match any of the items in the basket.
