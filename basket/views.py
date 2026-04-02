@@ -68,10 +68,25 @@ def edit_basket(request, item_id):
 
     **Model**
     :model:`products.Product`
+
+    **Context**
+    ``product``
+    An instance of :model:`products.Product`
+
+    ``product_cost``
+    Business logic which lives in `products.constants`
+
+    ``item_id``
+    An instance of the product stored in the basket session
+
+    ``edit_form``
+    Data from product with item_id stored in basket to pass to template.
+    Template uses this data to prepopulate the form fields for this product.
     """
     basket = request.session.get("basket", {})
     product = get_object_or_404(Product, pk=basket[item_id]["product_id"])
     template = "basket/edit_basket.html"
+    edit_form = basket[item_id]
 
     # Used to loop through in template input fields
     if product.shape == "cupcake":
@@ -112,6 +127,7 @@ def edit_basket(request, item_id):
         "product": product,
         "product_cost": product_cost,
         "item_id": item_id,
+        "edit_form": edit_form,
     }
 
     return render(request, template, context)
