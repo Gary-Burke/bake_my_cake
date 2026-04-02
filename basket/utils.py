@@ -1,3 +1,4 @@
+from products.constants import PRODUCT_COST
 from decimal import Decimal
 
 
@@ -9,7 +10,29 @@ def check_basket(request, basket, product, total):
     the basket is increased. If not, then a new item is added.
     """
 
-    data = request.POST
+    data = request.POST.copy()
+
+    # Prevent HTML form hacking by checking values with predefined values
+    # If values are not valid then assign default values for item creation
+    # No need to add cupcake check since they have the same values
+
+    if data.get("sponge") not in PRODUCT_COST["sponge"]:
+        data["sponge"] = "vanilla"
+
+    if data.get("filling") not in PRODUCT_COST["filling"]:
+        data["filling"] = "vanilla"
+
+    if data.get("icing") not in PRODUCT_COST["icing"]:
+        data["icing"] = "royal_icing"
+
+    if data.get("tiers") not in PRODUCT_COST["tiers"]:
+        data["tiers"] = 1
+
+    if data.get("quantity") not in PRODUCT_COST["quantity"]:
+        data["quantity"] = 1
+
+    if data.get("size") not in PRODUCT_COST["size"]:
+        data["size"] = "small"
 
     # Make a copy of POST data and prepare the data
     # to compare with basket line items
@@ -34,12 +57,10 @@ def check_basket(request, basket, product, total):
     # quantity and total for items in basket accordingly.
     # Remove quantity and total for dictionary comparison as these should
     # be diffent values while the dictionaries still match.
+
     for item in basket:
         quantity_item = int(basket[item].pop("quantity"))
         total_item = basket[item].pop("total")
-
-        print(f"qty_check: {qty_check["check"]}")
-        print(f"basket: {basket[item]}")
 
         if basket[item] == qty_check["check"]:
             basket[item]["quantity"] = quantity_item + \
@@ -53,6 +74,7 @@ def check_basket(request, basket, product, total):
 
     # If items don't match then add a new item to the basket
     # Ensure item_id is unique or it will overwrite items in basket
+
     if not qty_change:
         current_items = [x for x in basket]
         counter = 1

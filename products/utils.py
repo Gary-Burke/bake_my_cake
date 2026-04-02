@@ -22,6 +22,19 @@ def calculate_total(request, product):
     else:
         size = Decimal(PRODUCT_COST["size"].get(data.get("size"), 1))
 
+    # Prevent HTML form hacking by checking values with predefined values
+    # If values are not valid then assign default values for total calculation
+    # No need to add cupcake check since they have the same values
+
+    sponge = 0 if data.get("sponge") not in PRODUCT_COST["sponge"] else sponge
+    filling = 0 if data.get(
+        "filling") not in PRODUCT_COST["filling"] else filling
+    icing = 0 if data.get("icing") not in PRODUCT_COST["icing"] else icing
+    tiers = 1 if data.get("tiers") not in PRODUCT_COST["tiers"] else tiers
+    quantity = 1 if data.get(
+        "quantity") not in PRODUCT_COST["quantity"] else quantity
+    size = 1 if data.get("size") not in PRODUCT_COST["size"] else size
+
     base_price = Decimal(product.base_price)
 
     total = (
