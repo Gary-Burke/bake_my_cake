@@ -106,8 +106,8 @@ a:has(.product-card) {
 
     .product-card-admin img {
         width: auto;
-        height: 180px;
-        max-width: 150px;
+        height: 160px;
+        max-width: 140px;
     }
 
     .edit img {
