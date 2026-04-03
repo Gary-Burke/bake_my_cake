@@ -23,7 +23,13 @@
 
         <div class="col-md-7 col-lg-6 mt-3 mt-md-0">
             <h2>{{ product.name }}</h2>
-            <h3 id="product-total">{{ product.base_price }}€</h3>
+            <h3 id="product-total">
+                {% if edit_form|get_item:'total' %}
+                {{ edit_form|get_item:'total' }}
+                {% else %}
+                {{ product.base_price }}€
+                {% endif %}
+            </h3>
 
             <div id="product-details" data-product-id="{{ product.id }}" data-slug="{{ product.slug }}" data-shape="{{ product.shape }}">
                 
