@@ -19,7 +19,7 @@
         <tbody>
             {% for item in basket_items %}
             <tr>
-                <th scope="row text-center">
+                <th scope="row">
                     {% if item.product.image_url %}
                     <img src="{{ item.product.image_url.url }}" alt="{{ item.product.name }}">
                     {% elif item.product.image %}

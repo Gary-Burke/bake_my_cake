@@ -18,7 +18,7 @@
                         <button class="btn border-light-subtle text-body bg-white" type="submit" id="button-search"><i
                                 class="fa-solid fa-magnifying-glass fa-lg"></i></button>
                         <input type="text" class="form-control" placeholder="Search our products ..." name="q"
-                            aria-label="Search our products" aria-describedby="basic-search">
+                            aria-label="Search our products">
                     </div>
                 </form>
             </div>
@@ -69,14 +69,14 @@
     {% endif %}
 </div>
 
-<section class="container text-center">
+<div class="container text-center">
     <!-- Display Product Cards -->
     {% if request.user.is_superuser and is_admin_view %}
     {% include 'products/includes/admin.html' %}
     {% else %}
     {% include 'products/includes/user.html' %}
     {% endif %}
-</section>
+</div>
 
 <!-- Pagination -->
 {% if is_paginated %}

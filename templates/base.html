@@ -106,14 +106,14 @@
 
                     <!-- Profile -->
                     <li class="list-inline-item text-center mx-4 dropdown">
-                        <button class="btn-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-user"></i>
                             {% if user.is_authenticated %}
                             <div class="account">{{ user }}</div>
                             {% else %}
                             <div class="account">Account</div>
                             {% endif %}
-                        </button>
+                        </a>
 
                         <!-- Dropdown Menu -->
                         <ul class="dropdown-menu">

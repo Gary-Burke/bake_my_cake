@@ -145,6 +145,10 @@ a:has(.logo) {
     font-size: 1.5rem;
 }
 
+#nav-sub a {
+    text-decoration: none;
+}
+
 .account {
     color: var(--light-color);
     font-size: 1.125rem;
