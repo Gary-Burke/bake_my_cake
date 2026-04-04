@@ -104,6 +104,9 @@ STORAGES = {
     },
 }
 
+# 1 year expressed in seconds for caching
+WHITENOISE_MAX_AGE = 31536000
+
 ROOT_URLCONF = 'bake_my_cake.urls'
 
 TEMPLATES = [
