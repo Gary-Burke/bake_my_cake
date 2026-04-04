@@ -38,15 +38,6 @@
     <!-- Google Fonts -->
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 
-    <!-- Newsletter -->
-    <script id="mcjs">
-        ! function (c, h, i, m, p) {
-            m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(
-                m, p)
-        }(document, "script",
-            "https://chimpstatic.com/mcjs-connected/js/users/b4403bda55ed3ccd9dd98a100/09bd6e2195dd3cac73e5df835.js");
-    </script>
-
     {% block extra_css %}
     {% endblock %}
 
@@ -116,7 +107,7 @@
                         <ul class="dropdown-menu">
                             {% if request.user.is_superuser %}
                             <li><a class="dropdown-item" href="{% url 'add_product' %}">Admin | Add Items</a></li>
-                            <li><a class="dropdown-item" href="{% url 'products_admin' %}">Admin | Edit Items</a></li>                            
+                            <li><a class="dropdown-item" href="{% url 'products_admin' %}">Admin | Edit Items</a></li>
                             {% endif %}
 
                             {% if user.is_authenticated %}
@@ -189,8 +180,10 @@
 
                 <!-- Links -->
                 <ul class="list-unstyled list-inline fs-6 mb-0 mt-3">
-                    <li class="list-inline-item border-end pe-1 mx-0 pe-md-3"><a href="{% url 'about' %}">Store Details</a></li>
-                    <li class="list-inline-item border-end pe-1 mx-0 px-md-3"><a href="{% url 'products' %}">Products</a></li>
+                    <li class="list-inline-item border-end pe-1 mx-0 pe-md-3"><a href="{% url 'about' %}">Store
+                            Details</a></li>
+                    <li class="list-inline-item border-end pe-1 mx-0 px-md-3"><a
+                            href="{% url 'products' %}">Products</a></li>
                     <li class="list-inline-item px-0 mx-0 ps-md-3"><a
                             href="https://www.termsfeed.com/live/e5045f95-3e2b-4c62-b638-c6651bcdc671"
                             target="_blank">Privacy Policy</a></li>
@@ -214,12 +207,11 @@
     <!-- Font Awesome Kit -->
     <script src="https://kit.fontawesome.com/3a3a47fde5.js" crossorigin="anonymous"></script>
 
-    {% block extras %}
-    {% endblock %}
-
     <!-- Custom JS -->
     <script src="{% static 'js/base.js' %}" defer></script>
 
+    {% block extras %}
+    {% endblock %}
 </body>
 
 </html>
