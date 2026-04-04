@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib import messages
 from django.conf import settings
+from django.db import IntegrityError
 
 from .models import Order, DeliveryDate, OrderLineItem
 from products.models import Product
@@ -259,125 +260,139 @@ def checkout_complete(request):
     session = stripe.checkout.Session.retrieve(session_id)
 
     if session.payment_status == "paid":
-        if not Order.objects.filter(
-                stripe_pid=session.payment_intent).exists():
+        try:
+            if not Order.objects.filter(
+                    stripe_pid=session.payment_intent).exists():
 
-            # Retrieve the form data saved during form validation in
-            # def validate_order_form()
-            pending_order = request.session.get("pending_order")
-            if not pending_order:
-                messages.error(request, "Order data not found.")
-                return redirect("checkout")
+                # Retrieve the form data saved during form validation in
+                # def validate_order_form()
+                pending_order = request.session.get("pending_order")
+                if not pending_order:
+                    messages.error(request, "Order data not found.")
+                    return redirect("checkout")
 
-            # Rebuild the form from the session data
-            basket = request.session.get("basket", {})
+                # Rebuild the form from the session data
+                basket = request.session.get("basket", {})
 
-            form_data = {
-                "name_surname": pending_order["name_surname"],
-                "phone_number": pending_order["phone_number"],
-                "email": pending_order["email"],
-                "street_address1": pending_order["street_address1"],
-                "street_address2": pending_order["street_address2"],
-                "town_or_city": pending_order["town_or_city"],
-                "state": pending_order["state"],
-                "postcode": pending_order["postcode"],
-                "country": pending_order["country"],
-            }
+                form_data = {
+                    "name_surname": pending_order["name_surname"],
+                    "phone_number": pending_order["phone_number"],
+                    "email": pending_order["email"],
+                    "street_address1": pending_order["street_address1"],
+                    "street_address2": pending_order["street_address2"],
+                    "town_or_city": pending_order["town_or_city"],
+                    "state": pending_order["state"],
+                    "postcode": pending_order["postcode"],
+                    "country": pending_order["country"],
+                }
 
-            order_form = OrderForm(form_data)
-            save_info = pending_order["save_info"]
+                order_form = OrderForm(form_data)
+                save_info = pending_order["save_info"]
 
-            if order_form.is_valid():
-                order = order_form.save(commit=False)
+                if order_form.is_valid():
+                    order = order_form.save(commit=False)
 
-                # Build Order with info not present in order_form
-                order.stripe_pid = session.payment_intent
-                order.grand_total = Decimal(session.amount_total) / 100
-                order.original_basket = json.dumps(basket)
+                    # Build Order with info not present in order_form
+                    order.stripe_pid = session.payment_intent
+                    order.grand_total = Decimal(session.amount_total) / 100
+                    order.original_basket = json.dumps(basket)
 
-                # Link Order to UserProfile
-                if request.user.is_authenticated:
-                    try:
-                        order.user_profile = UserProfile.objects.get(
-                            user=request.user)
-                    except UserProfile.DoesNotExist:
-                        order.user_profile = ""
+                    # Link Order to UserProfile
+                    if request.user.is_authenticated:
+                        try:
+                            order.user_profile = UserProfile.objects.get(
+                                user=request.user)
+                        except UserProfile.DoesNotExist:
+                            order.user_profile = ""
 
-                # Parse "delivery_date" string into datetime object
-                # and extract the date
-                date_obj = datetime.strptime(
-                    pending_order["delivery_date"], "%Y-%m-%d").date()
+                    # Parse "delivery_date" string into datetime object
+                    # and extract the date
+                    date_obj = datetime.strptime(
+                        pending_order["delivery_date"], "%Y-%m-%d").date()
 
-                # Search if date_obj exists as an instance in DeliveryDate
-                # and returns it or creates it if not found.
-                delivery_date, _ = DeliveryDate.objects.get_or_create(
-                    date=date_obj)
+                    # Search if date_obj exists as an instance in DeliveryDate
+                    # and returns it or creates it if not found.
+                    delivery_date, _ = DeliveryDate.objects.get_or_create(
+                        date=date_obj)
 
-                # Set ForeignKey relation between Order and Delivery Date
-                order.delivery_date = delivery_date
-                order.save()
+                    # Set ForeignKey relation between Order and Delivery Date
+                    order.delivery_date = delivery_date
+                    order.save()
 
-                # Save an instance for OrderLineItem for every item in basket
-                for item in basket:
-                    try:
-                        product_id = basket[item]["product_id"]
-                        product = Product.objects.get(id=product_id)
-                        order_line_item = OrderLineItem(
-                            order=order,
-                            product=product,
-                            size=basket[item]["size"],
-                            tiers=basket[item]["tiers"],
-                            sponge=basket[item]["sponge"],
-                            filling=basket[item]["filling"],
-                            icing=basket[item]["icing"],
-                            main_colour=basket[item]["main_colour"],
-                            secondary_colour=basket[item]["secondary_colour"],
-                            quantity=basket[item]["quantity"],
-                            cake_topper=basket[item]["cake_topper"],
-                            total=basket[item]["total"],
-                        )
-                        order_line_item.save()
+                    # Save an instance of OrderLineItem for every item stored
+                    # in the session basket
+                    for item in basket:
+                        try:
+                            product_id = basket[item]["product_id"]
+                            product = Product.objects.get(id=product_id)
+                            order_line_item = OrderLineItem(
+                                order=order,
+                                product=product,
+                                size=basket[item]["size"],
+                                tiers=basket[item]["tiers"],
+                                sponge=basket[item]["sponge"],
+                                filling=basket[item]["filling"],
+                                icing=basket[item]["icing"],
+                                main_colour=basket[item]["main_colour"],
+                                secondary_colour=basket[item][
+                                    "secondary_colour"],
+                                quantity=basket[item]["quantity"],
+                                cake_topper=basket[item]["cake_topper"],
+                                total=basket[item]["total"],
+                            )
+                            order_line_item.save()
 
-                    except Product.DoesNotExist:
-                        messages.error(
-                            request, (
-                                "One of the prodcuts in your basket has been "
-                                "removed from our database. Please contact "
-                                "us for assistance"
-                            ))
+                        except Product.DoesNotExist:
+                            messages.error(
+                                request, (
+                                    "One of the prodcuts in your basket has "
+                                    "been removed from our database. Please "
+                                    "contact us for assistance"
+                                ))
 
-                        order.delete()
-                        return redirect("basket")
+                            order.delete()
+                            return redirect("basket")
 
-                # Update UserProfile if save_info was checked
-                # No try block needed due to use of signals in profiles models
-                if save_info and request.user.is_authenticated:
-                    profile = UserProfile.objects.get(user=request.user)
-                    profile.name_surname = pending_order["name_surname"]
-                    profile.phone_number = pending_order["phone_number"]
-                    profile.email = pending_order["email"]
-                    profile.street_address1 = pending_order["street_address1"]
-                    profile.street_address2 = pending_order["street_address2"]
-                    profile.town_or_city = pending_order["town_or_city"]
-                    profile.state = pending_order["state"]
-                    profile.postcode = pending_order["postcode"]
-                    profile.country = pending_order["country"]
-                    profile.save()
+                    # Update UserProfile if save_info was checked
+                    # No try block needed due to signals used in profile models
+                    if save_info and request.user.is_authenticated:
+                        profile = UserProfile.objects.get(user=request.user)
+                        profile.name_surname = pending_order["name_surname"]
+                        profile.phone_number = pending_order["phone_number"]
+                        profile.email = pending_order["email"]
+                        profile.street_address1 = pending_order[
+                            "street_address1"]
+                        profile.street_address2 = pending_order[
+                            "street_address2"]
+                        profile.town_or_city = pending_order["town_or_city"]
+                        profile.state = pending_order["state"]
+                        profile.postcode = pending_order["postcode"]
+                        profile.country = pending_order["country"]
+                        profile.save()
 
-                send_confirmation_email(order, settings.DEFAULT_FROM_EMAIL)
+                    send_confirmation_email(order, settings.DEFAULT_FROM_EMAIL)
 
-                # Clear session data after saving
-                del request.session["pending_order"]
+                    # Clear session data after saving
+                    del request.session["pending_order"]
 
-            else:
-                messages.error(request, 'There was an error with your form. \
-                Please double check your information.')
+                else:
+                    messages.error(
+                        request,
+                        "There was an error with your form. "
+                        "Please double check your information."
+                    )
+
+        except IntegrityError:
+            # Webhook created the order first
+            # Race condition handled gracefully
+            pass
 
         # Clear basket from session after checkout
         if 'basket' in request.session:
             del request.session['basket']
 
         order = Order.objects.get(stripe_pid=session.payment_intent)
+
         template = "checkout/complete.html"
         context = {
             "order": order,

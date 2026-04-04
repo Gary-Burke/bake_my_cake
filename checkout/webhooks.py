@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.db import IntegrityError
 
 from .models import Order, OrderLineItem, DeliveryDate
 from products.models import Product
@@ -123,7 +124,12 @@ def handle_checkout_complete(session):
     date_obj = datetime.strptime(metadata["delivery_date"], "%Y-%m-%d").date()
     delivery_date, _ = DeliveryDate.objects.get_or_create(date=date_obj)
     order.delivery_date = delivery_date
-    order.save()
+
+    try:
+        order.save()
+    except IntegrityError:
+        # checkout_complete created the order first — race condition, skip
+        return
 
     # Create order line items from basket
     for item_key, item_data in basket.items():
