@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 from django.contrib import messages
 import os
+import sys
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
@@ -143,6 +144,20 @@ WSGI_APPLICATION = 'bake_my_cake.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
+
+# When running Django unit tests we need to use the sqlite3 database.
+# Storages/staticfiles and emails must be set to default settings for tests.
+if 'test' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
