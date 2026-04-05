@@ -210,6 +210,8 @@ def add_product(request):
     :template:`products/add_product.html`
     """
 
+    product_form = ProductForm()
+
     if request.method == "POST":
         product_form = ProductForm(data=request.POST, files=request.FILES)
         if product_form.is_valid():
@@ -221,13 +223,12 @@ def add_product(request):
                 request, messages.SUCCESS,
                 f"{product.name} was successfully added to the database!"
             )
+            product_form = ProductForm()
         else:
             messages.add_message(
                 request, messages.ERROR,
                 "Unable to add product. Please try again later"
             )
-
-    product_form = ProductForm()
 
     template = "products/add_product.html"
     context = {
