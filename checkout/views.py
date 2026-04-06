@@ -351,7 +351,7 @@ def checkout_complete(request):
                                 ))
 
                             order.delete()
-                            return redirect("basket")
+                            return redirect("view_basket")
 
                     # Update UserProfile if save_info was checked
                     # No try block needed due to signals used in profile models
