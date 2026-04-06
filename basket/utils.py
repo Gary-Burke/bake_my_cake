@@ -37,8 +37,8 @@ def check_basket(request, basket, product, total):
     # Make a copy of POST data and prepare the data
     # to compare with basket line items
     qty_check = {"check": dict(data.copy())}
-    qty_check["check"].pop("csrfmiddlewaretoken")
-    qty_check["check"].pop("quantity")
+    qty_check["check"].pop("csrfmiddlewaretoken", None)
+    qty_check["check"].pop("quantity", 1)
 
     # Some products don't have tiers as options, so set default to 1
     qty_check["check"]["tiers"] = int(data.get("tiers", 1))
