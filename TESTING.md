@@ -116,3 +116,17 @@ I've tested my deployed project to check for responsiveness issues.
 | products | ![screenshot](documentation/testing/responsiveness/products-mobile.png) | ![screenshot](documentation/testing/responsiveness/products-tablet.png) | ![screenshot](documentation/testing/responsiveness/products-desktop.png) | Works as expected |
 | profile | ![screenshot](documentation/testing/responsiveness/profile-mobile.png) | ![screenshot](documentation/testing/responsiveness/profile-tablet.png) | ![screenshot](documentation/testing/responsiveness/profile-desktop.png) | Works as expected |
 | 404 | ![screenshot](documentation/testing/responsiveness/404-mobile.png) | ![screenshot](documentation/testing/responsiveness/404-tablet.png) | ![screenshot](documentation/testing/responsiveness/404-desktop.png) | Works as expected |
+
+## Browser Compatibility
+
+I've tested my deployed project on multiple browsers to check for compatibility issues.  
+I used a free account from [LambdaTest](https://app.lambdatest.com/) to test my website on **Firefox** and **Edge**.
+
+| Page | Chrome | Firefox | Edge | Notes |
+| --- | --- | --- | --- | --- |
+| index | ![screenshot](documentation/features/home.png) | ![screenshot](documentation/testing/firefox/index.png) | ![screenshot](documentation/testing/edge/index.png) | Works as expected |
+| products | ![screenshot](documentation/features/products.png) | ![screenshot](documentation/testing/firefox/products.png) | ![screenshot](documentation/testing/edge/products.png) | Works as expected |
+| product-details | ![screenshot](documentation/features/product-details.png) | ![screenshot](documentation/testing/firefox/product-details.png) | ![screenshot](documentation/testing/edge/product-details.png) | Works as expected |
+| basket | ![screenshot](documentation/features/view-basket.png) | ![screenshot](documentation/testing/firefox/basket.png) | ![screenshot](documentation/testing/edge/basket.png) | Works as expected |
+| checkout | ![screenshot](documentation/features/checkout.png) | ![screenshot](documentation/testing/firefox/checkout.png) | ![screenshot](documentation/testing/edge/checkout.png) | Works as expected |
+| custom-order | ![screenshot](documentation/features/custom-order.png) | ![screenshot](documentation/testing/firefox/custom-order.png) | ![screenshot](documentation/testing/edge/custom-order.png) | Works as expected |
