@@ -402,26 +402,3 @@ def checkout_complete(request):
 
     messages.error(request, "Payment was not completed.")
     return redirect("checkout")
-
-
-def session_status(request):
-    """
-    Called by complete.js to poll the session status via AJAX.
-    """
-
-    # https://docs.stripe.com/payments/quickstart-checkout-sessions
-    session_id = request.GET.get("session_id")
-    if not session_id:
-        return JsonResponse({"error": "No session_id provided"}, status=400)
-
-    session = stripe.checkout.Session.retrieve(
-        session_id,
-        expand=["payment_intent"],  # so we can read payment_intent.status
-    )
-
-    return JsonResponse({
-        "status": session.status,
-        "payment_status": session.payment_status,
-        "payment_intent_id": session.payment_intent.id if session.payment_intent else None,  # noqa
-        "payment_intent_status": session.payment_intent.status if session.payment_intent else None,  # noqa
-    })
