@@ -12,7 +12,7 @@ $(document).ready(function () {
         if (path !== "profile") {
             e.preventDefault();
             window.location.href = `/profile/orders/?path=${path}`;
-        };
+        }
     });
 
 });

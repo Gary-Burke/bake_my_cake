@@ -90,7 +90,7 @@ $(document).ready(function () {
         $("select option[value='small']").text("Small 15cm Ø");
         $("select option[value='medium']").text("Medium 20cm Ø");
         $("select option[value='large']").text("Large 25cm Ø");
-    };
+    }
 
     // Add animation to edit/delete icons when hovered
     $(".admin-icons i").hover(function () {
@@ -103,7 +103,7 @@ $(document).ready(function () {
      * Gets productId from clicked product delete icon to build dynamic URL.
      * If delete confirm clicked then set URL dynamically to delete product.         
      */
-    const ModalExist = $("#deleteModal")
+    const ModalExist = $("#deleteModal");
 
     if (ModalExist.length) {
         const deleteModal = new bootstrap.Modal($("#deleteModal"));
