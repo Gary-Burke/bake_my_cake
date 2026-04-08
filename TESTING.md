@@ -98,3 +98,21 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 | profiles | [models.py](https://github.com/Gary-Burke/bake_my_cake/blob/main/profiles/models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/Gary-Burke/bake_my_cake/main/profiles/models.py) | ![screenshot](documentation/testing/validation/py-profiles-models.png) | No errors/warnings |
 | profiles | [urls.py](https://github.com/Gary-Burke/bake_my_cake/blob/main/profiles/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/Gary-Burke/bake_my_cake/main/profiles/urls.py) | ![screenshot](documentation/testing/validation/py-profiles-urls.png) | No errors/warnings |
 | profiles | [views.py](https://github.com/Gary-Burke/bake_my_cake/blob/main/profiles/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/Gary-Burke/bake_my_cake/main/profiles/views.py) | ![screenshot](documentation/testing/validation/py-profiles-views.png) | No errors/warnings |
+
+## Responsiveness
+
+I've tested my deployed project to check for responsiveness issues.
+
+| Page | Mobile | Tablet | Desktop | Notes |
+| --- | --- | --- | --- | --- |
+| index | ![screenshot](documentation/testing/responsiveness/index-mobile.png) | ![screenshot](documentation/testing/responsiveness/index-tablet.png) | ![screenshot](documentation/testing/responsiveness/index-desktop.png) | Works as expected |
+| about | ![screenshot](documentation/testing/responsiveness/about-mobile.png) | ![screenshot](documentation/testing/responsiveness/about-tablet.png) | ![screenshot](documentation/testing/responsiveness/about-desktop.png) | Works as expected |
+| basket | ![screenshot](documentation/testing/responsiveness/basket-mobile.png) | ![screenshot](documentation/testing/responsiveness/basket-tablet.png) | ![screenshot](documentation/testing/responsiveness/basket-desktop.png) | Works as expected |
+| checkout | ![screenshot](documentation/testing/responsiveness/checkout-mobile.png) | ![screenshot](documentation/testing/responsiveness/checkout-tablet.png) | ![screenshot](documentation/testing/responsiveness/checkout-desktop.png) | Works as expected |
+| custom-order | ![screenshot](documentation/testing/responsiveness/custom-order-mobile.png) | ![screenshot](documentation/testing/responsiveness/custom-order-tablet.png) | ![screenshot](documentation/testing/responsiveness/custom-order-desktop.png) | Works as expected |
+| product-details | ![screenshot](documentation/testing/responsiveness/product-details-mobile.png) | ![screenshot](documentation/testing/responsiveness/product-details-tablet.png) | ![screenshot](documentation/testing/responsiveness/product-details-desktop.png) | Works as expected |
+| products-add | ![screenshot](documentation/testing/responsiveness/products-add-mobile.png) | ![screenshot](documentation/testing/responsiveness/products-add-tablet.png) | ![screenshot](documentation/testing/responsiveness/products-add-desktop.png) | Works as expected |
+| products-edit | ![screenshot](documentation/testing/responsiveness/products-edit-mobile.png) | ![screenshot](documentation/testing/responsiveness/products-edit-tablet.png) | ![screenshot](documentation/testing/responsiveness/products-edit-desktop.png) | Works as expected |
+| products | ![screenshot](documentation/testing/responsiveness/products-mobile.png) | ![screenshot](documentation/testing/responsiveness/products-tablet.png) | ![screenshot](documentation/testing/responsiveness/products-desktop.png) | Works as expected |
+| profile | ![screenshot](documentation/testing/responsiveness/profile-mobile.png) | ![screenshot](documentation/testing/responsiveness/profile-tablet.png) | ![screenshot](documentation/testing/responsiveness/profile-desktop.png) | Works as expected |
+| 404 | ![screenshot](documentation/testing/responsiveness/404-mobile.png) | ![screenshot](documentation/testing/responsiveness/404-tablet.png) | ![screenshot](documentation/testing/responsiveness/404-desktop.png) | Works as expected |
