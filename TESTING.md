@@ -130,3 +130,27 @@ I used a free account from [LambdaTest](https://app.lambdatest.com/) to test my 
 | basket | ![screenshot](documentation/features/view-basket.png) | ![screenshot](documentation/testing/firefox/basket.png) | ![screenshot](documentation/testing/edge/basket.png) | Works as expected |
 | checkout | ![screenshot](documentation/features/checkout.png) | ![screenshot](documentation/testing/firefox/checkout.png) | ![screenshot](documentation/testing/edge/checkout.png) | Works as expected |
 | custom-order | ![screenshot](documentation/features/custom-order.png) | ![screenshot](documentation/testing/firefox/custom-order.png) | ![screenshot](documentation/testing/edge/custom-order.png) | Works as expected |
+
+## Lighthouse Audit
+
+I've tested my deployed project using the Lighthouse Audit tool to check for any major issues.  
+Some warnings are outside of my control, and mobile results tend to be lower than desktop.
+
+**Index Page**:
+- The low score on **Best Practices** is mainly due to third-party cookies directly related to the use of MailChimp for the newsletter.
+
+**Checkout Page**:
+- The low score on **Best Practices** is mainly due to third-party cookies directly related to the use of Stripe for the Online Payments.
+- The low score on **Performance** for mobile is related to the Stripe pay element, the needed Javascript as well as the use of flatpickr.
+
+| Page | Mobile | Desktop |
+| --- | --- | --- |
+| Index | ![screenshot](documentation/testing/lighthouse/index-mobile.png) | ![screenshot](documentation/testing/lighthouse/index-desktop.png) |
+| Products | ![screenshot](documentation/testing/lighthouse/products-mobile.png) | ![screenshot](documentation/testing/lighthouse/products-desktop.png) |
+| Product Details | ![screenshot](documentation/testing/lighthouse/product-details-mobile.png) | ![screenshot](documentation/testing/lighthouse/product-details-desktop.png) |
+| Custom Order | ![screenshot](documentation/testing/lighthouse/custom-order-mobile.png) | ![screenshot](documentation/testing/lighthouse/custom-order-desktop.png) |
+| Basket | ![screenshot](documentation/testing/lighthouse/basket-mobile.png) | ![screenshot](documentation/testing/lighthouse/basket-desktop.png) |
+| Basket Edit | ![screenshot](documentation/testing/lighthouse/basket-edit-mobile.png) | ![screenshot](documentation/testing/lighthouse/basket-edit-desktop.png) |
+| Checkout | ![screenshot](documentation/testing/lighthouse/checkout-mobile.png) | ![screenshot](documentation/testing/lighthouse/checkout-desktop.png) |
+| Admin Add Product | ![screenshot](documentation/testing/lighthouse/products-admin-add-mobile.png) | ![screenshot](documentation/testing/lighthouse/products-admin-add-desktop.png) |
+| Admin Edit Product | ![screenshot](documentation/testing/lighthouse/products-admin-edit-mobile.png) | ![screenshot](documentation/testing/lighthouse/products-admin-edit-desktop.png) |
