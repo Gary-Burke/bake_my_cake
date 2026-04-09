@@ -154,3 +154,112 @@ Some warnings are outside of my control, and mobile results tend to be lower tha
 | Checkout | ![screenshot](documentation/testing/lighthouse/checkout-mobile.png) | ![screenshot](documentation/testing/lighthouse/checkout-desktop.png) |
 | Admin Add Product | ![screenshot](documentation/testing/lighthouse/products-admin-add-mobile.png) | ![screenshot](documentation/testing/lighthouse/products-admin-add-desktop.png) |
 | Admin Edit Product | ![screenshot](documentation/testing/lighthouse/products-admin-edit-mobile.png) | ![screenshot](documentation/testing/lighthouse/products-admin-edit-desktop.png) |
+
+## User Story Testing
+
+| Target | Expectation | Outcome | Screenshot |
+| --- | --- | --- | --- |
+| As a user | I would like to see a clean and consistent navigation bar | so that I can easily navigate to where I want to go. | ![screenshot](documentation/features/navbar.png) |
+| As a user | I would like to see a clean home page with information about the business | so that I can know what product/service is being sold. | ![screenshot](documentation/features/home.png) |
+| As a user | I would like to register an account | so that I can place orders and manage my details. | ![screenshot](documentation/features/register.png) |
+| As a user | I would like to log in and log out securely | so that my account information is protected. | ![screenshot](documentation/features/login.png) |
+| As a user | I would like to view cakes displayed with images and prices | so that I can easily browse and choose what I want to buy. | ![screenshot](documentation/features/products.png) |
+| As a user | I would like to select a cake and view its full details | so that I can understand my customization options before purchasing. | ![screenshot](documentation/features/product-details.png) |
+| As a user | I would like to see a about page | so that I can find important contact and location information for the business. | ![screenshot](documentation/features/about.png) |
+| As a user | I want to see a footer clearly displayed | so that I can find important information such as the privacy policy. | ![screenshot](documentation/features/footer.png) |
+| As a user | I would like to submit a personalized cake request | so that I can request a completely custom design. | ![screenshot](documentation/features/custom-order.png) |
+| As the owner | I would like to be able to delete products from the database | so that I can remove products that are no longer on offer. | ![screenshot](documentation/features/admin-delete.png) |
+| As the owner | I would like to edit existing products in the database | so that I can keep the product listings accurate and up to date. | ![screenshot](documentation/features/admin-edit.png) |
+| As the owner | I would like to add new cake and cupcake products to the website | so that customers can browse and purchase them. | ![screenshot](documentation/features/admin-add.png) |
+| As a user | I would like to add customized cakes to my basket | so that I can review them before checkout. | ![screenshot](documentation/features/add-to-basket.png) |
+| As a user | I would like to view my current basket | so that I can have an overview of what I have already added before checkout. | ![screenshot](documentation/features/view-basket.png) |
+| As a user | I would like to update or remove items from my basket | so that I can adjust my order before purchasing. | ![screenshot](documentation/features/edit-basket.png) |
+| As the owner | I would like to have a custom 404 error page displayed when applicable | so that my customers don't lose trust in the website. | ![screenshot](documentation/features/404.png) |
+| As a user | I would like to select a pickup date for my order | so that I can collect my cake at a convenient time. | ![screenshot](documentation/features/date-selection.png) |
+| As a user | I would like to securely checkout and make an online payment | so that I can complete my purchase safely. | ![screenshot](documentation/features/payment.png) |
+| As the owner | I would like my website to meet as many SEO requirements as possible | so that users can easily find my website. | Refer to the SEO & Marketing section in the [README.md](README.md#seo--marketing) file. |
+| As the owner | I would like my website to have web marketing strategies implemented | so that my brand can expand. | Refer to the SEO & Marketing section in the [README.md](README.md#seo--marketing) file. |
+| As a user | I would like to customize the cake size | so that it suits the number of guests at my event. | ![screenshot](documentation/features/product-details.png) |
+| As a user | I would like to change the number of tiers of a cake | so that it matches my celebration needs. | ![screenshot](documentation/features/product-details.png) |
+| As a user | I would like to choose the type of sponge for my cake | so that I can select my preferred flavor. | ![screenshot](documentation/features/product-details.png) |
+| As a user | I would like to select a filling for my cake | so that it matches my taste preferences. | ![screenshot](documentation/features/product-details.png) |
+| As a user | I would like to choose the type of icing | so that the cake fits my taste preferences. | ![screenshot](documentation/features/product-details.png) |
+| As a user | I would like to choose the main colour combination of my cake | so that the cake can look the way I want it to . | ![screenshot](documentation/features/product-details.png) |
+| As a user | I would like to sort the products alphabetically and by price | so that I can make a better decision on what I want to buy. | ![screenshot](documentation/features/products-sort.png) |
+| As a user | I would like to search for cakes based on their names | so that I can find a specific related product. | ![screenshot](documentation/features/products-search.png) |
+| As a user | I would like to manage my profile and contact details | so that my order information is always accurate. | ![screenshot](documentation/features/profile-details.png) |
+| As a user | I would like to view my order history | so that I can keep track of my previous purchases. | ![screenshot](documentation/features/profile.png) |
+| As a user | I would to receive confirmation emails | so that I can be assured of my transactions. | ![screenshot](documentation/features/email-confirmation.png) |
+
+## Automated Testing
+
+I have conducted a series of automated tests on my application.
+
+> [!NOTE]  
+> I fully acknowledge and understand that, in a real-world scenario, an extensive set of additional tests would be more comprehensive.
+
+### Python (Unit Testing)
+
+I have used Django's built-in unit testing framework to test the application functionality. In order to run the tests, I ran the following command in the terminal each time:
+
+- `python manage.py test name-of-app`
+
+To create the coverage report, I would then run the following commands:
+
+- `pip3 install coverage`
+- `pip3 freeze --local > requirements.txt`
+- `coverage run --omit="*/site-packages/*,*/migrations/*,*/__init__.py,env.py,.env" manage.py test`
+- `coverage report`
+
+To see the HTML version of the reports, and find out whether some pieces of code were missing, I ran the following commands:
+
+- `coverage html`
+- `python -m http.server`
+
+Below are the results from the full coverage report on my application that I've tested:
+
+![screenshot](documentation/testing/automation/html-coverage.png)
+
+#### Unit Test Issues
+
+**Fixed Issues**
+
+| Issue | Explanation | Solution | Screenshot |
+| --- | --- | --- | --- |
+| ValueError: Missing staticfiles manifest entry for 'images/favicon/apple-touch-icon.png' | Storages/staticfiles and emails must be set to default settings for tests | Override the static files storage backend in test settings to use the basic StaticFilesStorage | ![screenshot](documentation/testing/automation/test-backend-storage.png) |
+| KeyError: category field | category is a ModelChoiceField, so it expects an integer PK of a Category instance, not the string "Birthday Cakes" |  "category": self.category.pk | ![screenshot](documentation/testing/automation/test-category.png) |
+| Cloudinary Fields | Cloudinary fields expect an actual file upload, not an URL | Patch the field to be a standard SimpleUploadedFile for the purposes of form testing. | ![screenshot](documentation/testing/automation/test-cloudinary.png) |
+| django.urls.exceptions.NoReverseMatch: Reverse for 'product_details' with arguments '('', 1)' not found | The product in my initial setUp function had no slug field. In my actual view this is auto-generated. | Add a slug manually in the testing environment. | ![screenshot](documentation/testing/automation/test-slug.png) |
+
+**Known Issues**
+
+> [!IMPORTANT]
+To my knowledge there are no more known issues present in the unit tests.
+
+## Bugs
+
+### Fixed Bugs
+
+[![GitHub issue custom search](https://img.shields.io/github/issues-search/Gary-Burke/bake_my_cake?query=is%3Aissue%20is%3Aclosed%20label%3Abug&label=Fixed%20Bugs&color=green)](https://www.github.com/Gary-Burke/bake_my_cake/issues?q=is%3Aissue+is%3Aclosed+label%3Abug)
+
+I've used [GitHub Issues](https://www.github.com/Gary-Burke/bake_my_cake/issues) to track and manage bugs and issues during the development stages of my project.
+
+All previously closed/fixed bugs can be tracked [here](https://www.github.com/Gary-Burke/bake_my_cake/issues?q=is%3Aissue+is%3Aclosed+label%3Abug).
+
+![screenshot](documentation/gh/bugs.png)
+
+### Unfixed Bugs
+
+[![GitHub issue custom search](https://img.shields.io/github/issues-search/Gary-Burke/bake_my_cake?query=is%3Aissue%2Bis%3Aopen%2Blabel%3Abug&label=Unfixed%20Bugs&color=red)](https://www.github.com/Gary-Burke/bake_my_cake/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
+Any remaining open issues can be tracked [here](https://www.github.com/Gary-Burke/bake_my_cake/issues?q=is%3Aissue+is%3Aopen+label%3Abug).
+
+> [!IMPORTANT]
+To my knowledge there are no remaining bugs present in this project.
+
+### Known Issues
+
+- The project is designed to be responsive from `375px` and upwards, in line with the material taught on the course LMS. Minor layout inconsistencies may occur on extra-wide (e.g. 4k/8k monitors), or smart-display devices (e.g. Nest Hub, Smart Watches, Gameboy Color, etc.), as these resolutions are outside the project’s scope, as taught by Code Institute.
+- When validating HTML with a semantic `<section>` element, the validator warns about lacking a header `h2-h6`. This is acceptable.
+- Validation errors on "signup.html" coming from the Django Allauth package.
+- If a product is in your basket, but then gets deleted from the database, it throws errors from the session storage memory.
