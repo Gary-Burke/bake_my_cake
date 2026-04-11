@@ -191,6 +191,33 @@ Some warnings are outside of my control, and mobile results tend to be lower tha
 | As a user | I would like to view my order history | so that I can keep track of my previous purchases. | ![screenshot](documentation/features/profile.png) |
 | As a user | I would to receive confirmation emails | so that I can be assured of my transactions. | ![screenshot](documentation/features/email-confirmation.png) |
 
+## Defensive Programming
+
+I have implemented measures and fixes to prevent users from hacking my website through html form manipulation and from gaining unrestricted access where applicable.  
+When users add invalid data through html form manipulation, the views catch that and assign the default values to the order.  
+Many of these measures have been tested through the Django Unit Tests but I have also performed manual testing for such defensive programming.
+
+| Page | Expectation | Test | Result | Screenshot |
+| --- | --- | --- | --- | --- |
+| Custom Order | Form should not submit when required fields are missing. | Attempt to submit form with empty field.  | Error messages informs user and prevents form submission. | ![screenshot](documentation/testing/defensive/custom-order-fields.png) |
+| Products Add | Only superuser should have access and rights to perform this action. | Attempt to brute force the url while user is logged out.  | Error messages informs user and prevents access. | ![screenshot](documentation/testing/defensive/anonymous-products-add.png) |
+| Products Add | Only superuser should have access and rights to perform this action. | Attempt to brute force the url while user is logged in (not admin).  | Error messages informs user and prevents access. | ![screenshot](documentation/testing/defensive/products-add.png) |
+| Products Add | Form should not submit when required fields are missing. | Attempt to submit form with empty field.  | Error messages informs user and prevents form submission. | ![screenshot](documentation/testing/defensive/products-add-fields.png) |
+| Products Delete | Only superuser should have access and rights to perform this action. | Attempt to brute force the url while user is logged out.  | Error messages informs user and prevents access. | ![screenshot](documentation/testing/defensive/anonymous-products-delete.png) |
+| Products Delete | Only superuser should have access and rights to perform this action. | Attempt to brute force the url while user is logged in (not admin).  | Error messages informs user and prevents access. | ![screenshot](documentation/testing/defensive/products-delete.png) |
+| Products Admin Edit | Only superuser should have access and rights to perform this action. | Attempt to brute force the url while user is logged out.  | Error messages informs user and prevents access. | ![screenshot](documentation/testing/defensive/anonymous-products-admin-edit.png) |
+| Products Admin Edit | Only superuser should have access and rights to perform this action. | Attempt to brute force the url while user is logged in (not admin).  | Error messages informs user and prevents access. | ![screenshot](documentation/testing/defensive/products-admin-edit.png) |
+| Products Edit | Only superuser should have access and rights to perform this action. | Attempt to brute force the url while user is logged out.  | Error messages informs user and prevents access. | ![screenshot](documentation/testing/defensive/anonymous-products-edit.png) |
+| Products Edit | Only superuser should have access and rights to perform this action. | Attempt to brute force the url while user is logged in (not admin).  | Error messages informs user and prevents access. | ![screenshot](documentation/testing/defensive/products-edit.png) |
+| Products Edit | Form should not submit when required fields are missing. | Attempt to submit form with empty field.  | Error messages informs user and prevents form submission. | ![screenshot](documentation/testing/defensive/products-edit-fields.png) |
+| Profile Admin | Template should not display admin fields if user is not superuser. | Logged in as normal user.  | Template does not render admin menu. | ![screenshot](documentation/testing/defensive/profile.png) |
+| Profile | Only authenticated users should have access to their profile. | Attempt to brute force the url while user is logged out.  | Access is prevented and user is redirected to login page. | ![screenshot](documentation/testing/defensive/anonymous-profile.png) |
+| Product Details | When user manipulates html form the basket should be preserved with allowed values. | Attempt to manipulate html form values and add the product to the basket.  | Product is added to the basket with default allowed values. | ![screenshot](documentation/testing/defensive/product-details-form-hack.png) |
+| Basket | When user manipulates html form the checkout form should be preserved with allowed values. | Attempt to manipulate html form values and proceed to checkout. | Checkout form is rendered with default allowed values. | ![screenshot](documentation/testing/defensive/basket-form-hack.png) |
+| Checkout | When user manipulates html form on checkout the order should be preserved with allowed values. | Attempt to manipulate html form values and proceed to pay. | Order is placed with default allowed values. | ![screenshot](documentation/testing/defensive/checkout-form-hack.png) |
+| Checkout | Form should not submit when required fields are missing. | Attempt to submit form with empty field.  | Error messages informs user and prevents form submission. | ![screenshot](documentation/testing/defensive/checkout-fields.png) |
+| 404 | When a user navigates to a broken/non-existant url, the website should display a custom 404 page. | Attempt to navigate to a url that does not exist e.g. "https://bake-my-cake-b1b688b8e8e7.herokuapp.com/bout".  | Website dispalys custom 404 page. | ![screenshot](documentation/features/404.png) |
+
 ## Automated Testing
 
 I have conducted a series of automated tests on my application.
