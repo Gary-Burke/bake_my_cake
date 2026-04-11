@@ -244,14 +244,24 @@ footer a {
         width: 80%;
         height: 0.2rem;
         background-color: var(--highlight-color);
-        transform: translateX(-50%) scaleX(0);
-        transform-origin: center;
+        -webkit-transform: translateX(-50%) scaleX(0);
+            -ms-transform: translateX(-50%) scaleX(0);
+                transform: translateX(-50%) scaleX(0);
+        -webkit-transform-origin: center;
+            -ms-transform-origin: center;
+                transform-origin: center;
+        -webkit-transition: -webkit-transform 0.3s ease;
+        transition: -webkit-transform 0.3s ease;
+        -o-transition: transform 0.3s ease;
         transition: transform 0.3s ease;
+        transition: transform 0.3s ease, -webkit-transform 0.3s ease;
     }
 
     #nav-top .nav-item:hover .nav-link::after,
     #nav-top .nav-link.active::after {
-        transform: translateX(-50%) scaleX(1);
+        -webkit-transform: translateX(-50%) scaleX(1);
+            -ms-transform: translateX(-50%) scaleX(1);
+                transform: translateX(-50%) scaleX(1);
     }
 
     .hero {
