@@ -155,6 +155,14 @@ class ProductList(ListView):
 class ProductListAdmin(LoginRequiredMixin, ProductList):
     is_admin_view = True
 
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(
+                request,
+                "These rights are only reserved for Admins!")
+            return redirect('index')
+        return super().get(request, *args, **kwargs)
+
 
 def product_details(request, slug, product_id):
     """
