@@ -45,24 +45,37 @@ def validate_order_form(request):
         min_date_val = today + timedelta(days=date_context["min_date"])
         max_date_val = today + timedelta(days=date_context["max_date"])
 
-        # Validate delivery_date separately as a string
-        # Test for empty input from user
-        # Test for html form hack for dates_not_allowed
         delivery_date_str = data.get("delivery_date", "")
+        # Convert JSON string to Python List for dates_not_allowed check
+        dates_not_allowed = json.loads(date_context["dates_not_allowed"])
+
+        # Test for empty input from user
         if not delivery_date_str:
             return JsonResponse({
                 "valid": False,
                 "errors": {"delivery_date": ["Please select a delivery date."]}
             })
-        elif delivery_date_str in date_context["dates_not_allowed"]:
+
+        # Convert string to date object to test for date input format
+        try:
+            delivery_date = datetime.strptime(
+                delivery_date_str, "%Y-%m-%d").date()
+        except ValueError:
+            return JsonResponse({
+                "valid": False,
+                "errors": {
+                    "delivery_date": ["Please enter a valid date format."]}
+            })
+
+        # Test for html form hack for dates_not_allowed
+        if delivery_date_str in dates_not_allowed:
             return JsonResponse({
                 "valid": False,
                 "errors": {
                     "delivery_date": ["Please select a valid delivery date."]}
             })
 
-        # Convert string to date object to test for min/max date range
-        delivery_date = datetime.strptime(delivery_date_str, "%Y-%m-%d").date()
+        # Test for min/max date range
         if delivery_date < min_date_val or delivery_date > max_date_val:
             return JsonResponse({
                 "valid": False,
@@ -71,7 +84,6 @@ def validate_order_form(request):
             })
 
         # Remaining code comes from claude.ai
-
         # Remove delivery_date from data before passing to OrderForm
         # since OrderForm expects a DeliveryDate FK instance, not a string
         form_data = {k: v for k, v in data.items() if k != "delivery_date"}
