@@ -150,6 +150,7 @@ $(document).ready(function () {
     }
 
     // ── Handle form submission ────────────────────────────────────────── //
+    // Used Claude.ai for this solution //
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);

@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.conf import settings
 from django.db import IntegrityError
+from datetime import date, timedelta, datetime
 
 from .models import Order, DeliveryDate, OrderLineItem
 from products.models import Product
@@ -14,7 +15,6 @@ from .forms import OrderForm
 from basket.contexts import basket_contents
 from .utils import get_dates
 from decimal import Decimal, ROUND_HALF_UP
-from datetime import datetime
 from .webhooks import send_confirmation_email
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -22,7 +22,6 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 # Create your views here.
 
 
-# Code from claude.ai
 def validate_order_form(request):
     """
     **Context**
@@ -37,15 +36,41 @@ def validate_order_form(request):
     gets stored in the request session as "pending_order"
     """
     if request.method == "POST":
+        # Checkout form data via JS as JSON
         data = json.loads(request.body)
+        # Call function for flatpickr date logic parameters from utils.py
+        date_context = get_dates()
 
-        # Validate delivery_date separately as a plain date
+        today = date.today()
+        min_date_val = today + timedelta(days=date_context["min_date"])
+        max_date_val = today + timedelta(days=date_context["max_date"])
+
+        # Validate delivery_date separately as a string
+        # Test for empty input from user
+        # Test for html form hack for dates_not_allowed
         delivery_date_str = data.get("delivery_date", "")
         if not delivery_date_str:
             return JsonResponse({
                 "valid": False,
                 "errors": {"delivery_date": ["Please select a delivery date."]}
             })
+        elif delivery_date_str in date_context["dates_not_allowed"]:
+            return JsonResponse({
+                "valid": False,
+                "errors": {
+                    "delivery_date": ["Please select a valid delivery date."]}
+            })
+
+        # Convert string to date object to test for min/max date range
+        delivery_date = datetime.strptime(delivery_date_str, "%Y-%m-%d").date()
+        if delivery_date < min_date_val or delivery_date > max_date_val:
+            return JsonResponse({
+                "valid": False,
+                "errors": {
+                    "delivery_date": ["Please select a valid delivery date."]}
+            })
+
+        # Remaining code comes from claude.ai
 
         # Remove delivery_date from data before passing to OrderForm
         # since OrderForm expects a DeliveryDate FK instance, not a string
