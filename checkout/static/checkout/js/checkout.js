@@ -173,7 +173,7 @@ $(document).ready(function () {
                     errorDiv.textContent = errors[0];
                 }
             });
-            showMessage("Please correct the errors above before paying.");
+            showMessage("Please correct the errors in the form above before paying.");
             setLoading(false);
             return;
         }

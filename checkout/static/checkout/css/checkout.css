@@ -20,6 +20,10 @@
     color: var(--dark-color);
 }
 
+#payment-message {
+    color: #dc3545;
+}
+
 /* ----- Media Queries ----- */
 
 /* Large screen sizes - 992px up*/
