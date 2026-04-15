@@ -25,7 +25,7 @@
             <h2>{{ product.name }}</h2>
             <h3 id="product-total">
                 {% if edit_form|get_item:'total' %}
-                {{ edit_form|get_item:'total' }}
+                {{ edit_form|get_item:'total' }}€
                 {% else %}
                 {{ product.base_price }}€
                 {% endif %}
