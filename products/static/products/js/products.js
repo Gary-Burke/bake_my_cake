@@ -125,4 +125,15 @@ $(document).ready(function () {
         $("#form-search input[name='q']").val(params.get("q"));
     }
 
+    // Reset all URL params and search input
+    $("#search-reset").on("click", () => {
+        $("#form-search input").val("");
+
+        const url = new URL(window.location);
+        const paramsToRemove = ["category", "sort", "direction", "page", "q"];
+
+        paramsToRemove.forEach(param => url.searchParams.delete(param));
+        window.location.replace(url);
+    });
+
 });

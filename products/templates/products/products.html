@@ -65,7 +65,7 @@
     {% if search == None or search == '' %}
     <p class="my-2 fs-6 ms-lg-4">Displaying products in <strong>{{ current_category|friendly_label }}</strong></p>
     {% else %}
-    <p class="my-2 fs-6 ms-lg-4">Displaying results for "{{ search }}" in <strong>{{ current_category|friendly_label }}</strong></p>
+    <p class="my-2 fs-6 ms-lg-4">Displaying results for "{{ search }}" in <strong>{{ current_category|friendly_label }}</strong><button id="search-reset" class="ms-3 text-secondary btn-none border border-secondary-subtle rounded">Reset</button></p>
     {% endif %}
 </div>
 
