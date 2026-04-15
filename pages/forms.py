@@ -18,8 +18,11 @@ class CustomOrderForm(forms.ModelForm):
         attrs={"placeholder": "e.g. Hexagon, L-Shaped or Heart"}))
     size = forms.CharField(max_length=255, widget=forms.TextInput(
         attrs={"placeholder": "e.g. 20 x 30cm"}))
-    tiers = forms.IntegerField(widget=forms.TextInput(
-        attrs={"placeholder": "e.g. 1 (we offer 1-3 tier options)"}))
+    tiers = forms.IntegerField(
+        min_value=1,
+        max_value=3,
+        widget=forms.NumberInput(
+            attrs={"placeholder": "e.g. 1 (we offer 1-3 tier options)"}))
     sponge = forms.CharField(max_length=255, widget=forms.TextInput(
         attrs={"placeholder": "e.g. Red Velvet"}))
     filling = forms.CharField(max_length=255, widget=forms.TextInput(
