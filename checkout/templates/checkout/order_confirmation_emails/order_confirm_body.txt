@@ -1,3 +1,5 @@
+{% load display_lables %}
+
 Hi {{ order.name_surname }},
 
 We have received your order at Bake My Cake.
@@ -6,6 +8,23 @@ Order Number: {{ order_number }}
 Order Total: {{ order.grand_total }}€
 
 Your order will be ready for collection on: {{ order.delivery_date }}
+
+Order Summary:
+{% for item in line_items %}
+--- Product Details ---
+Name: {{ item.product.name }}
+Size: {{ item.size|friendly_label }}
+{% if not item.product.shape == "cupcake" %}Tiers: {{ item.tiers }}{% endif %}
+Cake Topper: {{ item.cake_topper|friendly_label }}
+Sponge: {{ item.sponge|friendly_label }}
+Filling: {{ item.filling|friendly_label }}
+Icing: {{ item.icing|friendly_label }}
+Main Colour: {{ item.main_colour|friendly_label }}
+Secondary Colour: {{ item.secondary_colour|friendly_label }}
+Qty: {{ item.quantity }}
+Sub-Total: {{ item.total }}€
+{% endfor %}                
+ --- End of Products --- 
 
 If you have any questions or concerns, please contact us at: {{ contact_email }}
 

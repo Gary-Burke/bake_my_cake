@@ -9,10 +9,11 @@
 <div class="container">
   <div class="row">
     <div class="col mt-4 offset-lg-2">
-      <h1 class="mb-2">Thank you for your order!</h1>
-      <p class="lead">A confirmation email has been sent to <strong>{{ order.email }}</strong></p>
+      <h1 class="mb-3">Thank you for your order!</h1>
+      <p>A confirmation email with your order details has been sent to <strong>{{ order.email }}</strong></p>
+      <p>Your credit card has been charged with: <strong>{{ order.grand_total }}€</strong></p>
       <p>Your order will be ready for collection on: <strong>{{ order.delivery_date }}</strong></p>
-      <a href="{% url 'index' %}" class="button button-primary my-2">Home</a>
+      <a href="{% url 'index' %}" class="button button-primary my-3">Home</a>
     </div>
   </div>
 

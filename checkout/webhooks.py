@@ -32,6 +32,7 @@ def send_confirmation_email(order, contact_email):
     body = render_to_string(
         'checkout/order_confirmation_emails/order_confirm_body.txt',
         {'order': order, 'order_number': order_number,
+         'line_items': order.lineitem.all(),
          'contact_email': contact_email})
 
     send_mail(
