@@ -27,7 +27,15 @@ $(document).ready(function () {
     const stripePublicKey = JSON.parse(
         document.getElementById("stripe-public-key").textContent
     );
-    const stripe = Stripe(stripePublicKey);
+
+    // https://docs.stripe.com/sdks/stripejs-testing-assistant#hide-the-testing-assistant
+    const stripe = Stripe(stripePublicKey, {
+        developerTools: {
+            assistant: {
+                enabled: false,
+            },
+        },
+    });
 
     let checkout;
     let actions;
