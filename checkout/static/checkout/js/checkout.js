@@ -243,6 +243,7 @@ $(document).ready(function () {
 
     function setLoading(isLoading) {
         document.querySelector("#submit").disabled = isLoading;
+        document.querySelector("#pay-back").classList.toggle("hidden", isLoading);
         document.querySelector("#spinner").classList.toggle("hidden", !isLoading);
         document.querySelector("#button-text").classList.toggle("hidden", isLoading);
     }
