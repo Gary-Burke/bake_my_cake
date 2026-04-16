@@ -15,6 +15,9 @@ class DeliveryDate(models.Model):
     """
     date = models.DateField()
 
+    class Meta:
+        ordering = ["date"]
+
     def __str__(self):
         return date_format(self.date)
 
@@ -45,6 +48,9 @@ class Order(models.Model):
     original_basket = models.TextField(default='')
     stripe_pid = models.CharField(max_length=254, default='', unique=True)
 
+    class Meta:
+        ordering = ["delivery_date"]
+
     def __str__(self):
         return str(self.order_number)
 
@@ -69,6 +75,9 @@ class OrderLineItem(models.Model):
     cake_topper = models.CharField(max_length=255)
     total = models.DecimalField(max_digits=6, decimal_places=2)
     created_on = models.DateField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["order"]
 
     def __str__(self):
         return f"Product ID {self.product.id} {self.product.name}"
