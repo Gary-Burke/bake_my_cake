@@ -20,7 +20,7 @@
         <!-- Checkout Details -->
         <hr>
         <div class="col col-lg-6 mt-2">
-            <p>Please complete the following details</p>
+            <p>Please select a date to <strong>collect</strong> your order</p>
 
             <!-- Payment Form -->
             <form action="{% url 'checkout' %}" method="POST"
@@ -41,7 +41,9 @@
                             placeholder="Click to Select..."
                             required>
                 </div>
-
+                
+                <!-- Billing Details Section -->
+                <p class="fs-5 mt-2">Please complete the following <strong>billing</strong> details</p>
                 {{ order_form|crispy }}
                 {% csrf_token %}
 
