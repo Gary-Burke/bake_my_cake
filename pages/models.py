@@ -24,7 +24,6 @@ class CustomOrder(models.Model):
     additional_info = models.TextField(max_length=255, null=True, blank=True)
     image_url = CloudinaryField('image upload', null=True, blank=True)
     created_on = models.DateTimeField(auto_now=True)
-    read = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["created_on", "name"]
