@@ -200,9 +200,13 @@ def checkout(request):
     if request.user.is_authenticated:
         try:
             profile = UserProfile.objects.get(user=request.user)
+            if not profile.email:
+                email = request.user.email
+            else:
+                email = profile.email
             order_form = OrderForm(initial={
                 "name_surname": profile.name_surname,
-                "email": profile.email,
+                "email": email,
                 "phone_number": profile.phone_number,
                 "street_address1": profile.street_address1,
                 "street_address2": profile.street_address2,
