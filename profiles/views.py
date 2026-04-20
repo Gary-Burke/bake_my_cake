@@ -69,8 +69,9 @@ class ItemListView(LoginRequiredMixin, ListView):
     **Context**
 
     ``path / current_path``
-    Used to determine queryset filter based on dates and
-    update the template selected class for the links
+    Used to determine queryset filter based on Order delivery_date field.
+    orders_history = orders that have already been collected
+    orders_current = orders pending collection
 
     ``queryset``
     All instances of products in :model:`checkout.OrderLineItem`:

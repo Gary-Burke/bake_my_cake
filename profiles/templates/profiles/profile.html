@@ -19,7 +19,7 @@
                 <li><a href="{% url 'order_list' %}" data-path="orders_current"
                         class="{% if current_path == 'orders_current' %}selected" aria-current="page{% endif %}">Current Orders</a></li>
                 <li><a href="{% url 'order_list' %}" data-path="orders_history"
-                        class="{% if current_path == 'orders_history' %}selected" aria-current="page{% endif %}">Order History</a></li>
+                        class="{% if current_path == 'orders_history' %}selected" aria-current="page{% endif %}">Closed Orders</a></li>
                 <li><a href="{% url 'profile' %}" data-path="profile" class="{% if current_path == 'profile' %}selected"
                         aria-current="page{% endif %}">Billing Details</a></li>
             </ul>
@@ -73,6 +73,7 @@
                 <li><span class="text-bold">Total:</span> {{ item.total }}€</li>
                 <li><span class="text-bold">Ordered On:</span> {{ item.created_on }}</li>
                 <li><span class="text-bold">Pickup Date:</span> {{ item.order.delivery_date }}</li>
+                <li><span class="text-bold">Order #:</span> {{ item.order.order_number|stringformat:"s"|slice:":10" }}</li>
             </ul>
 
 
